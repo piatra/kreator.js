@@ -4,8 +4,8 @@
   "scripts": {
     "start": "index.js"
   },
-  "version": "0.1.0-2",
+  "version": "0.1.0",
   "engines": {
-    "node": "0.8.x"
+    "node": "*"
   }
 }
