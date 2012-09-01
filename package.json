@@ -1,11 +1,20 @@
 {
-  "name": "kreator-server",
-  "subdomain": "kreator",
+  "name": "piatra",
+  "subdomain": "piatra",
   "scripts": {
     "start": "index.js"
   },
-  "version": "0.1.0",
+  "version": "0.0.0-18",
   "engines": {
-    "node": "v0.6.8"
+    "node": "0.6.x"
+  },
+  "dependencies": {
+    "express": "*",
+    "request": "*",
+    "async": "*",
+    "node-native-zip": "*",
+    "jade": "*",
+    "less": "*",
+    "cheerio": "*"
   }
 }

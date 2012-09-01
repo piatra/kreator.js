@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>kreator</title>
+	<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'> -->
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet/less" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/monokai.css">
+	<script src="js/less-1.3.0.min.js"></script>
+</head>
+<body>
+
+<header class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<div class="btn-toolbar">
+				<div class="btn-group">
+					<a class="btn" data-title="turn it bold" data-textstyle="b" href="#"><i class="icon-bold"></i></a>
+					<a class="btn" data-title="turn it italic" data-textstyle="i" href="#"><i class="icon-italic"></i></a>
+				</div>
+				<div class="controls">
+					<select id="select-dimensions">
+						<option title="remove headings" value="normal">headings</option>
+						<option title="remove headings" value="normal">none</option>
+						<option title="Heading 1" value="h1">H1</option>
+						<option title="Heading 2" value="h2">H2</option>
+						<option title="Heading 3" value="h3">H3</option>
+						<option title="Heading 4" value="h4">H4</option>
+					</select>
+				</div>
+				<div class="btn-group">
+					<a class="btn" data-title="make a link" data-textstyle="a" href="#">
+						<i class="icon-font"></i>
+					</a>
+					<a class="btn" data-title="add a quote" data-textstyle="blockquote" href="#">
+						<i class="icon-comment"></i>
+					</a>
+					<a class="btn" data-title="make a list" data-textstyle="li" href="#">
+						<i class="icon-list"></i>
+					</a>
+				</div>
+				<div class="btn-group">
+					<a id="remove" class="btn" data-title="remove" data-textstyle="delete" href="#">
+						<i class="icon-remove"></i>
+					</a>
+					<a href="#" class="btn" data-title="custom move" id="custom-move" data-textstyle="move">
+						<i class="icon-move"></i>
+					</a>
+					<a href="#" class="btn" data-title="settings" id="settings-btn">
+						<i class="icon-cog"></i>
+					</a>
+
+				</div>
+				<div class="btn-group pull-right">
+					<a class="btn fullscreen" data-title="fullscreen" id="fullscreen" href="#">
+						<i class="icon-fullscreen"></i>
+					</a>
+				</div>
+				<div class="btn-group pull-right">
+					<a class="btn" data-title="align left" data-textstyle="left" href="#">
+						<i class="icon-align-left"></i>
+					</a>
+					<a class="btn" data-title="align center" data-textstyle="center" href="#">
+						<i class="icon-align-center"></i>
+					</a>
+					<a class="btn" data-title="align right" data-textstyle="right" href="#">
+						<i class="icon-align-right"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+<div class="container">
+	<div class='alert alert-info'>
+		<strong>Hello, stranger</strong> This is the presentation mode. You can 
+		<a href="#" class="btn download" data-title="download" id="download">
+			<i class="icon-ok"></i> download
+		</a> your presentation or <a class="btn fullscreen" data-title="fullscreen" href="#">
+			<i class="icon-fullscreen"></i> exit fullscreen
+		</a>
+	</div>
+</div>
+
+<div id="select-template" class="templates">
+	<figure><img title="layout-12-6-6" src="./img/layout.png"></figure>
+	<figure><img title="layout-12-6-6" src="./img/layout.png"></figure>
+	<figure><img title="layout-12-img-8" src="./img/layout.png"></figure>
+	<figure><img title="layout-4-8" src="./img/layout2.png"></figure>
+	<button class="btn btn-primary">templates</button>
+</div>
+
+<div class="reveal">
+	<div class="slides"> 
+		<section>
+			<section><h1>Hello</h1></section>
+			<section><h1>world!</h1></section>
+		</section>
+	</div>
+
+<aside class="controls">
+	<a class="left" href="#">&#x25C4;</a>
+	<a class="right" href="#">&#x25BA;</a>
+	<a class="up" href="#">&#x25B2;</a>
+	<a class="down" href="#">&#x25BC;</a>
+</aside>
+<div class="progress"><span></span></div>
+</div>
+</body>
+
+<script src="js/highlight.pack.js"></script>
+<script src="js/reveal.min.js"></script>
+
+<script>
+	// Parse the query string into a key/value object
+	var query = {};
+	location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
+		query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
+	} );
+
+	Reveal.initialize({
+		controls: true,
+		progress: true
+	});
+
+</script>
+<script data-main="js/main" src="js/require.js"></script>
+</html>
