@@ -392,14 +392,6 @@ label {
 	}
 }
 
-.btn.grid {
-	display:none;
-}
-
-.active ~ .btn.grid {
-	display:inline-block;
-}
-
 .menu {
 	position:absolute;
 	left:-620px;
@@ -542,11 +534,11 @@ ul.menu.hidden {
 	}
 }
 
-.all-images + .btn {
+.btn ~ .btn.toggle {
 	display:none;
 }
 
-	.all-images.active + .btn {
+	.btn.active ~ .btn.toggle {
 		display:inline-block;
 	}
 
@@ -570,3 +562,7 @@ ul.menu.hidden {
 		border-radius:2px;
 		margin:5px;
 	}
+
+.resize img:hover {
+	cursor: se-resize;
+}
