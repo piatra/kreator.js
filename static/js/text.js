@@ -25,7 +25,7 @@ define(['jquery', 'htmlEntites'], function($, htmlEntites) {
 			t = '</'+tag+'>';
 			string = string.replace(t, '');
 			if(string != stringcpy) return string;
-
+			console.log(newstring);
 			newstring += '<'+ tag +'>' + find + '</'+ tag +'>'; // wrap in apropriate tag
 			return string.replace(find, newstring); // replace the old word with the wrapped word
 		},

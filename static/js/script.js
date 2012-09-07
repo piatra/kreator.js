@@ -30,10 +30,6 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 				$('body').css('background', uioptions.body[0].split(':')[1]);
 			}
 
-			// $(window).on('mousemove', function(e){
-			// 	$('#coords').text(e.offsetX + ' ' + e.offsetY);	
-			// });
-
 			$('body').append(options.right).append(options.down);
 
 			$('section').on('click', addContentToSlide);
@@ -91,7 +87,6 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 						title: title
 					}
 				})
-				//settings.clear();
 			});
 
 			$('#settings-btn').on('click', function(){
@@ -103,13 +98,12 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 				var tag = $(this).data('textstyle');
 				if(tag === 'li') {
 					$(this).toggleClass('active');
-					$('<span contentEditable><li></li></span>')
+					$span = $('<span contentEditable><li></li></span>')
 						.on('click', editSpan)
 						.appendTo(Kreator.getCurrentSlide())
 						.trigger('click').focus();
 				}
 
-				var string = '';
 				if(['b', 'i'].indexOf(tag)>=0) {
 					$span.html(textStyle.format(tag, $span));
 				} else if(['blockquote'].indexOf(tag)>=0) {
@@ -161,17 +155,28 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					$(this).toggleClass('active');
 					$('.present').toggleClass('resize');
 					var img = document.querySelector('.present img');
-					img.ondragstart = function (e) {
-						this.setAttribute('data-x', e.pageX);
-						this.setAttribute('data-y', e.pageY);
-						console.log(this.width);
-					}
-					img.ondrag = function (e) {
-						var x = parseInt(this.getAttribute('data-x'));
-						var y = parseInt(this.getAttribute('data-y'));
-						var p = x / e.pageX;
-						var w = this.width;
-						this.style.width = p * w + 'px';
+					if (img)
+						img.ondragstart = function (e) {
+							var that = this;
+							console.log('bound');
+							window.onmousemove = function (e) {
+								console.log(that);
+								that.style.width = e.pageX - that.offsetLeft + 'px';
+							}
+							e.preventDefault();
+							window.onmouseup = function (e) {
+								window.onmousemove = null;
+								window.onmouseup = null;
+							}
+						}
+					if ( ! $(this).hasClass('active') ) {
+						var x = Kreator.getSlideX() + 1;
+						var y = Kreator.getSlideY() + 1;
+						if (y==1) {
+							settings.set(['.slides:nth-child('+x+') section img', 'width:300px']);
+						} else {
+							settings.set(['.slides section:nth-child('+x+') section:nth-child('+y+') img', 'width:300px']);
+						}
 					}
 				}
 			});
@@ -182,6 +187,12 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 				s.on('click', function (e) {
 					editSpan(e, this);
 				});
+			})
+
+			$('#select-dimensions').on('change', function () {
+				var h = $(this).val();
+				var html = '<' + h + '>' + $span.html() + '</' + h + '>';
+				$span.html(html);
 			})
 
 			$('#cl-dimensions').on('change', function(){
@@ -253,7 +264,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 				var value = parseInt($(this).val()) || 0;
 				var action = $('.menu .active').attr('title');
 				var clsName = $span.attr('class') || $span.addClass('kreator-class') && $span.attr('class');
-				console.log(action, clsName, $span);
+				
 				if(action === 'rotate') {
 					$span.css('transform','rotate('+value+'deg)');
 					if(clsName) {
@@ -289,18 +300,6 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 				}
 			});
 
-
-			var holder = document.querySelector('section')
-			holder.ondragover = function () { return false; };
-			holder.ondragend = function () { return false; };
-			holder.ondrop = function (e) {
-				e.preventDefault();
-				var files = e.dataTransfer.files;
-				for (var i = 0; i < files.length; i++) {
-					slideTemplate.previewfile(holder, files[i]);
-				}
-			}
-
 		};
 
 		Reveal.addEventListener( 'slidechanged', function( event ) {
@@ -316,17 +315,25 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			slideY = y;
 		};
 
+		var getSlideX = function () {
+			return slideX;
+		}
+
+		var getSlideY = function () {
+			return slideY;
+		}
+
 		var addContentToSlide = function() {
 
 			var count = $('span', Kreator.getCurrentSlide()).length;
 			if ($('.present').hasClass('crosshair') || count > 10) return;
 
-			var d = dummyText.clone().on('click', function(e){
+			var d = $('<span contentEditable></span>').on('click', function(e){
 				editSpan(e, d);
-			})
-				, list = ($('.btn.active').attr('data-textstyle') === 'li');
-				
-			d.appendTo(Kreator.getCurrentSlide()).trigger('click').focus();
+			}).appendTo($('.present')).trigger('click').focus();
+
+			var list = ($('.btn.active').attr('data-textstyle') === 'li');
+
 			if(!count) {
 				$('.menu.hidden').removeClass('hidden');
 			}
@@ -344,6 +351,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 
 		var addSlideRight = function() {
 			var s = this.getCurrentSlide();
+			$('.active').trigger('click');
 			// if the current slide is the last slide on the X axis we append to the parent
 			if($('.slides>section').length == slideX+1) {
 				$('<section/>').on('click', addContentToSlide).appendTo('.slides');
@@ -356,7 +364,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 
 		var addSlideDown = function() {
 			var s = this.getCurrentSlide();
-
+			$('.active').trigger('click');
 			if(s.parent().hasClass('slides')) {
 				var c = $('<section/>').append(s.html());
 				var ns = $('<section/>');
@@ -392,6 +400,8 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			getCurrentSlide: getCurrentSlide,
 			setSlideX: setSlideX,
 			setSlideY: setSlideY,
+			getSlideY : getSlideY,
+			getSlideX : getSlideX,
 			init: init
 		};
 	})({

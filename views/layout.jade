@@ -21,7 +21,7 @@ html(lang="en")
 								i(class="icon-italic")
 						.controls
 							select#select-dimensions
-								option(title="remove headings", value="normal") none
+								option(title="remove headings", value="normal") heading
 								option(title="Heading 1", value="h1") H1
 								option(title="Heading 2", value="h2") H2
 								option(title="Heading 3", value="h3") H3
@@ -63,7 +63,9 @@ html(lang="en")
 								i(class="icon-align-center")
 							a(class="btn", data-title="align right", data-textstyle="right", href="#")
 								i(class="icon-align-right")
-		ul.notifications
+		// ul.sidebar
+		//	li.btn.btn-warning Remove
+		//	li.btn Edit
 
 		.reveal
 			.slides
@@ -98,7 +100,8 @@ html(lang="en")
 
 			Reveal.initialize({
 				controls: true,
-				progress: true
+				progress: true,
+				keyboard: false
 			});
 		script(data-main="js/main", src="js/require.js")
 		//script(src="https://www.google.com/jsapi")

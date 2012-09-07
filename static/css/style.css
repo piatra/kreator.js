@@ -64,7 +64,6 @@ section {
 	position:relative;
 		&:hover {
 			background:rgba(100, 100, 100, .3);
-			/*-webkit-transition-duration:.5s;*/
 		}
 		&:focus {
 			background:rgba(100, 100, 100, .2);
@@ -91,14 +90,14 @@ section {
 	position:absolute;
 	border-radius:50%;
 	font-size:30px;
-	color:#666;
+	color:#ddd;
 	cursor:pointer;
-	background:rgba(50,50,50,.3);
+	background:#1b1b1b;
 	padding:9px 10px 8px;
 	text-shadow:0 1px 0 #111;
 	.transition(.2s);
 	z-index:10;
-	border:2px solid rgba(0,0,0,.4);
+	border:2px solid rgba(0,0,0,.3);
 	font-size:30px;
 }
 
@@ -117,7 +116,7 @@ section {
 
 div[data-direction=right] {
 	right:1%;
-	top:48%;
+	top:46%;
 }
 
 div[data-direction=bottom] {
@@ -491,25 +490,26 @@ ul.menu.hidden {
 	display:none;
 }
 
-.notifications {
+.sidebar {
 	position:absolute;
 	top:8%;
-	right:1%;
+	right:2%;
 	font-size:13px;
 	text-align:center;
 	z-index:1100;
 	margin:0;
 	padding:0;
-	width:14%;
+	width:100px;
+	background:#1b1b1b;
 }
 
-	.notifications li {
-		background:rgba(255,255,255,.2);
-		border-radius:5px;
+	.sidebar li {
 		list-style: none;
-		padding:1px 0;
-		margin-top:5px;
+	}
+
+	.sidebar .btn {
 		width:100%;
+		display:inline-block;
 	}
 
 .visible {

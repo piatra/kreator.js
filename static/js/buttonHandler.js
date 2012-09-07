@@ -16,7 +16,7 @@ define(function(){
 					} else if (document.documentElement.webkitRequestFullScreen) {
 						document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
 					}
-					document.querySelector('body').classList.add('fullscreen');
+					
 				} else {
 					if (document.cancelFullScreen) {
 						document.querySelector('body').classList.remove('fullscreen');
