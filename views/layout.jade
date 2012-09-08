@@ -2,7 +2,7 @@
 html(lang="en")
 	head
 		title kreator
-		//link(href='http://fonts.googleapis.com/css?family=Open+Sans', rel='stylesheet', type='text/css')
+		link(href='http://fonts.googleapis.com/css?family=Open+Sans', rel='stylesheet', type='text/css')
 		link(rel="stylesheet", href="css/main.css")
 		link(rel="stylesheet", type="text/css", href="css/bootstrap.css")
 		link(rel="stylesheet/less", type="text/css", href="css/style.css")
@@ -47,6 +47,7 @@ html(lang="en")
 						.btn-group
 							a(href="#", class="btn all-images", data-title="all images", data-textstyle="images")
 								i(class="icon-picture")
+								span(class="label label-info") 0
 							a(href="#", class="btn upload-images toggle", data-title="upload images", data-textstyle="upload")
 								i(class="icon-upload")
 							a(href="#", class="btn toggle", data-title="resize image", data-textstyle="resize")
@@ -83,8 +84,8 @@ html(lang="en")
 				a(class="up", href="#")&#x25B2;
 				a(class="down", href="#")&#x25BC;
 
-			.showreel
-				figure: img(src="img/layout.png")
+			ul.thumbnails
+		
 			.progress
 				span
 
@@ -104,6 +105,6 @@ html(lang="en")
 				keyboard: false
 			});
 		script(data-main="js/main", src="js/require.js")
-		//script(src="https://www.google.com/jsapi")
+		script(src="https://www.google.com/jsapi")
 		script
-			//google.load("webfont", "1");
+			google.load("webfont", "1");

@@ -150,7 +150,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					slideTemplate.uploadImages.call($(this));
 				} else if(tag === 'images') {
 					$(this).toggleClass('active');
-					$('.showreel').toggle();
+					$('.thumbnails').toggle();
 				} else if(tag === 'resize') {
 					$(this).toggleClass('active');
 					$('.present').toggleClass('resize');
@@ -160,28 +160,29 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 							var that = this;
 							console.log('bound');
 							window.onmousemove = function (e) {
-								console.log(that);
 								that.style.width = e.pageX - that.offsetLeft + 'px';
 							}
 							e.preventDefault();
 							window.onmouseup = function (e) {
+								console.log('mouseup');
 								window.onmousemove = null;
 								window.onmouseup = null;
+								img.ondragstart = null;
 							}
 						}
 					if ( ! $(this).hasClass('active') ) {
 						var x = Kreator.getSlideX() + 1;
 						var y = Kreator.getSlideY() + 1;
 						if (y==1) {
-							settings.set(['.slides:nth-child('+x+') section img', 'width:300px']);
+							settings.set(['.slides:nth-child('+x+') section img', img.style.width]);
 						} else {
-							settings.set(['.slides section:nth-child('+x+') section:nth-child('+y+') img', 'width:300px']);
+							settings.set(['.slides section:nth-child('+x+') section:nth-child('+y+') img', img.style.width]);
 						}
 					}
 				}
 			});
 
-			$('.showreel img').live('click', function () {
+			$('.thumbnails img').live('click', function () {
 				var el = $('<img>').attr('src', $(this).attr('src')).css('width', '200px');
 				var s = $('<span/>').append(el).appendTo('.present');
 				s.on('click', function (e) {
@@ -253,7 +254,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 				} else if(action === 'font') {
 					$('#range-handler').hide();
 					$('#menu-input').attr('placeholder', 'font family').val($span.css('font-family'));
-					$span.addClass('kreator-class');
+					$span.addClass(Kreator.generateClassName(1));
 					$('.menu .active').removeClass('active');
 					$(this).addClass('active');
 				}
@@ -263,7 +264,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			$('#menu-input').on('keyup', function (e) {
 				var value = parseInt($(this).val()) || 0;
 				var action = $('.menu .active').attr('title');
-				var clsName = $span.attr('class') || $span.addClass('kreator-class') && $span.attr('class');
+				var clsName = $span.attr('class') || $span.addClass(Kreator.generateClassName(1)) && $span.attr('class');
 				
 				if(action === 'rotate') {
 					$span.css('transform','rotate('+value+'deg)');
@@ -281,6 +282,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 				} else if (action === 'font') {
 					if(e.keyCode == 13) {
 						var family = $(this).val();
+						
 						slideTemplate.addMessage(family);
 						WebFont.load({
 							google: {
@@ -288,10 +290,9 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 							},
 							active: function () {
 								$span.css('font-family', family);
+
 								if(clsName) {
-									console.log(settings.get());
 									settings.set(['.'+clsName, 'font-family: ' + family]);
-									console.log(settings.get());
 								}
 								settings.set(family, 'webfont');
 							}
@@ -306,6 +307,13 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 				Kreator.setSlideX(event.indexh);
 				Kreator.setSlideY(event.indexv);
 		});
+
+		var generateClassName = function (testClass) {
+			var n = parseInt(testClass) + 1;
+			while ($('.kreator-class-' + n).length)
+				n++;
+			return 'kreator-class-' + n;
+		}
 
 		var setSlideX = function(x) {
 			slideX = x;
@@ -330,7 +338,9 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 
 			var d = $('<span contentEditable></span>').on('click', function(e){
 				editSpan(e, d);
-			}).appendTo($('.present')).trigger('click').focus();
+			})
+
+			d.appendTo($('.present')).trigger('click').focus();
 
 			var list = ($('.btn.active').attr('data-textstyle') === 'li');
 
@@ -358,7 +368,6 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			} else { // else we just append after the current element
 				$('<section/>').on('click', addContentToSlide).insertAfter(s);
 			}
-
 			$('.menu').addClass('hidden');
 		};
 
@@ -380,7 +389,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			
 			e.stopPropagation();
 			$span = $(that) || $(this);
-
+			console.log($span);
 			var textStyle = htmlEntites.findTags($span.html());
 			
 			if(textStyle >= 0)
@@ -402,6 +411,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			setSlideY: setSlideY,
 			getSlideY : getSlideY,
 			getSlideX : getSlideX,
+			generateClassName: generateClassName,
 			init: init
 		};
 	})({

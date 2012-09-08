@@ -274,14 +274,6 @@ body {
 	     -o-transition: color .15s ease;
 	        transition: color .15s ease;
 }
-	
-	.reveal a:not(.image):hover {
-		color: hsl(185, 85%, 70%);
-		
-		text-shadow: none;
-		border: none;
-		border-radius: 2px;
-	}
 
 .reveal section img {
 	margin: 30px 0 0 0;

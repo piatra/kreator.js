@@ -12,7 +12,6 @@ define(['settings'], function(settings){
 			$('body').css('background', webkitBg);
 			
 			settings.set(['body', 'background: ' + webkitBg]);
-			settings.set(['.highlight', 'color: #f05']);
 		};
 
 		var finishedSettings = function(e){
@@ -74,22 +73,36 @@ define(['settings'], function(settings){
 					modal.toggleClass('hide');
 					that.removeClass('active');
 				});
-				document.querySelector('#upload').addEventListener('change', function (e) {
-					var files = e.target.files;
-					var reader = new FileReader();
-					reader.onload = function (event) {
-						var image = new Image();
-						image.src = event.target.result;
-						image.width = 50; // a fake resize
-						var figure = document.createElement('figure')
-						figure.appendChild(image);
-						document.querySelector('.showreel').appendChild(figure);
-					};
-					
-					for (var i = files.length - 1; i >= 0; i--) {
-						reader.readAsDataURL(files[i]);
-					};
-					
+				document.querySelector('#upload').addEventListener('change', function (evt) {
+					var files = evt.target.files; // FileList object
+
+					// Loop through the FileList and render image files as thumbnails.
+					for (var i = 0, f; f = files[i]; i++) {
+						
+						// Only process image files.
+						if (!f.type.match('image.*')) {
+							continue;
+						}
+						var reader = new FileReader();
+						// Closure to capture the file information.
+						reader.onload = (function(theFile) {
+							return function(event) {
+								var image = new Image();
+								image.classList.add('thumbnail');
+								image.src = event.target.result;
+								image.dataset.path = 'img/' + theFile.name;
+								var li = document.createElement('li');
+								li.classList.add('span2');
+								li.appendChild(image);
+								document.querySelector('.thumbnails').appendChild(li);
+								var label = document.querySelector('.label');
+								label.innerHTML = parseInt(label.innerHTML) + 1;
+							};
+						})(f);
+						
+						// Read in the image file as a data URL.
+						reader.readAsDataURL(f);
+					}
 				}, false);
 			});
 		};
