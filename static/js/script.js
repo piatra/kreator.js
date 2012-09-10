@@ -5,7 +5,6 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			slideY = 0, // to keep track of the current slide we're on
 			$ = options.jquery,
 			Reveal = options.reveal,
-			dummyText = $('<span contentEditable></span>'), // this is the generic span in which gets added to the section you edit this to insert content
 			$span,
 			hljs = options.hljs;
 
@@ -96,38 +95,40 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			$('.btn-group a').on('click', function(e){
 				e.preventDefault();
 				var tag = $(this).data('textstyle');
+				$(this).toggleClass('active');
 				if(tag === 'li') {
-					$(this).toggleClass('active');
-					$span = $('<span contentEditable><li></li></span>')
-						.on('click', editSpan)
-						.appendTo(Kreator.getCurrentSlide())
-						.trigger('click').focus();
+					if($(this).hasClass('active'))
+						$span = $('<span contentEditable><li></li></span>')
+							.on('click', editSpan)
+							.appendTo(Kreator.getCurrentSlide())
+							.trigger('click').focus();
 				}
-
 				if(['b', 'i'].indexOf(tag)>=0) {
+					$(this).toggleClass('active');
 					$span.html(textStyle.format(tag, $span));
 				} else if(['blockquote'].indexOf(tag)>=0) {
+					$(this).toggleClass('active');
 					textStyle.paragraph(tag, $span);
 				} else if(['left', 'center', 'right'].indexOf(tag)>=0) {
+					$(this).toggleClass('active');
 					textStyle.align(tag, $span);
 				} else if(tag === 'a') {
+					$(this).toggleClass('active');
 					textStyle.insertHiperlink(this, $span);
 				} else if(tag === 'move') {
 					var s = Kreator.getCurrentSlide();
-					$(this).toggleClass('active btn-info');
+					$(this).toggleClass('btn-info');
 					var section = $('.reveal section');
-					if(s.hasClass('crosshair')) {
-						$('.present span').off('click', bHandler.moveSpan)
+					if(!$(this).hasClass('active')) {
+						$('.present span').off('mousedown', bHandler.moveSpan)
 								.attr('contentEditable', true);
 					} else {
 						$('.present span').on('mousedown', bHandler.moveSpan)
 								.attr('contentEditable', false);
 					}
 					$('.present').toggleClass('crosshair');
-					$('body').toggleClass('noselect');
-
 				} else if(tag === 'grid') {
-					$(this).toggleClass('active');
+		
 					if($(this).hasClass('active')) {
 						canvas.init();
 					} else {
@@ -135,55 +136,41 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					}
 				} else if(tag === 'remove') {
 					
-					var $this = $(this).toggleClass('active btn-info');
+					$(this).toggleClass('btn-info');
 					$('.present').toggleClass('crosshair');
 					
-					if($this.hasClass('active')) {
+					if($(this).hasClass('active')) {
 						$('span').on('click', bHandler.removeSpan);
 					} else {
 						$('span').off('click', bHandler.removeSpan);
 					}
 				} else if(tag === 'grid-clear') {
+					$(this).toggleClass('active');
 					settings.remove(['canvasPoints']);
 				} else if(tag === 'upload') {
-					$(this).toggleClass('active');
 					slideTemplate.uploadImages.call($(this));
 				} else if(tag === 'images') {
-					$(this).toggleClass('active');
 					$('.thumbnails').toggle();
 				} else if(tag === 'resize') {
-					$(this).toggleClass('active');
 					$('.present').toggleClass('resize');
 					var img = document.querySelector('.present img');
-					if (img)
-						img.ondragstart = function (e) {
-							var that = this;
-							console.log('bound');
-							window.onmousemove = function (e) {
-								that.style.width = e.pageX - that.offsetLeft + 'px';
-							}
-							e.preventDefault();
-							window.onmouseup = function (e) {
-								console.log('mouseup');
-								window.onmousemove = null;
-								window.onmouseup = null;
-								img.ondragstart = null;
-							}
-						}
+					if (img) bHandler.imageResize(img);
 					if ( ! $(this).hasClass('active') ) {
 						var x = Kreator.getSlideX() + 1;
 						var y = Kreator.getSlideY() + 1;
 						if (y==1) {
-							settings.set(['.slides:nth-child('+x+') section img', img.style.width]);
+							settings.set(['.slides:nth-child('+x+') section img', 'width :' + img.style.width]);
 						} else {
-							settings.set(['.slides section:nth-child('+x+') section:nth-child('+y+') img', img.style.width]);
+							settings.set(['.slides section:nth-child('+x+') section:nth-child('+y+') img', 'width :' + img.style.width]);
 						}
 					}
 				}
 			});
 
 			$('.thumbnails img').live('click', function () {
-				var el = $('<img>').attr('src', $(this).attr('src')).css('width', '200px');
+				var el = $('<img>').attr('src', $(this).attr('src'))
+					.css('width', '200px')
+					.attr('data-path', $(this).attr('data-path'));
 				var s = $('<span/>').append(el).appendTo('.present');
 				s.on('click', function (e) {
 					editSpan(e, this);
@@ -191,9 +178,10 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			})
 
 			$('#select-dimensions').on('change', function () {
+				// create H headings
 				var h = $(this).val();
-				var html = '<' + h + '>' + $span.html() + '</' + h + '>';
-				$span.html(html);
+				var html = textStyle.removeHeadings($span.html());
+				$span.html('<' + h + '>' + html + '</' + h + '>');
 			})
 
 			$('#cl-dimensions').on('change', function(){
@@ -212,13 +200,15 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			});
 
 			$('.menu li').on('click', function () {
-				var action = $(this).attr('title');
-				
+				var $this = $(this);
+				var action = $this.attr('data-title');
+				$this.toggleClass('active');
 				if(action === 'rotate') {
 					$('.menu .active').removeClass('active');
-					$(this).addClass('active');
+					$this.addClass('active');
 					
 					$span.css('transform','rotate(10deg)');
+					$('#menu-input').val('10deg');
 					if(!document.querySelector('#range-handler')) {
 						var fragment = document.createDocumentFragment()
 						, li = document.createElement('li')
@@ -263,7 +253,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 
 			$('#menu-input').on('keyup', function (e) {
 				var value = parseInt($(this).val()) || 0;
-				var action = $('.menu .active').attr('title');
+				var action = $('.menu .active').attr('data-title');
 				var clsName = $span.attr('class') || $span.addClass(Kreator.generateClassName(1)) && $span.attr('class');
 				
 				if(action === 'rotate') {
@@ -343,7 +333,9 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			d.appendTo($('.present')).trigger('click').focus();
 
 			var list = ($('.btn.active').attr('data-textstyle') === 'li');
-
+			if(list) {
+				$('.active').trigger('click');
+			}
 			if(!count) {
 				$('.menu.hidden').removeClass('hidden');
 			}
@@ -389,7 +381,6 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			
 			e.stopPropagation();
 			$span = $(that) || $(this);
-			console.log($span);
 			var textStyle = htmlEntites.findTags($span.html());
 			
 			if(textStyle >= 0)

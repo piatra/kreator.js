@@ -7,7 +7,11 @@ define(['jquery', 'htmlEntites'], function($, htmlEntites) {
 			, find = s.toString().toLowerCase() // get the selection
 			, string = span.html()
 			, stringcpy = string;
-			console.log(stringcpy, string, find);
+			
+			if (tag.match(/<.h?.>/gi)) {
+				string = this.removeHeadings(string);
+			}
+
 			var sel;
 			if (window.getSelection) {
 				sel = window.getSelection();
@@ -23,6 +27,7 @@ define(['jquery', 'htmlEntites'], function($, htmlEntites) {
 			var t = '<'+tag+'>';
 			string = string.replace(t, '');
 			t = '</'+tag+'>';
+			console.log(tag);
 			string = string.replace(t, '');
 			if(string != stringcpy) return string;
 			console.log(newstring);

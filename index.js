@@ -89,11 +89,19 @@ app.post('/', function(req, res) {
 					var array = slides[i];
 					content += '<section>';
 					array.forEach(function(s){
-						content += '<section>' + s + '</section>';
+						var $ = cheerio.load(s);
+						var img = $('img');
+						img.attr('src', img.attr('data-path'));
+						img.removeAttr('data-path');
+						content += '<section>' + $.html() + '</section>';
 					});
 					content += '</section>';
 				} else {
-					content += slides[i];
+					var $ = cheerio.load(slides[i]);
+					var img = $('img');
+					img.attr('src', img.attr('data-path'));
+					img.removeAttr('data-path');
+					content += $.html();
 				}
 			}
 			content += results[1];

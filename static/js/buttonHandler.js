@@ -173,6 +173,19 @@ define(function(){
 				that.style.top = top + 'px';
 			}
 		},
+		imageResize: function (img) {
+			img.ondragstart = function (e) {
+				var that = this;
+				window.onmousemove = function (e) {
+					that.style.width = e.pageX - that.offsetLeft + 'px';
+				}
+				e.preventDefault();
+				window.onmouseup = function (e) {
+					window.onmousemove = null;
+					window.onmouseup = null;
+				}
+			}
+		},
 		showLine: function(x1, y1, x2, y2) {
 			var $line = $('.snap-line').removeClass('fade-out');
 			if(!$line.length) $line = $('<div/>').addClass('snap-line');

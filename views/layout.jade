@@ -2,7 +2,7 @@
 html(lang="en")
 	head
 		title kreator
-		link(href='http://fonts.googleapis.com/css?family=Open+Sans', rel='stylesheet', type='text/css')
+		//link(href='http://fonts.googleapis.com/css?family=Open+Sans', rel='stylesheet', type='text/css')
 		link(rel="stylesheet", href="css/main.css")
 		link(rel="stylesheet", type="text/css", href="css/bootstrap.css")
 		link(rel="stylesheet/less", type="text/css", href="css/style.css")
@@ -71,10 +71,10 @@ html(lang="en")
 		.reveal
 			.slides
 				ul(class="menu hidden")
-					li(title="rotate"): i(class="icon-repeat")
-					li(title="add class"): i(class="icon-list-alt") 
-					li(title="font"): i(class="icon-font")
-					li(title="clear"): i(class="icon-remove")
+					li(data-title="rotate"): i(class="icon-repeat")
+					li(data-title="add class"): i(class="icon-list-alt") 
+					li(data-title="font"): i(class="icon-font")
+					li(data-title="clear"): i(class="icon-remove")
 					li.input: input(placeholder="value", id="menu-input")
 				section
 
@@ -105,6 +105,6 @@ html(lang="en")
 				keyboard: false
 			});
 		script(data-main="js/main", src="js/require.js")
-		script(src="https://www.google.com/jsapi")
+		//script(src="https://www.google.com/jsapi")
 		script
-			google.load("webfont", "1");
+			//google.load("webfont", "1");

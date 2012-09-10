@@ -55,6 +55,11 @@ define(['settings'], function(settings){
 					settings.set(title, 'title');
 					document.title = title;
 				});
+				$('#clear-storage', $(this)).on('click', function () {
+					if(confirm('Delete settings ?')) {
+						settings.clear();
+					}
+				})
 			});
 		};
 
