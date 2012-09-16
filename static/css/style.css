@@ -78,6 +78,18 @@ section {
 	padding:.5em;
 }
 
+.icon-can {
+	background:url(../img/can.png);
+	width:16px;
+	height:16px;
+}
+
+.icon-palette {
+	background:url(../img/palette.png);
+	width:16px;
+	height:16px;
+}
+
 .onhover {
 	background:#555;
 }
@@ -194,6 +206,8 @@ header a.btn:after {
 	width:100px;
 	display:none;
 	border:1px solid #555;
+	color:#1b1b1b;
+	text-shadow:0 1px 0 #fff;
 }
 
 header a.btn:before {

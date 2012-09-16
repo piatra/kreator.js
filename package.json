@@ -4,7 +4,7 @@
   "scripts": {
     "start": "index.js"
   },
-  "version": "0.0.0-21",
+  "version": "0.0.0-24",
   "engines": {
     "node": "0.6.x"
   },

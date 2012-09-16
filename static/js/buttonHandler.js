@@ -160,7 +160,6 @@ define(function(){
 							snapped = true;
 						}
 						if (top < line.from[1]) {
-							console.log(top, line.from[1]);
 							that.style.top = top + dl - that.clientHeight + 'px';
 							snapped = true;
 						}
@@ -177,14 +176,16 @@ define(function(){
 			img.ondragstart = function (e) {
 				var that = this;
 				window.onmousemove = function (e) {
+					if($('a.btn.active').eq(1).attr('data-textstyle') !== 'resize') return;
 					that.style.width = e.pageX - that.offsetLeft + 'px';
-				}
+				};
 				e.preventDefault();
 				window.onmouseup = function (e) {
 					window.onmousemove = null;
 					window.onmouseup = null;
-				}
-			}
+					console.log('resize removed');
+				};
+			};
 		},
 		showLine: function(x1, y1, x2, y2) {
 			var $line = $('.snap-line').removeClass('fade-out');

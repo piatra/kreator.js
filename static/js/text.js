@@ -27,11 +27,14 @@ define(['jquery', 'htmlEntites'], function($, htmlEntites) {
 			var t = '<'+tag+'>';
 			string = string.replace(t, '');
 			t = '</'+tag+'>';
-			console.log(tag);
+			
 			string = string.replace(t, '');
 			if(string != stringcpy) return string;
-			console.log(newstring);
+			
 			newstring += '<'+ tag +'>' + find + '</'+ tag +'>'; // wrap in apropriate tag
+			if (string.match('href')) {
+				return string.replace('>' + find + '<', '>' + newstring + '<');
+			}
 			return string.replace(find, newstring); // replace the old word with the wrapped word
 		},
 		removeHeadings: function(string) {

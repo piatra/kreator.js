@@ -2908,7 +2908,7 @@ button.close {
 .btn {
   display: inline-block;
   *display: inline;
-  padding: 4px 14px;
+  padding: 4px 10px;
   margin-bottom: 0;
   *margin-left: .3em;
   font-size: 14px;

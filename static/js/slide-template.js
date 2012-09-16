@@ -8,10 +8,12 @@ define(['settings'], function(settings){
 			var color1 = $('input', $(this)).eq(1).val();
 			var color2 = $('input', $(this)).eq(2).val();
 			var fontsize = $('input', $(this)).eq(3).val();
+			var bg = '-webkit-radial-gradient('+color1+', '+color2+')';
 			var webkitBg = '-webkit-radial-gradient('+color1+', '+color2+')';
-			$('body').css('background', webkitBg);
+			var mozBg = '-moz-radial-gradient('+color1+', '+color2+')';
+			$('body').css('background', bg);
 			
-			settings.set(['body', 'background: ' + webkitBg]);
+			settings.set(['body', 'background: ' + bg + ';background:' + webkitBg + ';background:' + mozBg]);
 		};
 
 		var finishedSettings = function(e){
@@ -23,7 +25,7 @@ define(['settings'], function(settings){
 		var addMessage = function(message) {
 			var msg = $('<li/>').html('<p>' + message + '</p>');
 			$('.notifications').append(msg);
-		}
+		};
 
 		var showSettings = function(s) {
 			var modal = $('#modal');
@@ -40,6 +42,7 @@ define(['settings'], function(settings){
 				});
 				$('#select-theme').on('change', function(){
 					var theme =  $(this).val();
+					$('body').removeAttr('style');
 					$('html').removeClass().addClass(theme);
 				});
 				$('form', $(this)).on('submit', updateSettings);
@@ -55,11 +58,19 @@ define(['settings'], function(settings){
 					settings.set(title, 'title');
 					document.title = title;
 				});
+				$('#presentation-author', $(this)).on('focusout', function () {
+					var author = $(this).val();
+					settings.set(author, 'author');
+				});
+				$('#presentation-description', $(this)).on('focusout', function () {
+					var description = $(this).val();
+					settings.set(description, 'description');
+				});
 				$('#clear-storage', $(this)).on('click', function () {
 					if(confirm('Delete settings ?')) {
 						settings.clear();
 					}
-				})
+				});
 			});
 		};
 

@@ -58,13 +58,13 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					theme;
 				if(html.classList.length) {
 					theme = html.classList[0];
-					if(theme.length>6) {
+					if(theme.length>12) {
 						theme = null;
 					}
 				} else {
 					theme = null;
 				}
-				
+
 				var webfonts = '';
 				var fonts = settings.get('webfont');
 				if(Array.isArray(fonts)) webfonts = fonts.map(function (font) {
@@ -73,6 +73,8 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					else webfonts = "<link href='http://fonts.googleapis.com/css?family="+fonts+"' rel='stylesheet' type='text/css'>";
 
 				var title = settings.get('title') || 'kreator.js presentation';
+				var description = settings.get('description') || 'kreator.js presentation';
+				var author = settings.get('author') || 'kreator.js presentation';
 				
 				$.ajax({
 					  type: 'POST'
@@ -83,9 +85,11 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 						params: settings.get(),
 						theme: theme,
 						webfont: webfonts,
-						title: title
+						title: title,
+						description: description,
+						author: author
 					}
-				})
+				});
 			});
 
 			$('#settings-btn').on('click', function(){
@@ -164,6 +168,23 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 							settings.set(['.slides section:nth-child('+x+') section:nth-child('+y+') img', 'width :' + img.style.width]);
 						}
 					}
+				} else if (tag === 'textcolor') {
+					var that = $(this);
+					if (that.hasClass('active')) {
+						var input = $('<input type="color">');
+						that.append(input);
+						input.on('click', function(e){
+							e.stopPropagation();
+						}).on('change', function(){
+							var color = $(this).val();
+							var className = $span.attr('class') || Kreator.generateClassName(2);
+							$span.css('color', color).addClass(className);
+							$('*', $span).eq(0).css('color', color);
+							settings.set(['.' + className, 'color:' + color]);
+							$(this).remove();
+							that.trigger('click');
+						});
+					}
 				}
 			});
 
@@ -175,14 +196,14 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 				s.on('click', function (e) {
 					editSpan(e, this);
 				});
-			})
+			});
 
 			$('#select-dimensions').on('change', function () {
 				// create H headings
 				var h = $(this).val();
 				var html = textStyle.removeHeadings($span.html());
 				$span.html('<' + h + '>' + html + '</' + h + '>');
-			})
+			});
 
 			$('#cl-dimensions').on('change', function(){
 				var tag = $(this).val(),
@@ -270,21 +291,33 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 						settings.copy('.'+oldCls, '.'+newCls);
 					}
 				} else if (action === 'font') {
+					var htag = $span.html();
+					htag = htag.match(/<.h?.>/gi);
+					if(!$span.attr('data-heading') && htag)
+						$span.attr('data-heading', htag[0][2]);
 					if(e.keyCode == 13) {
 						var family = $(this).val();
-						
 						slideTemplate.addMessage(family);
 						WebFont.load({
 							google: {
 								families: [ family ]
 							},
 							active: function () {
+								console.log('active', htag);
 								$span.css('font-family', family);
-
+								if($span.attr('data-heading')) {
+									htag = 'h' + $span.attr('data-heading');
+									$span.html('<'+htag+'>' + $span.html() + '</'+ htag +'>');
+									$span.removeAttr('data-heading');
+									$('h1', $span).css('font-family', family);
+								}
 								if(clsName) {
 									settings.set(['.'+clsName, 'font-family: ' + family]);
 								}
 								settings.set(family, 'webfont');
+							},
+							complete: function () {
+								console.log('end');
 							}
 						});
 					}

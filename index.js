@@ -2,7 +2,7 @@ var express = require('express'),
 	app = express(),
 	async = require('async'),
 	request = require('request'),
-	zip = require("node-native-zip"),
+	zip = require('node-native-zip'),
 	fs = require('fs'),
 	filelist = [
 		"http://localhost:3000/get/head.html",
@@ -61,28 +61,37 @@ app.get('/get/:file', function(req, res) {
 });
 
 app.post('/', function(req, res) {
-	console.log(req.body.theme);
+	
 	if(req.body.theme !== 'null') {
 		filelist[0] = 'http://localhost:3000/get/' + req.body.theme + '.html';
 	}
 
 	async.map(filelist, fetch, function(err, results){
 		if (err) {
-			// either file1, file2 or file3 has raised an error, so you should not use results and handle the error
+			console.log('Error!');
 		} else {
 			var $ = cheerio.load(results[0]);
+			
 			$('title').text(req.body.title);
+			$('meta[name=author]').attr('content', req.body.author);
+			$('meta[name=description]').attr('content', req.body.description);
 			var content = $.html();
+			content = content.replace('</head></html>', '');
+			
 			content += req.body.webfont;
 			content += results[12];
-
+			
 			var slides = req.body.slides;
 			var css = results[11] + generateCSS.parse(req.body.params);
 			console.log(css);
+
 			parser.parse(css, function (err, tree) {
-			if (err) { return console.error(err) }
+				if (err) {
+					return console.error(err);
+				}
 				results[11] = tree.toCSS();
 			});
+
 			slides = JSON.parse(slides);
 			for (var i in slides) {
 				if(Array.isArray(slides[i])) {
@@ -97,7 +106,7 @@ app.post('/', function(req, res) {
 					});
 					content += '</section>';
 				} else {
-					var $ = cheerio.load(slides[i]);
+					$ = cheerio.load(slides[i]);
 					var img = $('img');
 					img.attr('src', img.attr('data-path'));
 					img.removeAttr('data-path');

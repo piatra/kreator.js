@@ -2,7 +2,7 @@
 html(lang="en")
 	head
 		title kreator
-		//link(href='http://fonts.googleapis.com/css?family=Open+Sans', rel='stylesheet', type='text/css')
+		link(href='http://fonts.googleapis.com/css?family=Open+Sans', rel='stylesheet', type='text/css')
 		link(rel="stylesheet", href="css/main.css")
 		link(rel="stylesheet", type="text/css", href="css/bootstrap.css")
 		link(rel="stylesheet/less", type="text/css", href="css/style.css")
@@ -19,6 +19,10 @@ html(lang="en")
 								i(class="icon-bold")
 							a(class="btn", data-title="turn it italic", data-textstyle="i", href="#")
 								i(class="icon-italic")
+							a(class="btn", data-title="text color", data-textstyle="textcolor", href="#")
+								i(class="icon-palette")
+							a(class="btn", data-title="background color", data-textstyle="bgcolor", href="#")
+								i(class="icon-can")
 						.controls
 							select#select-dimensions
 								option(title="remove headings", value="normal") heading
@@ -105,6 +109,6 @@ html(lang="en")
 				keyboard: false
 			});
 		script(data-main="js/main", src="js/require.js")
-		//script(src="https://www.google.com/jsapi")
+		script(src="https://www.google.com/jsapi")
 		script
-			//google.load("webfont", "1");
+			google.load("webfont", "1");
