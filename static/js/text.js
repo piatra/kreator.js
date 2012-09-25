@@ -21,21 +21,19 @@ define(['jquery', 'htmlEntites'], function($, htmlEntites) {
 			} else if (document.selection) {
 				sel = document.selection.createRange();
 			}
-
+			
 			if(!find.trim()) return; // if nothing is selected
 
 			var t = '<'+tag+'>';
 			string = string.replace(t, '');
 			t = '</'+tag+'>';
-			
-			string = string.replace(t, '');
-			if(string != stringcpy) return string;
-			
 			newstring += '<'+ tag +'>' + find + '</'+ tag +'>'; // wrap in apropriate tag
+
 			if (string.match('href')) {
 				return string.replace('>' + find + '<', '>' + newstring + '<');
 			}
-			return string.replace(find, newstring); // replace the old word with the wrapped word
+			
+			return string.replace(find, newstring);
 		},
 		removeHeadings: function(string) {
 			return string.replace(/<.h?.>/gi, '');

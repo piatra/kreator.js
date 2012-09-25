@@ -68,6 +68,7 @@ define(function(){
 			return Math.sqrt(dx * dx + dy * dy);
 		},
 		moveSpan : function(e){
+			
 			e.stopPropagation();
 			that = this;
 			

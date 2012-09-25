@@ -5,9 +5,9 @@ define(['settings'], function(settings){
 		var updateSettings = function(e){
 			e.preventDefault();
 			e.stopPropagation();
-			var color1 = $('input', $(this)).eq(1).val();
-			var color2 = $('input', $(this)).eq(2).val();
-			var fontsize = $('input', $(this)).eq(3).val();
+			var color1 = $('input', $(this)).eq(3).val();
+			var color2 = $('input', $(this)).eq(4).val();
+			var fontsize = $('input', $(this)).eq(5).val();
 			var bg = '-webkit-radial-gradient('+color1+', '+color2+')';
 			var webkitBg = '-webkit-radial-gradient('+color1+', '+color2+')';
 			var mozBg = '-moz-radial-gradient('+color1+', '+color2+')';

@@ -62,9 +62,7 @@ app.get('/get/:file', function(req, res) {
 
 app.post('/', function(req, res) {
 	
-	if(req.body.theme !== 'null') {
-		filelist[0] = 'http://localhost:3000/get/' + req.body.theme + '.html';
-	}
+	filelist[0] = 'http://localhost:3000/get/' + req.body.theme + '.html';
 
 	async.map(filelist, fetch, function(err, results){
 		if (err) {
@@ -93,12 +91,15 @@ app.post('/', function(req, res) {
 			});
 
 			slides = JSON.parse(slides);
+			
 			for (var i in slides) {
 				if(Array.isArray(slides[i])) {
 					var array = slides[i];
 					content += '<section>';
 					array.forEach(function(s){
 						var $ = cheerio.load(s);
+						$('div').removeAttr('style');
+						$('.visible').removeClass('visible');
 						var img = $('img');
 						img.attr('src', img.attr('data-path'));
 						img.removeAttr('data-path');
@@ -107,6 +108,8 @@ app.post('/', function(req, res) {
 					content += '</section>';
 				} else {
 					$ = cheerio.load(slides[i]);
+					$('div').removeAttr('style');
+					$('.visible').removeClass('visible');
 					var img = $('img');
 					img.attr('src', img.attr('data-path'));
 					img.removeAttr('data-path');

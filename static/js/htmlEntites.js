@@ -9,10 +9,18 @@ define(function(){
 			"gt"  : ">"
 		};
 		var convertTags = function (content) {
-			return content.replace(new RegExp("span","g"),"div")
+			var string = content.replace(new RegExp("span","g"),"div")
 				.replace(new RegExp(' contenteditable=""',"g"),'')
 				.replace(new RegExp(' contenteditable="true"',"g"),'')
 				.replace(new RegExp(' contenteditable="false"',"g"),'');
+            
+           	var $string = $(string);
+           	var span = $string.children('div');
+           	$string.children('div').each(function(idx, el){ 
+           		$(el).replaceWith('<span>' + $(span[idx]).html() + '</span>');
+           	})
+           	console.log($string.html());
+			return string;
 		};
 		var findTags = function (str) {
 			if(str) {

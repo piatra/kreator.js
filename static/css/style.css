@@ -70,6 +70,16 @@ section {
 			border:1px dotted #555;
 			outline:none;
 		}
+		span {
+			border:none;
+			display:inline;
+			&:hover {
+				background:none;
+			}
+			&:focus {
+				background:none;
+			}
+		}
 	}
 }
 

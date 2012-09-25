@@ -24,10 +24,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 						Reveal.navigateDown();
 					});
 			
-			var uioptions = settings.get();
-			if(uioptions && uioptions.hasOwnProperty('body')) {
-				$('body').css('background', uioptions.body[0].split(':')[1]);
-			}
+			settings.clear();
 
 			$('body').append(options.right).append(options.down);
 
@@ -59,10 +56,10 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 				if(html.classList.length) {
 					theme = html.classList[0];
 					if(theme.length>12) {
-						theme = null;
+						theme = 'head';
 					}
 				} else {
-					theme = null;
+					theme = 'head';
 				}
 
 				var webfonts = '';
@@ -120,12 +117,14 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					$(this).toggleClass('active');
 					textStyle.insertHiperlink(this, $span);
 				} else if(tag === 'move') {
-					var s = Kreator.getCurrentSlide();
 					$(this).toggleClass('btn-info');
 					var section = $('.reveal section');
-					if(!$(this).hasClass('active')) {
+					if(!$(this).hasClass('active') && $('span', $('.present')).length ) {
 						$('.present span').off('mousedown', bHandler.moveSpan)
 								.attr('contentEditable', true);
+						var className = $span.attr('class') || $span.addClass(Kreator.generateClassName(1)) && $span.attr('class');
+						settings.set(['.'+className, 'position:absolute;top:'+$span.css('top')+';left:'+$span.css('left')]);
+						
 					} else {
 						$('.present span').on('mousedown', bHandler.moveSpan)
 								.attr('contentEditable', false);
@@ -170,21 +169,28 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					}
 				} else if (tag === 'textcolor') {
 					var that = $(this);
+					if($('input[type=color]').length) {
+						$('input[type=color]').remove();
+					}
 					if (that.hasClass('active')) {
 						var input = $('<input type="color">');
 						that.append(input);
 						input.on('click', function(e){
 							e.stopPropagation();
 						}).on('change', function(){
+							console.log('change triggered');
 							var color = $(this).val();
-							var className = $span.attr('class') || Kreator.generateClassName(2);
-							$span.css('color', color).addClass(className);
-							$('*', $span).eq(0).css('color', color);
+							var className = $span.attr('class') || Kreator.generateClassName(1);
+							$span.html(textStyle.format('span', $span));
+							var coloredText = $('span:not([style])', $span);
+							coloredText.css('color', color).addClass(className);
 							settings.set(['.' + className, 'color:' + color]);
 							$(this).remove();
 							that.trigger('click');
 						});
 					}
+				} else if (tag === 'fullscreen' || tag === 'settings') {
+					$(this).removeClass('active');
 				}
 			});
 
@@ -280,7 +286,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 				if(action === 'rotate') {
 					$span.css('transform','rotate('+value+'deg)');
 					if(clsName) {
-						settings.set(['.'+clsName, 'transform: rotate('+value+'deg)']);
+						settings.set(['.'+clsName, '-webkit-transform: rotate('+value+'deg);-moz-transform: rotate('+value+'deg);transform: rotate('+value+'deg)']);
 					}
 				} else if (action === 'add class') {
 					if(e.keyCode == 13) {
@@ -291,33 +297,23 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 						settings.copy('.'+oldCls, '.'+newCls);
 					}
 				} else if (action === 'font') {
-					var htag = $span.html();
-					htag = htag.match(/<.h?.>/gi);
-					if(!$span.attr('data-heading') && htag)
-						$span.attr('data-heading', htag[0][2]);
+					
 					if(e.keyCode == 13) {
+						
 						var family = $(this).val();
-						slideTemplate.addMessage(family);
 						WebFont.load({
 							google: {
 								families: [ family ]
 							},
 							active: function () {
-								console.log('active', htag);
 								$span.css('font-family', family);
-								if($span.attr('data-heading')) {
-									htag = 'h' + $span.attr('data-heading');
-									$span.html('<'+htag+'>' + $span.html() + '</'+ htag +'>');
-									$span.removeAttr('data-heading');
+								if($('h1', $span).length) {
 									$('h1', $span).css('font-family', family);
 								}
 								if(clsName) {
 									settings.set(['.'+clsName, 'font-family: ' + family]);
 								}
 								settings.set(family, 'webfont');
-							},
-							complete: function () {
-								console.log('end');
 							}
 						});
 					}
@@ -332,11 +328,11 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 		});
 
 		var generateClassName = function (testClass) {
-			var n = parseInt(testClass) + 1;
+			var n = 1;
 			while ($('.kreator-class-' + n).length)
 				n++;
 			return 'kreator-class-' + n;
-		}
+		};
 
 		var setSlideX = function(x) {
 			slideX = x;
@@ -348,7 +344,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 
 		var getSlideX = function () {
 			return slideX;
-		}
+		};
 
 		var getSlideY = function () {
 			return slideY;
