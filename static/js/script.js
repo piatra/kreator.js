@@ -178,11 +178,11 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 						input.on('click', function(e){
 							e.stopPropagation();
 						}).on('change', function(){
-							console.log('change triggered');
 							var color = $(this).val();
-							var className = $span.attr('class') || Kreator.generateClassName(1);
 							$span.html(textStyle.format('span', $span));
 							var coloredText = $('span:not([style])', $span);
+							var className = coloredText.attr('class') || Kreator.generateClassName(1);
+							console.log(className);
 							coloredText.css('color', color).addClass(className);
 							settings.set(['.' + className, 'color:' + color]);
 							$(this).remove();
@@ -191,6 +191,28 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					}
 				} else if (tag === 'fullscreen' || tag === 'settings') {
 					$(this).removeClass('active');
+				} else if (tag === 'bgcolor') {
+					var that = $(this);
+					if($('input[type=color]').length) {
+						$('input[type=color]').remove();
+					}
+					var input = $('<input type="color">');
+						that.append(input);
+						input.on('click', function(e){
+							e.stopPropagation();
+						}).on('change', function(){
+							var color = $(this).val();
+							var className = $span.attr('class') || Kreator.generateClassName(1);
+							console.log(className);
+							$span.css('background', color);
+							if (!$span.attr('class')) {
+								$span.addClass(className);
+							}
+							settings.set(['.' + className, 'background:' + color]);
+							$(this).remove();
+							that.trigger('click');
+						});
+
 				}
 			});
 
