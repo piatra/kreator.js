@@ -521,23 +521,18 @@ ul.menu.hidden {
 .sidebar {
 	position:absolute;
 	top:8%;
-	right:2%;
+	right:4%;
 	font-size:13px;
 	text-align:center;
 	z-index:1100;
 	margin:0;
 	padding:0;
 	width:100px;
-	background:#1b1b1b;
 }
 
 	.sidebar li {
 		list-style: none;
-	}
-
-	.sidebar .btn {
-		width:100%;
-		display:inline-block;
+		margin:2px;
 	}
 
 .visible {

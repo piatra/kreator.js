@@ -226,6 +226,46 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 				});
 			});
 
+			$('#duplicate').on('click', function () {
+
+				var slide = $('.present').clone().removeClass('.present');
+
+				if($(this).hasClass('btn-group')) {
+					var el = document.querySelector('.duplicate-direction');
+					console.log(el.classList);
+					if($('.duplicate-direction').hasClass('right')) {
+						Kreator.addSlideRight(slide);
+						Reveal.navigateRight();
+					} else {
+						Kreator.addSlideDown(slide);
+						Reveal.navigateDown();
+					}
+					return;
+				}
+				$this = $(this);
+				var btn = $('<button/>').addClass('btn');
+				$this.addClass('btn-group').removeClass('btn btn-warning');
+				btn.clone().html('<i class="icon-arrow-down"></i>')
+							.hover(function(e){
+								$(this).addClass('duplicate-direction down');
+							}, function(e) {
+								$(this).removeClass('duplicate-direction down');
+								var that = this;
+								bHandler.cancelDuplicate(e, that);
+							})
+							.appendTo($this);
+				btn.clone().html('<i class="icon-arrow-right"></i>')
+							.hover(function(e){
+								$(this).addClass('duplicate-direction right');
+							}, function(e) {
+								var that = this;
+								$(this).removeClass('duplicate-direction right');
+								bHandler.cancelDuplicate(e, that);
+							})
+							.appendTo($this);
+				
+			});
+
 			$('#select-dimensions').on('change', function () {
 				// create H headings
 				var h = $(this).val();
@@ -402,27 +442,33 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			return $('.present');
 		};
 
-		var addSlideRight = function() {
-			var s = this.getCurrentSlide();
+		var addSlideRight = function(slide) {
+			var s = $('.present');
 			$('.active').trigger('click');
 			// if the current slide is the last slide on the X axis we append to the parent
 			if($('.slides>section').length == slideX+1) {
-				$('<section/>').on('click', addContentToSlide).appendTo('.slides');
+				if(slide)
+					slide.on('click', addContentToSlide).appendTo('.slides');
+				else
+					$('<section/>').on('click', addContentToSlide).appendTo('.slides');
 			} else { // else we just append after the current element
-				$('<section/>').on('click', addContentToSlide).insertAfter(s);
+				if(slide)
+					slide.on('click', addContentToSlide).insertAfter(s);
+				else
+					$('<section/>').on('click', addContentToSlide).insertAfter(s);
 			}
 			$('.menu').addClass('hidden');
 		};
 
-		var addSlideDown = function() {
+		var addSlideDown = function(slide) {
 			var s = this.getCurrentSlide();
 			$('.active').trigger('click');
+			var ns = slide || $('<section/>');
 			if(s.parent().hasClass('slides')) {
 				var c = $('<section/>').append(s.html());
-				var ns = $('<section/>');
 				s.html('').append(c).append(ns);
 			} else {
-				$('<section/>').insertAfter(s);
+				ns.insertAfter(s);
 			}
 
 			$('.menu').addClass('hidden');

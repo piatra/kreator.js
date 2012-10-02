@@ -91,6 +91,15 @@ define(function(){
 				$(document).off('mousemove');
 			});
 		},
+		cancelDuplicate : function (e, that) {
+			setTimeout(function () {
+				if(!$('.duplicate-direction').length)
+				$('#duplicate')
+					.removeClass('btn-group')
+					.addClass('btn-warning btn')
+					.html('Duplicate');
+				}, 4000)
+		},
 		move : function (e) {
 			
 			var   left = 0
