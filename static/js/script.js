@@ -269,13 +269,25 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 
 			$('#remove-slide').on('click', function () {
 				var coords = Reveal.getIndices();
-				console.log(coords);
-				//$('.present').remove();
-				if(coords.v) {
-					Reveal.navigateTo( coords.h, coords.v-1 );
-				} else {
-					Reveal.navigateTo( coords.h-1, coords.v );
+				if(coords.h || coords.v) {
+					if (coords.v) {
+						var s = Kreator.getCurrentSlide();
+						s.remove();
+						Reveal.navigateTo(coords.h, coords.v-1);
+					} else {
+						var s = Kreator.getCurrentSlide();
+						s.remove();
+						Reveal.navigateTo(coords.h-1, coords.v);
+					}
 				}
+				// var coords = Reveal.getIndices();
+				// console.log(coords);
+				// //$('.present').remove();
+				// if(coords.v) {
+				// 	Reveal.navigateTo( coords.h, coords.v-1 );
+				// } else {
+				// 	Reveal.navigateTo( coords.h-1, coords.v );
+				// }
 				//Reveal.navigatePrev();
 				//Reveal.toggleOverview();
 			});
