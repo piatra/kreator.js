@@ -159,8 +159,8 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					var img = document.querySelector('.present img');
 					if (img) bHandler.imageResize(img);
 					if ( ! $(this).hasClass('active') ) {
-						var x = Kreator.getSlideX() + 1;
-						var y = Kreator.getSlideY() + 1;
+						var x = Reveal.getIndices().h + 1;
+						var y = Reveal.getIndices().v + 1;
 						if (y==1) {
 							settings.set(['.slides:nth-child('+x+') section img', 'width :' + img.style.width]);
 						} else {
@@ -213,6 +213,8 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 							that.trigger('click');
 						});
 
+				} else if (tag === 'overview') {
+					Reveal.toggleOverview();
 				}
 			});
 
@@ -228,11 +230,10 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 
 			$('#duplicate').on('click', function () {
 
-				var slide = $('.present').clone().removeClass('.present');
+				var slide = Kreator.getCurrentSlide();
 
 				if($(this).hasClass('btn-group')) {
 					var el = document.querySelector('.duplicate-direction');
-					console.log(el.classList);
 					if($('.duplicate-direction').hasClass('right')) {
 						Kreator.addSlideRight(slide);
 						Reveal.navigateRight();
@@ -264,6 +265,19 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 							})
 							.appendTo($this);
 				
+			});
+
+			$('#remove-slide').on('click', function () {
+				var coords = Reveal.getIndices();
+				console.log(coords);
+				//$('.present').remove();
+				if(coords.v) {
+					Reveal.navigateTo( coords.h, coords.v-1 );
+				} else {
+					Reveal.navigateTo( coords.h-1, coords.v );
+				}
+				//Reveal.navigatePrev();
+				//Reveal.toggleOverview();
 			});
 
 			$('#select-dimensions').on('change', function () {
@@ -384,11 +398,6 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 
 		};
 
-		Reveal.addEventListener( 'slidechanged', function( event ) {
-				Kreator.setSlideX(event.indexh);
-				Kreator.setSlideY(event.indexv);
-		});
-
 		var generateClassName = function (testClass) {
 			var n = 1;
 			while ($('.kreator-class-' + n).length)
@@ -396,32 +405,18 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			return 'kreator-class-' + n;
 		};
 
-		var setSlideX = function(x) {
-			slideX = x;
-		};
-
-		var setSlideY = function(y) {
-			slideY = y;
-		};
-
-		var getSlideX = function () {
-			return slideX;
-		};
-
-		var getSlideY = function () {
-			return slideY;
-		}
-
 		var addContentToSlide = function() {
+			
+			var present = Kreator.getCurrentSlide();
 
-			var count = $('span', Kreator.getCurrentSlide()).length;
+			var count = $('span', $(present)).length;
 			if ($('.present').hasClass('crosshair') || count > 10) return;
 
 			var d = $('<span contentEditable></span>').on('click', function(e){
 				editSpan(e, d);
-			})
+			});
 
-			d.appendTo($('.present')).trigger('click').focus();
+			d.appendTo($(present)).trigger('click').focus();
 
 			var list = ($('.btn.active').attr('data-textstyle') === 'li');
 			if(list) {
@@ -439,16 +434,27 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 		};
 
 		var getCurrentSlide = function() {
-			return $('.present');
+			var present;
+			var slides = document.querySelectorAll('.present');
+			[].forEach.call(slides, function(s){
+				if(!s.classList.contains('stack')) {
+					present = s;
+				}
+			});
+			return $(present);
 		};
 
 		var addSlideRight = function(slide) {
-			var s = $('.present');
+			var s = Kreator.getCurrentSlide();
 			$('.active').trigger('click');
 			// if the current slide is the last slide on the X axis we append to the parent
-			if($('.slides>section').length == slideX+1) {
-				if(slide)
-					slide.on('click', addContentToSlide).appendTo('.slides');
+			if($('.slides>section').length == Reveal.getIndices().h+1) {
+				if(slide) {
+					$('<section/>')
+						.on('click', addContentToSlide)
+						.html(slide.html())
+						.appendTo('.slides');
+				}
 				else
 					$('<section/>').on('click', addContentToSlide).appendTo('.slides');
 			} else { // else we just append after the current element
@@ -461,16 +467,23 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 		};
 
 		var addSlideDown = function(slide) {
-			var s = this.getCurrentSlide();
-			$('.active').trigger('click');
-			var ns = slide || $('<section/>');
-			if(s.parent().hasClass('slides')) {
-				var c = $('<section/>').append(s.html());
-				s.html('').append(c).append(ns);
+			var ind = Reveal.getIndices();
+			var newSlide = slide || $('<section/>');
+			newSlide.on('click', addContentToSlide);
+			if(ind.v) {
+				var parent = document.querySelector('.stack.present');
+				$('<section></section>').html(newSlide.html())
+										.on('click', addContentToSlide)
+										.appendTo($(parent));
 			} else {
-				ns.insertAfter(s);
-			}
+				var content = $('.present').html();
+				var holder = $('<section></section>');
+				$('.present').replaceWith(holder);
+				$('<section/>').html(content).appendTo(holder);
+				newSlide.appendTo(holder);
 
+			}
+			Reveal.navigateDown();
 			$('.menu').addClass('hidden');
 		};
 
@@ -481,12 +494,12 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			var textStyle = htmlEntites.findTags($span.html());
 			
 			if(textStyle >= 0)
-				$('#select-dimensions option:eq('+textStyle+')').attr('selected', 'selected')
+				$('#select-dimensions option:eq('+textStyle+')').attr('selected', 'selected');
 
 			$('.menu').css({
 				'top' : e.currentTarget.offsetTop + 27,
 				'display' : 'block'
-			})
+			});
 			
 		};
 
@@ -495,10 +508,6 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			addSlideRight: addSlideRight,
 			editSpan: editSpan,
 			getCurrentSlide: getCurrentSlide,
-			setSlideX: setSlideX,
-			setSlideY: setSlideY,
-			getSlideY : getSlideY,
-			getSlideX : getSlideX,
 			generateClassName: generateClassName,
 			init: init
 		};

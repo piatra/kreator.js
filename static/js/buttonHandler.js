@@ -98,7 +98,7 @@ define(function(){
 					.removeClass('btn-group')
 					.addClass('btn-warning btn')
 					.html('Duplicate');
-				}, 4000)
+				}, 1000)
 		},
 		move : function (e) {
 			

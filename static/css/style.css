@@ -531,6 +531,7 @@ ul.menu.hidden {
 }
 
 	.sidebar li {
+		width:100%;
 		list-style: none;
 		margin:2px;
 	}
