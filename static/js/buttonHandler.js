@@ -16,7 +16,7 @@ define(function(){
 					} else if (document.documentElement.webkitRequestFullScreen) {
 						document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
 					}
-					
+					Reveal.navigateTo(0,0);
 				} else {
 					if (document.cancelFullScreen) {
 						document.querySelector('body').classList.remove('fullscreen');
@@ -70,7 +70,7 @@ define(function(){
 		moveSpan : function(e){
 			
 			e.stopPropagation();
-			that = this;
+			var that = this;
 			
 			that.style.position = 'absolute';
 			this.style.width = 'auto';
@@ -84,10 +84,11 @@ define(function(){
 			lines = JSON.parse(localStorage.getItem('canvasPoints')) || [];
 
 			$(document).on('mousemove', function (e) {
-				buttonHandler.move(e);
+				buttonHandler.move.call(that, e);
 			});
 
 			$(document).on('mouseup', function () {
+				$(window).trigger('movemouseup');
 				$(document).off('mousemove');
 			});
 		},
@@ -98,7 +99,7 @@ define(function(){
 					.removeClass('btn-group')
 					.addClass('btn-warning btn')
 					.html('Duplicate');
-				}, 1000)
+				}, 1000);
 		},
 		move : function (e) {
 			
@@ -107,6 +108,7 @@ define(function(){
 				, top = 0
 				, l = $('.snap-line')
 				, snapped = false
+				, that = this
 				;
 
 			if(e.pageX != mouseX) {

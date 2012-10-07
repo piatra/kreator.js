@@ -76,7 +76,7 @@ body {
 .reveal h3, 
 .reveal h4 {
 	margin: 0 0 10px 0;
-	
+	font-weight: bold;
 	color: #eee;
 	
 	font-family: Impact, sans-serif;

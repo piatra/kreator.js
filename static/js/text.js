@@ -22,13 +22,16 @@ define(['jquery', 'htmlEntites'], function($, htmlEntites) {
 				sel = document.selection.createRange();
 			}
 			
-			if(!find.trim()) return; // if nothing is selected
+			if(!find.trim()) {
+				console.log('nothing selected');
+				return; // if nothing is selected
+			}
 
 			var t = '<'+tag+'>';
 			string = string.replace(t, '');
 			t = '</'+tag+'>';
 			newstring += '<'+ tag +'>' + find + '</'+ tag +'>'; // wrap in apropriate tag
-
+		
 			if (string.match('href')) {
 				return string.replace('>' + find + '<', '>' + newstring + '<');
 			}

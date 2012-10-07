@@ -9,8 +9,7 @@ define(function(){
 			"gt"  : ">"
 		};
 		var convertTags = function (content) {
-			var string = content.replace(new RegExp("span","g"),"div")
-				.replace(new RegExp(' contenteditable=""',"g"),'')
+			var string = content.replace(new RegExp(' contenteditable',"g"),'')
 				.replace(new RegExp(' contenteditable="true"',"g"),'')
 				.replace(new RegExp(' contenteditable="false"',"g"),'');
             
