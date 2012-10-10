@@ -291,30 +291,33 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 				bHandler.toggleFullscreen();
 			});
 
-			$(window).on('paste', function(e){
-				setTimeout(function(){textStyle.formatCode.call(Kreator, $span);}, 100);
-			});
+			// needs fixing
+			// $(window).on('paste', function(e){
+			// 	setTimeout(function(){textStyle.formatCode.call(Kreator, $span);}, 100);
+			// });
 
 			$('.menu li').on('click', function () {
 				var $this = $(this);
 				var action = $this.attr('data-title');
 				var clsName = $span.attr('class');
-
-				$this.toggleClass('active');
-				if(action === 'rotate') {
+				if($this.hasClass('active')) {
 					$('.menu .active').removeClass('active');
-					$this.addClass('active');
-					
+					$('#range-handler').parent().hide();
+					return;
+				} else {
+					$('.menu .active').removeClass('active');
+					$('#range-handler').parent().hide();
+					$this.toggleClass('active');
+				}
+				if(action === 'rotate') {
+
 					$span.css('transform','rotate(10deg)');
 					$('#menu-input').val('10deg');
+
 					if(!document.querySelector('#range-handler')) {
-						var fragment = document.createDocumentFragment()
-						var li = document.createElement('li')
-						var range = document.createElement('input');
-						range.type="range";
-						range.id ="range-handler";
-						range.min=-180;
-						range.max=180;
+						var fragment = document.createDocumentFragment();
+						var li = document.createElement('li');
+						var range = bHandler.createRangeEl();
 						range.addEventListener('keyup', function(){
 							$('#menu-input').val(this.value + ' deg').trigger('keyup');
 						}, false);
@@ -322,13 +325,10 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 						fragment.appendChild(li);
 						document.querySelector('.menu').appendChild(fragment);
 					} else {
-						$('#range-handler').show();
+						$('#range-handler').parent().show();
 					}
 
 				} else if(action === 'add class') {
-					$('.menu .active').removeClass('active');
-					$('#range-handler').hide();
-					$(this).addClass('active');
 					$('#menu-input').attr('placeholder', 'class name').val(clsName);
 				} else if(action === 'clear') {
 					settings.remove(clsName);
@@ -338,11 +338,8 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 						'font-family': 'inherit'
 					});
 				} else if(action === 'font') {
-					$('#range-handler').hide();
 					$('#menu-input').attr('placeholder', 'font family').val($span.css('font-family'));
 					clsName = $span.attr('class') || $span.addClass(Kreator.generateClassName()) && $span.attr('class');
-					$('.menu .active').removeClass('active');
-					$(this).addClass('active');
 				}
 
 			});
@@ -402,9 +399,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 		var addContentToSlide = function() {
 			
 			var present = Kreator.getCurrentSlide();
-
-			var count = $('span', $(present)).length;
-			if ($('.present').hasClass('crosshair') || count > 10) return;
+			if ($('.present').hasClass('crosshair')) return;
 
 			var d = $('<span contentEditable></span>').on('click', function(e){
 				editSpan(e, d);
@@ -415,9 +410,6 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			var list = ($('.btn.active').attr('data-textstyle') === 'li');
 			if(list) {
 				$('.active').trigger('click');
-			}
-			if(!count) {
-				$('.menu.hidden').removeClass('hidden');
 			}
 		};
 		
@@ -503,7 +495,10 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 				$('#select-dimensions option:eq('+textStyle+')').attr('selected', 'selected');
 			}
 
-			$('.menu').css({'top' : e.currentTarget.offsetTop + 27, 'display' : 'block'});
+			$('.menu')
+				.removeClass('hidden')
+				.css({'top' : e.currentTarget.offsetTop + 27, 'display' : 'block'})
+				.children('.active').trigger('click');
 			
 		};
 

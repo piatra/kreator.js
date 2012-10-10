@@ -225,6 +225,14 @@ define(function(){
 				x -= x%step;
 				return x;
 			}
+		},
+		createRangeEl: function() {
+			var range = document.createElement('input');
+			range.type="range";
+			range.id ="range-handler";
+			range.min=-180;
+			range.max=180;
+			return range;
 		}
 	};
 	return buttonHandler;
