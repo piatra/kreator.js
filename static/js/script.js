@@ -8,6 +8,12 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			hljs = options.hljs;
 
 		var init = function() {
+			
+			var confirmExit = function () {
+				return "Did you download ? ";
+			};
+
+			window.onbeforeunload = confirmExit;
 
 			options.right = $('<div data-direction="right">+</div>')
 					.addClass('add-slide add-right')
@@ -63,9 +69,10 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 
 				var webfonts = '';
 				var fonts = settings.get('webfont');
-				if(Array.isArray(fonts)) webfonts = fonts.map(function (font) {
-					return "<link href='http://fonts.googleapis.com/css?family="+font+"' rel='stylesheet' type='text/css'>"
-				}).join('');
+				if(fonts)
+					if(Array.isArray(fonts)) webfonts = fonts.map(function (font) {
+							return "<link href='http://fonts.googleapis.com/css?family="+font+"' rel='stylesheet' type='text/css'>";
+						}).join('');
 					else webfonts = "<link href='http://fonts.googleapis.com/css?family="+fonts+"' rel='stylesheet' type='text/css'>";
 
 				var title = settings.get('title') || 'kreator.js presentation';
@@ -240,7 +247,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 				}
 
 				var btn = $('<button/>').addClass('btn');
-				$this.addClass('btn-group').removeClass('btn btn-warning');
+				$this.addClass('btn-group').removeClass('btn');
 				btn.clone().html('<i class="icon-arrow-down"></i>')
 							.hover(function(e){
 								$(this).addClass('duplicate-direction down');
@@ -305,6 +312,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					$('#range-handler').parent().hide();
 					return;
 				} else {
+					if($this.children('input').length) return;
 					$('.menu .active').removeClass('active');
 					$('#range-handler').parent().hide();
 					$this.toggleClass('active');
@@ -315,17 +323,15 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					$('#menu-input').val('10deg');
 
 					if(!document.querySelector('#range-handler')) {
-						var fragment = document.createDocumentFragment();
 						var li = document.createElement('li');
 						var range = bHandler.createRangeEl();
-						range.addEventListener('keyup', function(){
-							$('#menu-input').val(this.value + ' deg').trigger('keyup');
-						}, false);
 						li.appendChild(range);
-						fragment.appendChild(li);
-						document.querySelector('.menu').appendChild(fragment);
+						document.querySelector('.menu').appendChild(li);
 					} else {
 						$('#range-handler').parent().show();
+						document.querySelector('#range-handler').addEventListener('change', function () {
+							$('#menu-input').val(this.value + ' deg').trigger('keyup');
+						}, false);
 					}
 
 				} else if(action === 'add class') {

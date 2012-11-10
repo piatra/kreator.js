@@ -56,8 +56,7 @@ html(lang="en")
 								i(class="icon-upload")
 							a(href="#", class="btn toggle", data-title="resize image", data-textstyle="resize")
 								i(class=" icon-resize-small")
-							a(href="#",class="btn btn-info download", data-title="download", id="download")
-								i(class="icon-download icon-white")
+
 						.btn-group.pull-right
 							a(class="btn fullscreen", data-title="fullscreen", id="fullscreen", href="#", data-textstyle="fullscreen")
 								i(class="icon-fullscreen")
@@ -71,8 +70,9 @@ html(lang="en")
 							a(class="btn", data-title="align right", data-textstyle="right", href="#")
 								i(class="icon-align-right")
 		ul.sidebar
-			li.btn.btn-warning#duplicate Duplicate
-			li.btn#remove-slide Remove
+			li.btn.btn-large#duplicate Duplicate
+			li.btn.btn-large#remove-slide Delete slide
+			li.btn.btn-large.btn-success#download Download
 
 		.reveal
 			.slides
@@ -82,6 +82,7 @@ html(lang="en")
 					li(data-title="font"): i(class="icon-font")
 					li(data-title="clear"): i(class="icon-remove")
 					li.input: input(placeholder="value", id="menu-input")
+					li.input: input(type="range", id="range-handler", min="-180", max="180")
 				section
 
 			aside.controls
@@ -106,9 +107,7 @@ html(lang="en")
 			} );
 
 			Reveal.initialize({
-				controls: true,
-				progress: true,
-				keyboard: false
+				progress: true
 			});
 		script(data-main="js/main", src="js/require.js")
 		script(src="https://www.google.com/jsapi")
