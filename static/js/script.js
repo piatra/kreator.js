@@ -13,7 +13,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 				return "Did you download ? ";
 			};
 
-			window.onbeforeunload = confirmExit;
+			//window.onbeforeunload = confirmExit;
 
 			options.right = $('<div data-direction="right">+</div>')
 					.addClass('add-slide add-right')

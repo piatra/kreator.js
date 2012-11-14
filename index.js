@@ -17,7 +17,8 @@ var express = require('express'),
 		"http://localhost:3000/get/print.css",
 		"http://localhost:3000/get/start.sh",
 		"http://localhost:3000/get/kreator.css",
-		"http://localhost:3000/get/middle.html"
+		"http://localhost:3000/get/middle.html",
+		"http://localhost:3000/get/night.css"
 	],
 	pub = __dirname + '/static',
 	less = require('less'),
@@ -31,6 +32,7 @@ app.configure(function(){
 	app.use(express.errorHandler());
 	app.set('views', __dirname + '/views');
 	app.set('view engine', 'jade');
+	app.locals.pretty = true;
 });
 
 var fetch = function(file,cb){
@@ -129,6 +131,7 @@ app.post('/', function(req, res) {
 			archive.add('css/print.css', new Buffer(results[9], "utf8"));
 			archive.add('start.sh', new Buffer(results[10]));
 			archive.add('css/kreator.css', new Buffer(results[11], "utf8"));
+			archive.add('css/night.css', new Buffer(results[13], "utf8"));
 			res.attachment('kreator_'+(new Date).getTime().toString()+'.zip');
 			res.send(archive.toBuffer());
 		}

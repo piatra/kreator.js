@@ -44,6 +44,9 @@ define(['settings'], function(settings){
 					var theme =  $(this).val();
 					$('body').removeAttr('style');
 					$('html').removeClass().addClass(theme);
+					theme = theme.split('-')[1];
+					if(theme === 'night')
+						$('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'http://localhost:3000/get/night.css') );
 				});
 				$('form', $(this)).on('submit', updateSettings);
 				$('.close', $(this)).on('click', function(){
