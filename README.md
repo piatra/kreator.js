@@ -44,3 +44,7 @@ You can add them as `feature` in the issue tracker
 
 I update the project once a week so it's evolving fast.
 There is a feature list and I'm using github issues to keep track of them. Hope to cross off as many as possible
+
+## Copyright and license
+
+Licensed under the Apache License, Version 2.0
