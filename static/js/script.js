@@ -235,6 +235,8 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 				var slide = Kreator.getCurrentSlide();
 				var $this = $(this);
 
+				console.log(slide.html());
+
 				if($this.hasClass('btn-group')) {
 					if($('.duplicate-direction').hasClass('right')) {
 						Kreator.addSlideRight(slide);
@@ -425,7 +427,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			return spans.eq(spans.length-1);
 		};
 
-		var getCurrentSlide = function() {
+		var getCurrentSlide = function(jquery) {
 			var present;
 			var slides = document.querySelectorAll('.present');
 			[].forEach.call(slides, function(s){
@@ -433,33 +435,21 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					present = s;
 				}
 			});
-			return $(present);
+			if(!jquery) return $(present);
+			return present;
 		};
 
 		var addSlideRight = function(slide) {
-			var s = Kreator.getCurrentSlide();
-			$('.active').trigger('click');
-			// if the current slide is the last slide on the X axis we append to the parent
-			if($('.slides>section').length == Reveal.getIndices().h+1) {
-				if(slide) {
-					s = $('<section/>')
-						.on('click', addContentToSlide)
-						.html(slide.html())
-						.appendTo('.slides');
-					var d = $('span', s).on('click', function(e){
-						editSpan(e, d);
-					});
-				}
-				else
-					$('<section/>').on('click', addContentToSlide).appendTo('.slides');
-			} else { // else we just append after the current element
-				if(slide) {
-					slide.on('click', addContentToSlide).insertAfter(s);
-				}
-				else
-					$('<section/>').on('click', addContentToSlide).insertAfter(s);
-			}
-			$('.menu').addClass('hidden');
+			var newSlide = document.createElement('section');
+			$(newSlide).on('click', addContentToSlide);
+			if(slide) newSlide.innerHTML = slide.html();
+			var cSlide = document.querySelector('.present:not(.stack)');
+			if(cSlide.parentNode.classList.contains('stack')) {
+				cSlide = cSlide.parentNode;
+				cSlide.parentNode.insertBefore(newSlide, cSlide.nextSibling);
+			} else
+				cSlide.parentNode.insertBefore(newSlide, cSlide.nextSibling);
+			$('span', $(newSlide)).on('click', editSpan);
 		};
 
 		var addSlideDown = function(slide) {
