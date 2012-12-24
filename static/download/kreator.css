@@ -1,1 +1,1 @@
-.pull-right{float:right;} .pull-left {float:left;} section div {min-height:30px;}
+.pull-right{float:right;} .pull-left {float:left;} section>span {min-height:30px;display:block;}

@@ -1,6 +1,45 @@
 define(['jquery', 'htmlEntites'], function($, htmlEntites) {
 	var myModule = {
 		// wrap the selected text in apropriate tags // makes words in bold/italic/underline
+		_format : function (tag, span) {
+			var target = getSelectionTarget();
+			if(!target) return;
+			var html = null;
+			if (typeof window.getSelection != "undefined") {
+				var sel = window.getSelection();
+				if (sel.rangeCount) {
+					var container = document.createElement("div");
+					for (var i = 0, len = sel.rangeCount; i < len; ++i) {
+						container.appendChild(sel.getRangeAt(i).cloneContents());
+					}
+					html = container.innerHTML;
+				}
+			} else if (typeof document.selection != "undefined") {
+				if (document.selection.type == "Text") {
+					html = document.selection.createRange().htmlText;
+				}
+			}
+			if(html) {
+				var value = '<'+tag+'>' + html + '</'+tag+'>';
+				return target.innerHTML.replace(html, value);
+			} else {
+				return false;
+			}
+		},
+		getSelectionTarget : function () {
+			var target=null;
+
+			if(window.getSelection) {
+				target=window.getSelection().getRangeAt(0).commonAncestorContainer;
+				return((target.nodeType===1)?target:target.parentNode);
+			}
+			
+			else if(document.selection) {
+				target=document.selection.createRange().parentElement();
+			}
+
+			return target;
+		},
 		format: function(tag, span) {
 			var s = window.getSelection()
 			, newstring = ''

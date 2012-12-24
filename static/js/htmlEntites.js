@@ -9,16 +9,16 @@ define(function(){
 			"gt"  : ">"
 		};
 		var convertTags = function (content) {
-			var string = content.replace(new RegExp(' contenteditable',"g"),'')
-				.replace(new RegExp(' contenteditable="true"',"g"),'')
-				.replace(new RegExp(' contenteditable="false"',"g"),'');
-            
-           	var $string = $(string);
-           	var span = $string.children('div');
-           	$string.children('div').each(function(idx, el){ 
-           		$(el).replaceWith('<span>' + $(span[idx]).html() + '</span>');
-           	})
-           	console.log($string.html());
+			var string = content.replace(new RegExp(' contenteditable="true"',"g"),'')
+				.replace(new RegExp(' contenteditable="false"',"g"),'')
+				.replace(new RegExp(' contenteditable',"g"),'')
+				.replace(new RegExp('=""',"g"),'');
+			
+			var $string = $(string);
+			var span = $string.children('div');
+			$string.children('div').each(function(idx, el){ 
+				$(el).replaceWith('<span>' + $(span[idx]).html() + '</span>');
+			});
 			return string;
 		};
 		var findTags = function (str) {

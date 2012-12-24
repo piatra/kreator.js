@@ -185,6 +185,9 @@ define(function(){
 			}
 		},
 		imageResize: function (img) {
+
+			img.classList.add('resizing');
+
 			img.ondragstart = function (e) {
 				var that = this;
 				window.onmousemove = function (e) {
@@ -195,7 +198,8 @@ define(function(){
 				window.onmouseup = function (e) {
 					window.onmousemove = null;
 					window.onmouseup = null;
-					console.log('resize removed');
+
+					$(window).trigger('resized');
 				};
 			};
 		},

@@ -4,7 +4,7 @@ GUI Editor for reveal.js
 https://github.com/hakimel/reveal.js/issues/31
 
 There is now an online version of this 
-http://piatra.jit.su (may include work in progress)
+http://piatra.herokuapps.com (may include work in progress)
 
 There is an about page https://github.com/piatra/kreator.js/wiki/About
 

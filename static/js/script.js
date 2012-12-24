@@ -1,3 +1,17 @@
+var showError = function () {
+	var modal = $('#modal');
+	if(!modal.length) modal = $('<div/>').attr('id', 'modal');
+	else modal.toggleClass('hide');
+	var body = $('body');
+	modal.load('./layouts/errorHandler.html', function(){
+		modal.appendTo(body);
+
+		$('#error-close', $(this)).on('click', function () {
+			modal.remove();
+		});
+	});
+};
+
 define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'settings', 'canvas'], 
 	function(textStyle, $, htmlEntites, bHandler, slideTemplate, settings, canvas){
 
@@ -128,6 +142,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					if(!$(this).hasClass('active') && $('span', $('.present')).length ) {
 						$('.present span').off('mousedown', bHandler.moveSpan).attr('contentEditable', true);
 					} else {
+						if(!$span) $span = $('.present span').eq(0);
 						$('.present span').on('mousedown', bHandler.moveSpan).attr('contentEditable', false);
 					}
 					$('.present').toggleClass('crosshair');
@@ -157,14 +172,11 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					$('.thumbnails').toggle();
 				} else if(tag === 'resize') {
 					$('.present').toggleClass('resize');
-					var img = document.querySelector('.present img');
-					if (img) {
-						bHandler.imageResize(img);
-					}
-					if ( ! $(this).hasClass('active') ) {
-						var className = $(this).attr('class') || $(this).addClass(Kreator.generateClassName()) && $(this).attr('class');
-						settings.set(['.'+className, 'width :' + img.style.width]);
-					}
+					var imgs = document.querySelectorAll('img');
+					if($(this).hasClass('active'))
+						[].forEach.call(imgs, function(img){
+							bHandler.imageResize(img);
+						});
 				} else if (tag === 'textcolor') {
 					var that = $(this);
 					if($('input[type=color]').length) {
@@ -212,6 +224,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					}
 
 				} else if (tag === 'overview') {
+					$('.menu').toggleClass('hidden');
 					Reveal.toggleOverview();
 				}
 			});
@@ -219,6 +232,15 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			$(window).on('movemouseup', function () {
 				var className = $span.attr('class') || $span.addClass(Kreator.generateClassName()) && $span.attr('class');
 				settings.set(['.'+className, 'position:absolute;top:'+$span.css('top')+';left:'+$span.css('left')]);
+			});
+
+			$(window).on('resized', function(e){ // after the image has been resized
+				var img = $('.resizing');
+				if(img.length) {
+					img.removeClass('resizing');
+					var className = $(img).attr('class') || $(img).addClass(Kreator.generateClassName()) && $(img).attr('class');
+					settings.set(['.'+className, 'width :' + img.width() + 'px']);
+				}
 			});
 	
 			$('.thumbnails img').live('click', function () {
@@ -340,8 +362,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					$('#menu-input').attr('placeholder', 'class name').val(clsName);
 				} else if(action === 'clear') {
 					settings.remove(clsName);
-					$span.removeClass();
-					$span.css({
+					$span.removeClass().css({
 						'transform': 'none',
 						'font-family': 'inherit'
 					});
@@ -353,9 +374,16 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			});
 
 			$('#menu-input').on('keyup', function (e) {
-				var value = parseInt($(this).val(), 10) || 0;
-				var action = $('.menu .active').attr('data-title');
-				var clsName = $span.attr('class') || $span.addClass(Kreator.generateClassName()) && $span.attr('class');
+				var value = parseInt($(this).val(), 10) || 0,
+					action = $('.menu .active').attr('data-title'),
+					img = $('img', $span),
+					clsName;
+
+				if(!img.length)
+					clsName = $span.attr('class') || $span.addClass(Kreator.generateClassName()) && $span.attr('class');
+				else {
+					clsName = img.attr('class') || img.addClass(Kreator.generateClassName()) && img.attr('class');
+				}
 				
 				if(action === 'rotate') {
 					$span.css('transform','rotate('+value+'deg)');
@@ -471,8 +499,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 				$('.present').replaceWith(holder);
 				$('<section/>').on('click', addContentToSlide)
 								.html(content).appendTo(holder);
-				newSlide.on('click', addContentToSlide)
-						.appendTo(holder);
+				newSlide.appendTo(holder);
 				d = $('span', holder).on('click', function(e){
 					editSpan(e, d);
 				});
@@ -493,7 +520,7 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 
 			$('.menu')
 				.removeClass('hidden')
-				.css({'top' : e.currentTarget.offsetTop + 27, 'display' : 'block'})
+				.css({'top' : e.currentTarget.offsetTop + 27})
 				.children('.active').trigger('click');
 			
 		};

@@ -5,26 +5,21 @@ define(['settings'], function(settings){
 		var updateSettings = function(e){
 			e.preventDefault();
 			e.stopPropagation();
-			var color1 = $('input', $(this)).eq(3).val();
-			var color2 = $('input', $(this)).eq(4).val();
-			var fontsize = $('input', $(this)).eq(5).val();
-			var bg = '-webkit-radial-gradient('+color1+', '+color2+')';
-			var webkitBg = '-webkit-radial-gradient('+color1+', '+color2+')';
-			var mozBg = '-moz-radial-gradient('+color1+', '+color2+')';
-			$('body').css('background', bg);
+			var color1 = $('input', $('#modal')).eq(3).val();
+			var color2 = $('input', $('#modal')).eq(4).val();
+			var fontsize = $('input', $('#modal')).eq(5).val();
+			var unprefixBg = 'radial-gradient(circle, '+color1+', '+color2+')';
+			var webkitBg = '-webkit-'+unprefixBg;
+			var mozBg = '-moz-'+unprefixBg;
+			$('body').css('background', webkitBg);
 			
-			settings.set(['body', 'background: ' + bg + ';background:' + webkitBg + ';background:' + mozBg]);
+			settings.set(['body', 'background:' + webkitBg + ';background:' + mozBg + ';background:' + unprefixBg]);
 		};
 
 		var finishedSettings = function(e){
 			e.preventDefault();
 			e.stopPropagation();
 			$('section').html('');
-		};
-
-		var addMessage = function(message) {
-			var msg = $('<li/>').html('<p>' + message + '</p>');
-			$('.notifications').append(msg);
 		};
 
 		var showSettings = function(s) {
@@ -48,7 +43,7 @@ define(['settings'], function(settings){
 					if(theme === 'night')
 						$('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'http://localhost:3000/get/night.css') );
 				});
-				$('form', $(this)).on('submit', updateSettings);
+				$('input[type=color]', $(this)).on('change', updateSettings);
 				$('.close', $(this)).on('click', function(){
 					modal.toggleClass('hide');
 				});
@@ -142,7 +137,6 @@ define(['settings'], function(settings){
 
 		return {
 			showSettings: showSettings,
-			addMessage: addMessage,
 			previewfile: previewfile,
 			uploadImages : uploadImages
 		};

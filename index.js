@@ -13,14 +13,13 @@ var express = require('express'),
 		"http://localhost:3000/get/highlight.js",
 		"http://localhost:3000/get/classList.js",
 		"http://localhost:3000/get/zenburn.css",
-		"http://localhost:3000/get/reset.css",
+		"http://localhost:3000/get/default.css",
 		"http://localhost:3000/get/print.css",
 		"http://localhost:3000/get/start.sh",
 		"http://localhost:3000/get/kreator.css",
 		"http://localhost:3000/get/middle.html",
 		"http://localhost:3000/get/night.css"
 	],
-	pub = __dirname + '/static',
 	less = require('less'),
 	parser = new(less.Parser),
 	generateCSS = require('./lib/css.js'),
@@ -28,7 +27,7 @@ var express = require('express'),
 
 app.configure(function(){
 	app.use(express.bodyParser());
-	app.use(express.static(pub));
+	app.use(express.static(__dirname + '/static'));
 	app.use(express.errorHandler());
 	app.set('views', __dirname + '/views');
 	app.set('view engine', 'jade');
@@ -68,7 +67,9 @@ app.post('/', function(req, res) {
 
 	async.map(filelist, fetch, function(err, results){
 		if (err) {
-			console.log('Error!');
+			console.log('Error! ', err);
+			var message = '<script>window.parent.showError()</script>'
+			res.end(message);
 		} else {
 			var $ = cheerio.load(results[0]);
 			
@@ -81,8 +82,10 @@ app.post('/', function(req, res) {
 			content += req.body.webfont;
 			content += results[12];
 			
-			var slides = req.body.slides;
+			var slides = JSON.parse(req.body.slides);
+			console.log(slides);
 			var css = results[11] + generateCSS.parse(req.body.params);
+
 			console.log(css);
 
 			parser.parse(css, function (err, tree) {
@@ -91,8 +94,6 @@ app.post('/', function(req, res) {
 				}
 				results[11] = tree.toCSS();
 			});
-
-			slides = JSON.parse(slides);
 			
 			for (var i in slides) {
 				if(Array.isArray(slides[i])) {
@@ -101,6 +102,7 @@ app.post('/', function(req, res) {
 					array.forEach(function(s){
 						var $ = cheerio.load(s);
 						$('div').removeAttr('style');
+						$('span').removeAttr('style');
 						$('.visible').removeClass('visible');
 						var img = $('img');
 						img.attr('src', img.attr('data-path'));
@@ -111,6 +113,7 @@ app.post('/', function(req, res) {
 				} else {
 					$ = cheerio.load(slides[i]);
 					$('div').removeAttr('style');
+					$('span').removeAttr('style');
 					$('.visible').removeClass('visible');
 					var img = $('img');
 					img.attr('src', img.attr('data-path'));
@@ -127,7 +130,7 @@ app.post('/', function(req, res) {
 			archive.add('lib/js/highlight.js', new Buffer(results[5], "utf8"));
 			archive.add('lib/js/classList.js', new Buffer(results[6], "utf8"));
 			archive.add('lib/css/zenburn.css', new Buffer(results[7], "utf8"));
-			archive.add('css/reset.css', new Buffer(results[8], "utf8"));
+			archive.add('css/default.css', new Buffer(results[8], "utf8"));
 			archive.add('css/print.css', new Buffer(results[9], "utf8"));
 			archive.add('start.sh', new Buffer(results[10]));
 			archive.add('css/kreator.css', new Buffer(results[11], "utf8"));
@@ -138,5 +141,5 @@ app.post('/', function(req, res) {
 	});
 });
 
-app.listen(process.env.PORT || 3000);
+app.listen(3000);
 console.log('Listening on port something');

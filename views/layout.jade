@@ -55,18 +55,19 @@ html(lang="en")
 							a(href="#", class="btn toggle", data-title="resize image", data-textstyle="resize")
 								i(class=" icon-resize-small")
 
-						.btn-group.pull-right
-							a(class="btn fullscreen", data-title="fullscreen", id="fullscreen", href="#", data-textstyle="fullscreen")
-								i(class="icon-fullscreen")
-							a(class="btn overview", data-title="overview", href="#", data-textstyle="overview")
-								i(class="icon-eye-open")
-						.btn-group.pull-right
+						.btn-group
 							a(class="btn", data-title="align left", data-textstyle="left", href="#")
 								i(class="icon-align-left")
 							a(class="btn", data-title="align center", data-textstyle="center", href="#")
 								i(class="icon-align-center")
 							a(class="btn", data-title="align right", data-textstyle="right", href="#")
 								i(class="icon-align-right")
+								
+						.btn-group
+							a(class="btn fullscreen", data-title="fullscreen", id="fullscreen", href="#", data-textstyle="fullscreen")
+								i(class="icon-fullscreen")
+							a(class="btn overview", data-title="overview", href="#", data-textstyle="overview")
+								i(class="icon-eye-open")
 		ul.sidebar
 			li.btn.btn-large#duplicate Duplicate
 			li.btn.btn-large#remove-slide Delete slide
@@ -108,6 +109,6 @@ html(lang="en")
 				progress: true
 			});
 		script(data-main="js/main", src="js/require.js")
-		script(src="https://www.google.com/jsapi")
-		script
-			google.load("webfont", "1");
+		script(src="//ajax.googleapis.com/ajax/libs/webfont/1.0.31/webfont.js")
+		//script
+			//google.load("webfont", "1");

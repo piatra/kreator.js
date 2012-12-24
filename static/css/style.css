@@ -239,17 +239,21 @@ input[type=range] {
 }
 input[type=range]:after,
 input[type=range]:before {
-  color: #333;
+  color: #000;
   position: absolute;
-  top: 2px;
+  top: -1px;
   font-size: 10px;
+  text-shadow: 0 -1px 0 #aaa;
+  background: #fff;
+  border-radius: 5px;
+  padding: 0 5px;
 }
 input[type=range]:after {
-  right: -26px;
+  right: -47px;
   content: attr(max) "px";
 }
 input[type=range]:before {
-  left: -26px;
+  left: -47px;
   content: attr(min) "px";
 }
 #modal .input-small {
@@ -446,7 +450,7 @@ ul.menu.hidden {
   background: rgba(255, 255, 255, 0.8);
   width: 2px;
   height: 2px;
-  -webkit-animation: fadeout 3s ease forwards;
+  -webkit-animation: fadeout 2s ease forwards;
 }
 @-webkit-keyframes fadeout {
   from {
