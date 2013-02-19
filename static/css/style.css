@@ -2,6 +2,7 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+
 }
 ::-moz-selection {
   background: #fe57a1;
@@ -16,7 +17,7 @@
 body {
   color: #fff;
 }
-body.noselect {
+.noselect {
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;

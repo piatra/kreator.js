@@ -1,0 +1,110 @@
+extends layout
+
+block content
+	header.navbar.navbar-fixed-top.navbar-inverse
+		.navbar-inner.noselect
+			.container
+				.btn-toolbar
+					.btn-group
+						a(class="btn", data-title="turn it bold", data-textstyle="b", href="#")
+							i(class="icon-bold")
+						a(class="btn", data-title="turn it italic", data-textstyle="i", href="#")
+							i(class="icon-italic")
+						a(class="btn", data-title="text color", data-textstyle="textcolor", href="#")
+							i(class="icon-palette")
+						a(class="btn", data-title="background color", data-textstyle="bgcolor", href="#")
+							i(class="icon-can")
+					.controls
+						select#select-dimensions
+							option(title="remove headings", value="normal") heading
+							option(title="Heading 1", value="h1") H1
+							option(title="Heading 2", value="h2") H2
+							option(title="Heading 3", value="h3") H3
+							option(title="Heading 4", value="h4") H4
+					.btn-group
+						a(class="btn", data-title="make a link", data-textstyle="a", href="#")
+							i(class="icon-font")
+						a(class="btn", data-title="add a quote", data-textstyle="blockquote", href="#")
+							i(class="icon-comment")
+						a(class="btn", data-title="make a list", data-textstyle="li", href="#")
+							i(class="icon-list")
+					.btn-group
+						a(id="remove", class="btn", data-title="remove", data-textstyle="remove", href="#")
+							i(class="icon-remove")
+						a(href="#", class="btn", data-title="move", data-textstyle="move")
+							i(class="icon-move")
+						a(href='#', class="btn toggle", data-title="draw grid", data-textstyle="grid")
+							i(class="icon-th")
+						a(href='#', class="btn toggle", data-title="clear grid", data-textstyle="grid-clear")
+							i(class="icon-trash")
+						a(href="#", class="btn btn-info", data-title="settings", id="settings-btn", data-textstyle="settings")
+							i(class="icon-cog icon-white")
+					.btn-group
+						a(href="#", class="btn all-images", data-title="all images", data-textstyle="images")
+							i(class="icon-picture")
+							span(class="label label-info") 0
+						a(href="#", class="btn upload-images", data-title="upload images", data-textstyle="upload")
+							i(class="icon-upload")
+						a(href="#", class="btn toggle", data-title="resize image", data-textstyle="resize")
+							i(class=" icon-resize-small")
+
+					.btn-group
+						a(class="btn", data-title="align left", data-textstyle="left", href="#")
+							i(class="icon-align-left")
+						a(class="btn", data-title="align center", data-textstyle="center", href="#")
+							i(class="icon-align-center")
+						a(class="btn", data-title="align right", data-textstyle="right", href="#")
+							i(class="icon-align-right")
+							
+					.btn-group
+						a(class="btn fullscreen", data-title="fullscreen", id="fullscreen", href="#", data-textstyle="fullscreen")
+							i(class="icon-fullscreen")
+						a(class="btn overview", data-title="overview", href="#", data-textstyle="overview")
+							i(class="icon-eye-open")
+	ul.sidebar.noselect
+		li.btn.btn-large#duplicate Duplicate
+		li.btn.btn-large#remove-slide Delete slide
+		li.btn.btn-large.btn-success#download Download
+
+	.reveal
+		.slides
+			ul(class="menu hidden")
+				li(data-title="rotate"): i(class="icon-repeat")
+				li(data-title="add class"): i(class="icon-list-alt") 
+				li(data-title="font"): i(class="icon-font")
+				li(data-title="clear"): i(class="icon-remove")
+				li.input: input(placeholder="value", id="menu-input")
+				li.input: input(type="range", id="range-handler", min="-180", max="180")
+			section
+
+		aside.controls.noselect
+			a(class="left", href="#")&#x25C4;
+			a(class="right", href="#")&#x25BA;
+			a(class="up", href="#")&#x25B2;
+			a(class="down", href="#")&#x25BC;
+
+		ul.thumbnails
+	
+		.progress
+			span
+
+		.add-slide.add-right.noselect(data-direction="right") +
+		.add-slide.add-down.noselect(data-direction="bottom") +
+
+	script(src="js/highlight.pack.js")
+	script(src="js/reveal.min.js")
+
+	script
+		// Parse the query string into a key/value object
+		var query = {};
+		location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
+			query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
+		} );
+
+		Reveal.initialize({
+			progress: true
+		});
+	script(data-main="js/main", src="js/require.js")
+	script(src="//ajax.googleapis.com/ajax/libs/webfont/1.0.31/webfont.js")
+	//script
+		//google.load("webfont", "1");
