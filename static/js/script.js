@@ -29,15 +29,13 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 
 			//window.onbeforeunload = confirmExit;
 
-			options.right = $('<div data-direction="right">+</div>')
-					.addClass('add-slide add-right')
+			options.right = $('.add-slide.add-right')
 					.on('click', function(){
 						Kreator.addSlideRight();
 						Reveal.navigateRight();
 					});
 			
-			options.down = $('<div data-direction="bottom">+</div>')
-					.addClass('add-slide add-down')
+			options.down = $('.add-slide.add-down')
 					.on('click', function(){
 						Kreator.addSlideDown();
 						Reveal.navigateDown();

@@ -45,7 +45,7 @@ var fetch = function(file,cb){
 };
 
 app.get('/', function(req, res) {
-	res.render('layout');
+	res.render('index');
 });
 
 app.get('/get/:file', function(req, res) {
