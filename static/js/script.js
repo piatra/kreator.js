@@ -22,12 +22,10 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 			hljs = options.hljs;
 
 		var init = function() {
-			
-			var confirmExit = function () {
+
+			window.onbeforeunload = function () {
 				return "Did you download ? ";
 			};
-
-			//window.onbeforeunload = confirmExit;
 
 			options.right = $('.add-slide.add-right')
 					.on('click', function(){

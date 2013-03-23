@@ -496,3 +496,7 @@ ul.thumbnails li {
 .resize img:hover {
   cursor: se-resize;
 }
+
+header .container {
+  text-align: center
+}

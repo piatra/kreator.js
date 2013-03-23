@@ -41,7 +41,7 @@ define(['settings'], function(settings){
 					$('html').removeClass().addClass(theme);
 					theme = theme.split('-')[1];
 					if(theme === 'night')
-						$('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'http://localhost:3000/get/night.css') );
+						$('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 'get/night.css') );
 				});
 				$('input[type=color]', $(this)).on('change', updateSettings);
 				$('.close', $(this)).on('click', function(){
@@ -109,11 +109,8 @@ define(['settings'], function(settings){
 								li.classList.add('span2');
 								li.appendChild(image);
 								document.querySelector('.thumbnails').appendChild(li);
-								var label = document.querySelector('.label');
-								label.innerHTML = parseInt(label.innerHTML) + 1;
 							};
 						})(f);
-						
 						// Read in the image file as a data URL.
 						reader.readAsDataURL(f);
 					}
