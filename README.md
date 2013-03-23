@@ -36,9 +36,10 @@ Please submit features bugs and request I'm very interested in what people expec
 You can add them as `feature` in the issue tracker
 
 ## Feature list (coming)
-	* Upload existing presentation
-	* Using File API to save intermediate snapshots
-	* Submit your own![send in as a feature request/enhancement](https://github.com/piatra/kreator.js/issues?state=open) 
+
+* Upload existing presentation
+* Using File API to save intermediate snapshots
+* [Submit your own!](https://github.com/piatra/kreator.js/issues?state=open)
 
 ## Copyright and license
 
