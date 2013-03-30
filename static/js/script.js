@@ -23,9 +23,9 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 
 		var init = function() {
 
-			window.onbeforeunload = function () {
-				return "Did you download ? ";
-			};
+			// window.onbeforeunload = function () {
+			// 	return "Did you download ? ";
+			// };
 
 			options.right = $('.add-slide.add-right')
 					.on('click', function(){

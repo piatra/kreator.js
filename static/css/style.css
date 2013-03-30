@@ -500,3 +500,39 @@ ul.thumbnails li {
 header .container {
   text-align: center
 }
+/*added*/
+.resizing {
+  position: absolute;
+}
+
+.resize-right {
+  background-color: red;
+  position: absolute;
+  width: 20px;
+  cursor: w-resize;
+}
+
+.resize-top {
+  background-color: red;
+  position: absolute;
+  height: 20px;
+  cursor: s-resize;
+}
+
+.resize-left {
+  background-color: red;
+  position: absolute;
+  width: 20px;
+  cursor: e-resize;
+}
+
+.resize-bottom {
+  background-color: red;
+  position: absolute;
+  height: 20px;
+  cursor: n-resize;
+}
+
+.moving {
+  cursor: move;
+}
