@@ -493,8 +493,10 @@ ul.thumbnails {
 ul.thumbnails li {
   list-style: none;
 }
-.resize img:hover {
-  cursor: se-resize;
+.resize img {
+
+  user-select:none;
+  -webkit-user-select:none;
 }
 
 header .container {
