@@ -337,13 +337,17 @@ label {
 }
 .present.crosshair,
 .present.pointer {
-  cursor: crosshair !important;
+  cursor: pointer !important;
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;
   -ms-user-select: none;
 }
-.present.crosshair span:hover,
+  .present.crosshair span:hover, .present.crosshair span:focus {
+    background:none;
+    bottom: 1px solid transparent;
+  }
+
 .present.pointer span:hover {
   cursor: move;
 }
@@ -469,10 +473,10 @@ ul.menu.hidden {
     opacity: 0;
   }
 }
-.btn ~ .btn.toggle {
+.btn + .btn.toggle {
   display: none;
 }
-.btn.active ~ .btn.toggle {
+.btn.active + .btn.toggle {
   display: inline-block;
 }
 .resize img {

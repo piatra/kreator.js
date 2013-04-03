@@ -134,7 +134,6 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					textStyle.insertHiperlink(this, $span);
 				} else if(tag === 'move') {
 					$(this).toggleClass('btn-info');
-					var section = $('.reveal section');
 					if(!$(this).hasClass('active') && $('span', $('.present')).length ) {
 						$('.present span').off('mousedown', bHandler.moveSpan).attr('contentEditable', true);
 					} else {
@@ -143,15 +142,16 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					}
 					$('.present').toggleClass('crosshair');
 				} else if(tag === 'grid') {
+					$(this).toggleClass('btn-info');
 					if($(this).hasClass('active')) {
 						canvas.init();
 					} else {
 						canvas.remove();
 					}
 				} else if(tag === 'remove') {
-					
+
 					$(this).toggleClass('btn-info');
-					
+
 					if($(this).hasClass('active')) {
 						$('.present').addClass('crosshair');
 						$('span').on('click', bHandler.removeSpan);
@@ -162,12 +162,15 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 				} else if(tag === 'grid-clear') {
 					$(this).toggleClass('active');
 					settings.remove(['canvasPoints']);
+					canvas.remove();
 				} else if(tag === 'upload') {
 					slideTemplate.uploadImages.call($(this));
 				} else if(tag === 'images') {
 					$('.thumbnails').toggle();
 				} else if(tag === 'resize') {
 					$('.present').toggleClass('resize');
+					$('.present').toggleClass('crosshair');
+					bHandler.disableInsert();
 					var imgs = document.querySelectorAll('img');
 					if($(this).hasClass('active'))
 						[].forEach.call(imgs, function(img){
@@ -211,7 +214,6 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 						input.on('click', function(e){
 							e.stopPropagation();
 						}).on('change', function(){
-							console.log('settings bg color');
 							var color = $(this).val();
 							$span.html(textStyle.format('span', $span));
 							var bgSpan = $('span:not([style])', $span);

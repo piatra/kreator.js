@@ -275,10 +275,10 @@ define(function(){
 			console.log('remove');
 
 			img.classList.remove('resizing');
-			img.removeEventListener('mousemove', attachImageMove);
-			var resizeR = document.createElement('div')
-			,	resizeL = document.createElement('div')
-			,	resizeB = document.createElement('div')
+			img.removeEventListener('mousemove', buttonHandler.attachImageMove);
+			var resizeR = document.querySelector('.resize-right')
+			,	resizeL = document.querySelector('.resize-left')
+			,	resizeB = document.querySelector('.resize-bottom')
 			;
 
 			resizeR.parentNode.removeChild(resizeR);
@@ -289,6 +289,13 @@ define(function(){
 			console.log('here');
 			this.classList.add('moving');
 			window.addEventListener('mousemove', buttonHandler.mousemove, false);
+		},
+		disableInsert : function () {
+			if(!$(this).hasClass('crosshair')) {
+				$('.present span').attr('contentEditable', true);
+			} else {
+				$('.present span').attr('contentEditable', false);
+			}
 		},
 		imageResize: function (img) {
 			console.log('add');
