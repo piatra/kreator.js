@@ -173,6 +173,10 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 						[].forEach.call(imgs, function(img){
 							bHandler.imageResize(img);
 						});
+					else
+						[].forEach.call(imgs, function(img){
+							bHandler.clearResize(img);
+						});
 				} else if (tag === 'textcolor') {
 					var that = $(this);
 					if($('input[type=color]').length) {

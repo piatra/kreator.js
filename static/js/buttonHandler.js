@@ -190,7 +190,7 @@ define(function(){
 			}
 		},
 
-		updateResizeBars: function (resizeR, resizeT, resizeL, resizeB, img) {
+		updateResizeBars: function (resizeR, resizeL, resizeB, img) {
 			buttonHandler.initR(resizeR, img);
 			buttonHandler.initL(resizeL, img);
 			buttonHandler.initB(resizeB, img);
@@ -234,23 +234,6 @@ define(function(){
 			}
 		},
 
-		resize_t: function (e) {
-			var img = $('.resizing').eq(0);
-			width = img.width();
-			height = img.height();
-			var	frameOffset = $('.present').offset();
-			var	offset = img.offset();
-			var	frameHeight = $('.present').height();
-			var	frameOffsetBottom = window.innerHeight - frameOffset.top - parseInt(frameHeight, 10);
-			var	offsetBottom = window.innerHeight - offset.top - parseInt(img.height(), 10);
-			var img_height = window.innerHeight - e.pageY - offsetBottom;
-			
-			if (img_height > 50 && img_height < 800) {
-				img.height(img_height);
-				img.width(ratio * img_height);
-			}
-		},
-
 		mousemove: function (e) {
 			var img = $('.resizing').eq(0)
 			,   frame = $('.present').eq(0).offset()
@@ -288,8 +271,27 @@ define(function(){
 			obj.style.left = parseInt(img.offsetLeft, 10) + 'px';
 			obj.style.top = parseInt(img.offsetTop, 10) + img.height - 10 + 'px';
 		},
+		clearResize: function (img) {
+			console.log('remove');
 
+			img.classList.remove('resizing');
+			img.removeEventListener('mousemove', attachImageMove);
+			var resizeR = document.createElement('div')
+			,	resizeL = document.createElement('div')
+			,	resizeB = document.createElement('div')
+			;
+
+			resizeR.parentNode.removeChild(resizeR);
+			resizeB.parentNode.removeChild(resizeB);
+			resizeL.parentNode.removeChild(resizeL);
+		},
+		attachImageMove : function () {
+			console.log('here');
+			this.classList.add('moving');
+			window.addEventListener('mousemove', buttonHandler.mousemove, false);
+		},
 		imageResize: function (img) {
+			console.log('add');
 			var resizeR = document.createElement('div')
 			,	resizeL = document.createElement('div')
 			,	resizeB = document.createElement('div')
@@ -301,13 +303,10 @@ define(function(){
 			img.parentNode.appendChild(resizeL);
 			img.parentNode.appendChild(resizeB);
 			img.classList.add('resizing');
-			
+
 			img.ondragstart = function() { return false; };
 
-			img.addEventListener('mousedown', function () {
-				img.classList.add('moving');
-				window.addEventListener('mousemove', buttonHandler.mousemove, false);
-			}, false);
+			img.addEventListener('mousedown', buttonHandler.attachImageMove, false);
 
 			resizeR.addEventListener('mousedown', function () {
 				ratio = img.height / img.width;
@@ -315,7 +314,6 @@ define(function(){
 					img.style.left = parseInt(img.offsetLeft, 10);
 					img.style.right = 'auto';
 				}
-				console.log(img.style.left, img.style.right);
 				window.addEventListener('mousemove', buttonHandler.resize_r, false);
 			}, false);
 
@@ -343,10 +341,9 @@ define(function(){
 				window.removeEventListener('mousemove', buttonHandler.resize_r, false);
 				window.removeEventListener('mousemove', buttonHandler.resize_l, false);
 				window.removeEventListener('mousemove', buttonHandler.resize_b, false);
-				window.removeEventListener('mousemove', buttonHandler.resize_t, false);
 				window.removeEventListener('mousemove', buttonHandler.mousemove, false);
 
-				buttonHandler.updateResizeBars(resizeR, resizeT, resizeL, resizeB, img);
+				buttonHandler.updateResizeBars(resizeR, resizeL, resizeB, img);
 
 			}, false);
 
