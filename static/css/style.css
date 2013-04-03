@@ -473,63 +473,39 @@ ul.menu.hidden {
 .btn.active ~ .btn.toggle {
   display: inline-block;
 }
-ul.thumbnails {
-  position: absolute;
-  left: 0;
-  bottom: 0px;
-  width: 100%;
-  height: 120px;
-  padding: 10px;
-  background: #1b1b1b;
-  z-index: 200;
-  display: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-  -ms-user-select: none;
-  border-top: 1px solid rgba(0, 0, 0, 0.9);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.9);
-}
-ul.thumbnails li {
-  list-style: none;
-}
 .resize img {
-
-  user-select:none;
   -webkit-user-select:none;
+  -moz-user-select:none;
+  user-select:none;
 }
 
 header .container {
   text-align: center
 }
-/*added*/
+
 .resizing {
   position: absolute;
 }
 
 .resize-right {
-  background-color: red;
   position: absolute;
   width: 20px;
   cursor: w-resize;
 }
 
 .resize-top {
-  background-color: red;
   position: absolute;
   height: 20px;
   cursor: s-resize;
 }
 
 .resize-left {
-  background-color: red;
   position: absolute;
   width: 20px;
   cursor: e-resize;
 }
 
 .resize-bottom {
-  background-color: red;
   position: absolute;
   height: 20px;
   cursor: n-resize;

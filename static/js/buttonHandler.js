@@ -192,7 +192,6 @@ define(function(){
 
 		updateResizeBars: function (resizeR, resizeT, resizeL, resizeB, img) {
 			buttonHandler.initR(resizeR, img);
-			buttonHandler.initT(resizeT, img);
 			buttonHandler.initL(resizeL, img);
 			buttonHandler.initB(resizeB, img);
 		},
@@ -245,13 +244,10 @@ define(function(){
 			var	frameOffsetBottom = window.innerHeight - frameOffset.top - parseInt(frameHeight, 10);
 			var	offsetBottom = window.innerHeight - offset.top - parseInt(img.height(), 10);
 			var img_height = window.innerHeight - e.pageY - offsetBottom;
-			// var img_height = window.innerHeight - e.pageY - parseInt(offsetBottom, 10);
-			//console.log(offset.top);
-			//console.log(offsetBottom, img_height);
-			if (img_height > 50) {
+			
+			if (img_height > 50 && img_height < 800) {
 				img.height(img_height);
 				img.width(ratio * img_height);
-			//	console.log(img.width(), img.height());
 			}
 		},
 
@@ -295,16 +291,13 @@ define(function(){
 
 		imageResize: function (img) {
 			var resizeR = document.createElement('div')
-			,	resizeT = document.createElement('div')
 			,	resizeL = document.createElement('div')
 			,	resizeB = document.createElement('div')
 			;
 			resizeR.classList.add('resize-right');
-			resizeT.classList.add('resize-top');
 			resizeL.classList.add('resize-left');
 			resizeB.classList.add('resize-bottom');
 			img.parentNode.appendChild(resizeR);
-			img.parentNode.appendChild(resizeT);
 			img.parentNode.appendChild(resizeL);
 			img.parentNode.appendChild(resizeB);
 			img.classList.add('resizing');
@@ -324,24 +317,6 @@ define(function(){
 				}
 				console.log(img.style.left, img.style.right);
 				window.addEventListener('mousemove', buttonHandler.resize_r, false);
-			}, false);
-
-			resizeT.addEventListener('mousedown', function () {
-				ratio = img.width / img.height;
-				var	frameOffset = $('.present').offset();
-				// var	frameOffsetBottom = window.innerHeight - frameOffset.top - parseInt($('.present').height(), 10);
-				var	offsetBottom = window.innerHeight - img.offsetTop - img.height - 2 * frameOffset.top;
-				//var MM = parseInt(offsetBottom);
-				//console.log(offsetBottom);
-				console.log(img.style.bottom);
-				// var	offsetBottom = window.innerHeight - img.offsetTop - img.height;
-				if (img.style.bottom == 'auto') {
-				    img.style.bottom = offsetBottom + 'px';
-				    img.style.top = 'auto';
-					console.log(img.style.top, img.style.bottom);
-				}
-
-				window.addEventListener('mousemove', buttonHandler.resize_t, false);
 			}, false);
 
 			resizeL.addEventListener('mousedown', function () {
@@ -375,7 +350,7 @@ define(function(){
 
 			}, false);
 
-			buttonHandler.updateResizeBars(resizeR, resizeT, resizeL, resizeB, img);	
+			buttonHandler.updateResizeBars(resizeR, resizeL, resizeB, img);	
 		},
 		
 		showLine: function(x1, y1, x2, y2) {

@@ -40,12 +40,12 @@ block content
 						a(href="#", class="btn btn-info", data-title="settings", id="settings-btn", data-textstyle="settings")
 							i(class="icon-cog icon-white")
 					.btn-group
-						a(href="#", class="btn all-images", data-title="all images", data-textstyle="images")
-							i(class="icon-picture")
+						//- a(href="#", class="btn all-images", data-title="all images", data-textstyle="images")
+						//- 	i(class="icon-picture")
 						a(href="#", class="btn upload-images", data-title="upload images", data-textstyle="upload")
 							i(class="icon-upload")
-						a(href="#", class="btn", data-title="resize image", data-textstyle="resize")
-							i(class=" icon-resize-small")
+						a(href="#", class="btn", data-title="move/resize image", data-textstyle="resize")
+							i(class=" icon-move")
 
 					.btn-group
 						a(class="btn", data-title="align left", data-textstyle="left", href="#")
@@ -84,7 +84,7 @@ block content
 			a(class="up", href="#")&#x25B2;
 			a(class="down", href="#")&#x25BC;
 
-		ul.thumbnails
+		//- ul.thumbnails
 	
 		.progress
 			span
@@ -106,6 +106,6 @@ block content
 			progress: true
 		});
 	script(data-main="js/main", src="js/require.js")
-	script(src="//ajax.googleapis.com/ajax/libs/webfont/1.0.31/webfont.js")
-	//script
-		//google.load("webfont", "1");
+	script(src="http://www.google.com/jsapi")
+	script
+		google.load("webfont", "1");

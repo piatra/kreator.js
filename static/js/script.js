@@ -238,16 +238,6 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					settings.set(['.'+className, 'width :' + img.width() + 'px']);
 				}
 			});
-	
-			$('.thumbnails img').live('click', function () {
-				var el = $('<img>').attr('src', $(this).attr('src'))
-					.css('width', '200px')
-					.attr('data-path', $(this).attr('data-path'));
-				var s = $('<span/>').append(el).appendTo('.present');
-				s.on('click', function (e) {
-					editSpan(e, this);
-				});
-			});
 
 			$('#duplicate').on('click', function () {
 				var slide = Kreator.getCurrentSlide();
