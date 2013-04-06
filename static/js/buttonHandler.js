@@ -235,7 +235,7 @@ define(function(){
 		},
 
 		mousemove: function (e) {
-			var img = $('.resizing').eq(0)
+			var img = $('#active-image')
 			,   frame = $('.present').eq(0).offset()
 			,	position = img.position();
 
@@ -286,7 +286,9 @@ define(function(){
 			resizeL.parentNode.removeChild(resizeL);
 		},
 		attachImageMove : function () {
-			console.log('here');
+			if(document.querySelector('#active-image'))
+				document.querySelector('#active-image').id = '';
+			this.id = 'active-image';
 			this.classList.add('moving');
 			window.addEventListener('mousemove', buttonHandler.mousemove, false);
 		},
@@ -298,11 +300,14 @@ define(function(){
 			}
 		},
 		imageResize: function (img) {
-			console.log('add');
+
 			var resizeR = document.createElement('div')
 			,	resizeL = document.createElement('div')
 			,	resizeB = document.createElement('div')
 			;
+
+
+
 			resizeR.classList.add('resize-right');
 			resizeL.classList.add('resize-left');
 			resizeB.classList.add('resize-bottom');
