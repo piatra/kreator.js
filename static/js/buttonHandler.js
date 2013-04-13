@@ -75,13 +75,14 @@ define(function(){
 		moveSpan : function(e){
 			
 			e.stopPropagation();
-			var that = this;
+			var that = this
+			,	frame = $('.present').eq(0).offset()
+			;
 			
 			that.style.position = 'absolute';
 			this.style.width = 'auto';
-
-			containerPosX = that.offsetLeft || document.width/2 - this.clientWidth;
-			containerPosY = that.offsetTop;
+			that.style.left = e.pageX - that.clientWidth / 2 - frame.left + 'px';
+			that.style.top = e.pageY - that.clientHeight / 2 - frame.top + 'px';
 
 			mouseX = e.pageX;
 			mouseY = e.pageY;
@@ -106,6 +107,7 @@ define(function(){
 					.html('Duplicate');
 				}, 1000);
 		},
+
 		move : function (e) {
 			
 			var   left = 0
@@ -114,15 +116,11 @@ define(function(){
 				, l = $('.snap-line')
 				, snapped = false
 				, that = this
+				, frame = $('.present').eq(0).offset()
 				;
 
-			if(e.pageX != mouseX) {
-				left = containerPosX + e.pageX - mouseX;
-				right = left + that.clientWidth + 1;
-			}
-			if(e.pageY != mouseY) {
-				top = containerPosY + e.pageY - mouseY;
-			}
+			left = e.pageX - that.clientWidth / 2 - frame.left;
+			top = e.pageY - that.clientHeight / 2 - frame.top;
 			
 			lines.map(function (line) {
 				var dl = buttonHandler.pDistance(left, top, line.from[0], line.from[1], line.to[0], line.to[1]);
