@@ -167,6 +167,14 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 					slideTemplate.uploadImages.call($(this));
 				} else if(tag === 'images') {
 					$('.thumbnails').toggle();
+				} else if(tag === 'bgimage') {
+					$('.present').toggleClass('crosshair');
+					bHandler.disableInsert();
+					var imgs = document.querySelectorAll('img');
+					if ($(this).hasClass('active'))
+						[].forEach.call(imgs, function(img){
+							bHandler.setWallpaper(img);
+						});
 				} else if(tag === 'resize') {
 					$('.present').toggleClass('resize');
 					$('.present').toggleClass('crosshair');

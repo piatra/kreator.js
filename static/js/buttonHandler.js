@@ -299,6 +299,21 @@ define(function(){
 				$('.present span').attr('contentEditable', false);
 			}
 		},
+		selectWallpaper: function () {
+			if(document.querySelector('#active-image')) {
+				document.querySelector('#active-image').id = '';
+			}
+			this.id = 'active-image';
+			var	img = $('#active-image')
+			,	frame = $('.present').eq(0)
+			,	path = img.attr('src');
+			;
+			frame.css('background-image', 'url(' + path + ')');
+		},
+		setWallpaper: function (img) {
+			img.ondragstart = function() { return false; };
+			img.addEventListener('mousedown', buttonHandler.selectWallpaper, false);
+		},
 		imageResize: function (img) {
 			var resizeR = document.createElement('div')
 			,	resizeL = document.createElement('div')
