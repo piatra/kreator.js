@@ -308,7 +308,8 @@ define(function(){
 			,	frame = $('.present').eq(0)
 			,	path = img.attr('src');
 			;
-			frame.css('background-image', 'url(' + path + ')');
+			frame.css('background', 'url(' + path + ') no-repeat');
+			frame.css('background-position', 'center center');
 		},
 		setWallpaper: function (img) {
 			img.ondragstart = function() { return false; };
