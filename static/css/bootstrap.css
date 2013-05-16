@@ -2247,6 +2247,10 @@ table .span24 {
   background-position: -167px -48px;
 }
 
+.icon-image {
+  background-position: -457px -48px;
+}
+
 .icon-italic {
   background-position: -192px -48px;
 }
@@ -2918,7 +2922,7 @@ button.close {
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
   vertical-align: middle;
   cursor: pointer;
-  background-color: #f5f5f5;
+  background-color: #fff;
   background-repeat: repeat-x;
   border: 1px solid #bbbbbb;
   *border: 0;
@@ -5070,10 +5074,6 @@ input[type="submit"].btn.btn-mini {
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
      -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
-  -webkit-transition: all 0.2s ease-in-out;
-     -moz-transition: all 0.2s ease-in-out;
-       -o-transition: all 0.2s ease-in-out;
-          transition: all 0.2s ease-in-out;
 }
 
 a.thumbnail:hover {
