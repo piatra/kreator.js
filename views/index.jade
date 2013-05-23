@@ -12,6 +12,8 @@ block content
 							i(class="icon-italic")
 						a(class="btn", data-title="text color", data-textstyle="textcolor", href="#")
 							i(class="icon-palette")
+						a(class="btn", data-title="background image", data-textstyle="bgimage", href="#")
+							i(class="icon-image")
 						a(class="btn", data-title="background color", data-textstyle="bgcolor", href="#")
 							i(class="icon-can")
 					.controls
@@ -31,17 +33,17 @@ block content
 					.btn-group
 						a(id="remove", class="btn", data-title="remove", data-textstyle="remove", href="#")
 							i(class="icon-remove")
-						//- a(href="#", class="btn", data-title="move", data-textstyle="move")
-						//- 	i(class="icon-move")
-						a(href='#', class="btn toggle", data-title="draw grid", data-textstyle="grid")
+						a(href="#", class="btn", data-title="move", data-textstyle="move")
+							i(class="icon-move")
+						a(href='#', class="btn", data-title="draw grid", data-textstyle="grid")
 							i(class="icon-th")
 						a(href='#', class="btn toggle", data-title="clear grid", data-textstyle="grid-clear")
 							i(class="icon-trash")
 						a(href="#", class="btn btn-info", data-title="settings", id="settings-btn", data-textstyle="settings")
 							i(class="icon-cog icon-white")
 					.btn-group
-						a(href="#", class="btn all-images", data-title="all images", data-textstyle="images")
-							i(class="icon-picture")
+						//- a(href="#", class="btn all-images", data-title="all images", data-textstyle="images")
+						//- 	i(class="icon-picture")
 						a(href="#", class="btn upload-images", data-title="upload images", data-textstyle="upload")
 							i(class="icon-upload")
 						a(href="#", class="btn", data-title="resize image", data-textstyle="resize")
@@ -84,7 +86,7 @@ block content
 			a(class="up", href="#")&#x25B2;
 			a(class="down", href="#")&#x25BC;
 
-		ul.thumbnails
+		//- ul.thumbnails
 	
 		.progress
 			span
@@ -106,6 +108,6 @@ block content
 			progress: true
 		});
 	script(data-main="js/main", src="js/require.js")
-	script(src="//ajax.googleapis.com/ajax/libs/webfont/1.0.31/webfont.js")
-	//script
-		//google.load("webfont", "1");
+	script(src="http://www.google.com/jsapi")
+	script
+		google.load("webfont", "1");

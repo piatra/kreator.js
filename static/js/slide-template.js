@@ -102,13 +102,12 @@ define(['settings'], function(settings){
 						reader.onload = (function(theFile) {
 							return function(event) {
 								var image = new Image();
+								var span = document.createElement('span');
+								span.appendChild(image);
 								image.classList.add('thumbnail');
 								image.src = event.target.result;
 								image.dataset.path = 'img/' + theFile.name;
-								var li = document.createElement('li');
-								li.classList.add('span2');
-								li.appendChild(image);
-								document.querySelector('.thumbnails').appendChild(li);
+								document.querySelector('.present').appendChild(span);
 							};
 						})(f);
 						// Read in the image file as a data URL.

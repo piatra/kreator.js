@@ -28,7 +28,9 @@ section {
   text-shadow: 0 1px 0 #000;
   font-family: 'Open Sans', sans-serif;
   font-size: 36px;
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
+  border:1px solid rgba(0,0,0,.2);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
 }
 section p {
   width: 100%;
@@ -335,13 +337,17 @@ label {
 }
 .present.crosshair,
 .present.pointer {
-  cursor: crosshair !important;
+  cursor: pointer !important;
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;
   -ms-user-select: none;
 }
-.present.crosshair span:hover,
+  .present.crosshair span:hover, .present.crosshair span:focus {
+    background:none;
+    bottom: 1px solid transparent;
+  }
+
 .present.pointer span:hover {
   cursor: move;
 }
@@ -467,36 +473,50 @@ ul.menu.hidden {
     opacity: 0;
   }
 }
-.btn ~ .btn.toggle {
+.btn + .btn.toggle {
   display: none;
 }
-.btn.active ~ .btn.toggle {
+.btn.active + .btn.toggle {
   display: inline-block;
 }
-ul.thumbnails {
-  position: absolute;
-  left: 0;
-  bottom: 0px;
-  width: 100%;
-  height: 120px;
-  padding: 10px;
-  background: #1b1b1b;
-  z-index: 200;
-  display: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-  -ms-user-select: none;
-  border-top: 1px solid rgba(0, 0, 0, 0.9);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.9);
-}
-ul.thumbnails li {
-  list-style: none;
-}
-.resize img:hover {
-  cursor: se-resize;
+.resize img {
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  user-select:none;
 }
 
 header .container {
   text-align: center
+}
+
+.resizing {
+  position: absolute;
+}
+
+.resize-right {
+  position: absolute;
+  width: 20px;
+  cursor: w-resize;
+}
+
+.resize-top {
+  position: absolute;
+  height: 20px;
+  cursor: s-resize;
+}
+
+.resize-left {
+  position: absolute;
+  width: 20px;
+  cursor: e-resize;
+}
+
+.resize-bottom {
+  position: absolute;
+  height: 20px;
+  cursor: n-resize;
+}
+
+.moving {
+  cursor: move;
 }

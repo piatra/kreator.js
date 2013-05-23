@@ -93,7 +93,7 @@ define(function () {
 		};
 
 		var remove = function () {
-			canvas.$el.remove();
+			canvas.el.parentNode.removeChild(canvas.el);
 			$('section').off('mouseup').off('mousedown');
 		};
 
