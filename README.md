@@ -13,9 +13,10 @@ There is an about page https://github.com/piatra/kreator.js/wiki/About
 Assuming you have node.js installed
 
 ````
-  node index.js
-  // now you can navigate to http://localhost:3000 to try it out
+  $ node index.js 
 ````
+
+Now you can navigate to http://localhost:3000 to try it out
 
 ## Features
 
