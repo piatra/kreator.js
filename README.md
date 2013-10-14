@@ -8,6 +8,15 @@ http://piatra.jit.su (may include work in progress)
 
 There is an about page https://github.com/piatra/kreator.js/wiki/About
 
+## To start
+
+Assuming you have node.js installed
+
+````
+  node index.js
+  // now you can navigate to http://localhost:3000 to try it out
+````
+
 ## Features
 
 * Create slides
