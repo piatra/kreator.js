@@ -81,10 +81,10 @@ block content
 			section
 
 		aside.controls.noselect
-			a(class="left", href="#")&#x25C4;
-			a(class="right", href="#")&#x25BA;
-			a(class="up", href="#")&#x25B2;
-			a(class="down", href="#")&#x25BC;
+			a(class="left", href="#") <
+			a(class="right", href="#") >
+			a(class="up", href="#") ^
+			a(class="down", href="#") v
 
 		//- ul.thumbnails
 	
@@ -96,18 +96,5 @@ block content
 
 	script(src="js/highlight.pack.js")
 	script(src="js/reveal.min.js")
-
-	script
-		// Parse the query string into a key/value object
-		var query = {};
-		location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
-			query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
-		} );
-
-		Reveal.initialize({
-			progress: true
-		});
 	script(data-main="js/main", src="js/require.js")
 	script(src="http://www.google.com/jsapi")
-	script
-		google.load("webfont", "1");
