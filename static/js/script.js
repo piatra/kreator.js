@@ -536,7 +536,6 @@ define(['text', 'jquery', 'htmlEntites', 'buttonHandler', 'slide-template', 'set
 	})({
 		jquery: $,
 		reveal: Reveal,
-		hljs: hljs,
 		settings: settings
 	});
 
