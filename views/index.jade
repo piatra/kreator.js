@@ -3,23 +3,9 @@ extends layout
 block content
 	//- include navbar
 
-	ul.sidebar.noselect
-		li.btn.btn-large#duplicate Duplicate
-		li.btn.btn-large#remove-slide Delete slide
-
 	.reveal
 		.slides
-			//- ul(class="menu hidden")
-			//- 	li(data-title="rotate"): i(class="icon-repeat")
-			//- 	li(data-title="add class"): i(class="icon-list-alt") 
-			//- 	li(data-title="font"): i(class="icon-font")
-			//- 	li(data-title="clear"): i(class="icon-remove")
-			//- 	li.input: input(placeholder="value", id="menu-input")
-			//- 	li.input: input(type="range", id="range-handler", min="-180", max="180")
 			section
-				h1	Hello world
-				h1	Hello world
-				h1	Hello world
 				h1	Hello world
 
 		aside.controls.noselect
@@ -27,12 +13,11 @@ block content
 			a(class="right", href="#") >
 			a(class="up", href="#") ^
 			a(class="down", href="#") v
-	
 		.progress
 			span
 
-		.add-slide.js-handler--add-slide-right.noselect(data-direction="right") +
-		.add-slide.js-handler--add-slide-down.noselect(data-direction="bottom") +
+		.add-slide.add-slide--right.js-handler--add-slide-right.noselect(data-direction="right") +
+		.add-slide.add-slide--bottom.js-handler--add-slide-down.noselect(data-direction="bottom") +
 
 block scripts
 	script(src="js/head.min.js")

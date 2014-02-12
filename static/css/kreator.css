@@ -1,0 +1,20 @@
+.add-slide {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+  line-height: 2rem;
+  color: #333;
+  z-index: 100;
+  cursor: pointer;
+}
+.add-slide--right {
+  right: 0;
+  top: 50%;
+}
+.add-slide--bottom {
+  bottom: 0;
+  left: 50%;
+}

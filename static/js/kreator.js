@@ -1,4 +1,4 @@
-slide = require('./slide-controller')
+slide = require('./slide-controller');
 
 module.exports = function kreator () {
 
@@ -13,10 +13,6 @@ module.exports = function kreator () {
 		theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
 		transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
-		// Parallax scrolling
-		// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-		// parallaxBackgroundSize: '2100px 900px',
-
 		// Optional libraries used to extend on reveal.js
 		dependencies: [
 			{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
@@ -28,6 +24,7 @@ module.exports = function kreator () {
 		]
 	});
 
-	slide.addListeners()
+	slide.addListeners(document.querySelector('.js-handler--add-slide-down'),
+                    document.querySelector('.js-handler--add-slide-right'));
 
-}
+};

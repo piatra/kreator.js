@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-slide = require('./slide-controller')
+slide = require('./slide-controller');
 
 module.exports = function kreator () {
 
@@ -14,10 +14,6 @@ module.exports = function kreator () {
 		theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
 		transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
-		// Parallax scrolling
-		// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-		// parallaxBackgroundSize: '2100px 900px',
-
 		// Optional libraries used to extend on reveal.js
 		dependencies: [
 			{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
@@ -29,33 +25,61 @@ module.exports = function kreator () {
 		]
 	});
 
-	slide.addListeners()
+	slide.addListeners(document.querySelector('.js-handler--add-slide-down'),
+                    document.querySelector('.js-handler--add-slide-right'));
 
-}
+};
+
 },{"./slide-controller":3}],2:[function(require,module,exports){
-var kreator = require('./kreator.js')
+var kreator = require('./kreator.js');
 
-kreator()
+kreator();
+
 },{"./kreator.js":1}],3:[function(require,module,exports){
-var addListeners = function () {
+var addListeners = function (addDown, addRight) {
 	// js-handler--add-slide-down
 	// js-handler--add-slide-right
-	var slideDown = document.querySelector('.js-handler--add-slide-down')
-	var slideRight = document.querySelector('.js-handler--add-slide-right')
 
-	slideDown.addEventListener('click', addSlideDown, 'false')
-	slideRight.addEventListener('click', addSlideRight, 'false')
-}
-
-function addSlideDown () {
-	console.log('addSlideDown')
-}
-
-function addSlideRight () {
-	console.log('addSlideRight')
-}
+	addDown.addEventListener('click', slidesController.addSlideDown, 'false');
+	addRight.addEventListener('click', slidesController.addSlideRight, 'false');
+};
 
 module.exports = {
 	addListeners: addListeners
-}
+};
+
+var slidesController = {
+  slidesParent: document.querySelector('.slides'),
+  addSlideDown: function() {
+    // to add a slide down we must add a section
+    // inside the current slide.
+    // We select it and the section inside
+    var currentSlide = slidesController.presentSlide();
+    var parentSlide = slidesController.newSlide();
+    var slide1 = slidesController.newSlide();
+    var slide2 = slidesController.newSlide();
+    slide1.innerHTML = currentSlide.innerHTML;
+    parentSlide.innerHTML = '';
+    parentSlide.appendChild(slide1);
+    parentSlide.appendChild(slide2);
+    currentSlide.parentNode.replaceChild(parentSlide, currentSlide);
+    Reveal.toggleOverview();
+    Reveal.toggleOverview();
+    Reveal.down();
+  },
+  addSlideRight: function() {
+    var slide = slidesController.newSlide();
+    slidesController.slidesParent.appendChild(slide);
+    Reveal.right();
+  },
+  presentSlide: function() {
+    return document.querySelector('.present');
+  },
+  newSlide: function() {
+    var slide = document.createElement('section');
+    slide.innerHTML = '<h2>Add your content here</h2>';
+    return slide;
+  }
+};
+
 },{}]},{},[2])

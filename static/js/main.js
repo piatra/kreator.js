@@ -1,3 +1,3 @@
-var kreator = require('./kreator.js')
+var kreator = require('./kreator.js');
 
-kreator()
+kreator();
