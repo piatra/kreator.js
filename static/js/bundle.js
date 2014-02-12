@@ -55,17 +55,26 @@ var slidesController = {
     // inside the current slide.
     // We select it and the section inside
     var currentSlide = slidesController.presentSlide();
-    var parentSlide = slidesController.newSlide();
-    var slide1 = slidesController.newSlide();
-    var slide2 = slidesController.newSlide();
-    slide1.innerHTML = currentSlide.innerHTML;
-    parentSlide.innerHTML = '';
-    parentSlide.appendChild(slide1);
-    parentSlide.appendChild(slide2);
-    currentSlide.parentNode.replaceChild(parentSlide, currentSlide);
-    Reveal.toggleOverview();
-    Reveal.toggleOverview();
-    Reveal.down();
+    var children = currentSlide.querySelector('section');
+    if (!children) {
+      var parentSlide = slidesController.newSlide();
+      var slide1 = slidesController.newSlide();
+      var slide2 = slidesController.newSlide();
+      slide1.innerHTML = currentSlide.innerHTML;
+      parentSlide.innerHTML = '';
+      parentSlide.appendChild(slide1);
+      parentSlide.appendChild(slide2);
+      currentSlide.parentNode.replaceChild(parentSlide, currentSlide);
+      Reveal.toggleOverview();
+      Reveal.toggleOverview();
+      Reveal.down();
+    } else {
+      var slide = slidesController.newSlide();
+      currentSlide.appendChild(slide);
+      Reveal.toggleOverview();
+      Reveal.toggleOverview();
+      Reveal.down();
+    }
   },
   addSlideRight: function() {
     var slide = slidesController.newSlide();
