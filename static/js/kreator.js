@@ -28,7 +28,9 @@ module.exports = function kreator () {
                     document.querySelector('.js-handler--add-slide-right'));
 
   menu.addListeners({
-    upload: document.querySelector('.js-handler--upload')
+    upload: document.querySelector('.js-handler--upload'),
+    heading: document.querySelector('.js-handler--headings'),
+    color: document.querySelector('.js-handler--color')
   });
 
 };

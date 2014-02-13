@@ -13,5 +13,14 @@ html(lang="en")
           form.js-handler--upload(action="")
             input(type='file', required)
             button Upload
+        li.menu-item
+          select(name="heading-size", class="js-handler--headings")
+            option(value="none") Text size
+            option(value="100px") 100px
+            option(value="80px") 80px
+            option(value="60px") 60px
+        li.menu-item
+          input(type="color", class="js-handler--color")
+
     block content
     block scripts

@@ -15,7 +15,7 @@
   top: 50%;
 }
 .add-slide--bottom {
-  bottom: 0;
+  bottom: 80px;
   left: 50%;
 }
 .container {
@@ -24,6 +24,12 @@
 }
 .menu-item {
   list-style: none;
+  display: inline-block;
+  background: rgba(255,255,255,0.1);
+  padding: 0.3rem;
+  border: 1px solid rgba(0,0,0,0.4);
+  height: 1.8rem;
+  border-radius: 3px;
 }
 .menu-item a {
   color: #f4f4f4;
