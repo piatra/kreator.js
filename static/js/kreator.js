@@ -9,7 +9,7 @@ module.exports = function kreator () {
     controls: true,
 		progress: true,
 		history: true,
-		center: true,
+    center: false,
 
 		theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
 		transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
