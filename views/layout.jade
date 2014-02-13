@@ -1,11 +1,17 @@
 doctype html
 html(lang="en")
-	head
-		title Kreator.js
-		link(rel="stylesheet", type="text/css", href="css/main.css")
-		link(rel="stylesheet", type="text/css", href="css/default.css")
-		link(rel="stylesheet", type="text/css", href="css/zenburn.css")
-		link(rel="stylesheet", type="text/css", href="css/kreator.css")
-	body
-		block content
-		block scripts
+  head
+    title Kreator.js
+    link(rel="stylesheet", type="text/css", href="css/main.css")
+    link(rel="stylesheet", type="text/css", href="css/default.css")
+    link(rel="stylesheet", type="text/css", href="css/zenburn.css")
+    link(rel="stylesheet", type="text/css", href="css/kreator.css")
+  body
+    .navbar.container
+      ul
+        li.menu-item
+          form.js-handler--upload(action="")
+            input(type='file', required)
+            button Upload
+    block content
+    block scripts

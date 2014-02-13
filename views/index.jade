@@ -1,26 +1,19 @@
 extends layout
 
 block content
-	//- include navbar
 
-	.reveal
-		.slides
-			section
-				h1	Hello world
+  .reveal
+    .slides
+      section(contentEditable)
+        h1 Hello world
+    .progress
+      span
 
-		aside.controls.noselect
-			a(class="left", href="#") <
-			a(class="right", href="#") >
-			a(class="up", href="#") ^
-			a(class="down", href="#") v
-		.progress
-			span
-
-		.add-slide.add-slide--right.js-handler--add-slide-right.noselect(data-direction="right") +
-		.add-slide.add-slide--bottom.js-handler--add-slide-down.noselect(data-direction="bottom") +
+    .add-slide.add-slide--right.js-handler--add-slide-right.noselect(data-direction="right") +
+    .add-slide.add-slide--bottom.js-handler--add-slide-down.noselect(data-direction="bottom") +
 
 block scripts
-	script(src="js/head.min.js")
-	script(src="./node_modules/reveal.js/js/reveal.min.js")
-	script(src="http://www.google.com/jsapi")
-	script(src="js/bundle.js")
+  script(src="js/head.min.js")
+  script(src="./node_modules/reveal.js/js/reveal.min.js")
+  script(src="http://www.google.com/jsapi")
+  script(src="js/bundle.js")

@@ -1,6 +1,7 @@
 var express = require('express'),
 	app = express(),
-	cheerio = require('cheerio');
+	cheerio = require('cheerio'),
+  path = require('path');
 
 app.configure(function(){
 	app.set('port', process.env.PORT || 3000);

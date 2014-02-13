@@ -1,11 +1,12 @@
 slide = require('./slide-controller');
+menu = require('./menu-controller');
 
 module.exports = function kreator () {
 
 	// Full list of configuration options available here:
 	// https://github.com/hakimel/reveal.js#configuration
 	Reveal.initialize({
-		controls: true,
+    controls: true,
 		progress: true,
 		history: true,
 		center: true,
@@ -15,16 +16,19 @@ module.exports = function kreator () {
 
 		// Optional libraries used to extend on reveal.js
 		dependencies: [
-			{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-			{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-			{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-			{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-			{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-			{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+			{ src: 'js/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: 'js/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: 'js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+			{ src: 'js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+			{ src: 'js/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 		]
 	});
 
 	slide.addListeners(document.querySelector('.js-handler--add-slide-down'),
                     document.querySelector('.js-handler--add-slide-right'));
+
+  menu.addListeners({
+    upload: document.querySelector('.js-handler--upload')
+  });
 
 };
