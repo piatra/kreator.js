@@ -35,7 +35,9 @@ function uploadSlides(e) {
  * */
 function parseFile(e) {
   var content = e.target.result;
-  appendContent(content);
+  var dummy = document.createElement('div');
+  dummy.innerHTML = content;
+  appendContent(dummy.querySelector('.slides').innerHTML);
 }
 
 /* Appends the parsed content to the page
