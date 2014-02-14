@@ -31,7 +31,8 @@ module.exports = function kreator () {
   menu.addListeners({
     upload: document.querySelector('.js-handler--upload'),
     heading: document.querySelector('.js-handler--headings'),
-    color: document.querySelector('.js-handler--color')
+    color: document.querySelector('.js-handler--color'),
+    styleButtons: document.querySelectorAll('.js-handler--style-button')
   });
 
 };
@@ -47,6 +48,9 @@ module.exports = {
     handler.upload.addEventListener('submit', uploadSlides, false);
     handler.heading.addEventListener('change', setHeading, false);
     handler.color.addEventListener('change', setColor, false);
+    _.each(handler.styleButtons, function (el) {
+      el.addEventListener('click', setFontStyle, false);
+    });
   }
 };
 
@@ -86,6 +90,16 @@ function appendContent(content) {
   slides.innerHTML = content;
   Reveal.toggleOverview();
   Reveal.toggleOverview();
+}
+
+function setFontStyle() {
+  var value = {
+    b: 'font-weight: bold',
+    u: 'text-decoration: underline',
+    i: 'font-style: italic'
+  };
+  var property = value[this.innerHTML.toLowerCase()];
+  replaceSelectionWithHtml('<span style="'+property+'">' + getSelectionHtml() + '</span>');
 }
 
 /*

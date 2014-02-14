@@ -22,7 +22,8 @@
   width: 80%;
   margin: 0 auto;
 }
-.menu-item {
+.menu-item,
+.menu-item--group {
   list-style: none;
   display: inline-block;
   background: rgba(255,255,255,0.1);
@@ -31,6 +32,7 @@
   height: 1.8rem;
   border-radius: 3px;
 }
-.menu-item a {
+.menu-item a,
+.menu-item--group a {
   color: #f4f4f4;
 }
