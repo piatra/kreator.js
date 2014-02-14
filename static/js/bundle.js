@@ -67,23 +67,33 @@ function uploadSlides(e) {
     var reader = new FileReader();
 
     reader.onload = (function(file) {
-      return parseFile;
+      return parseFile.bind(this, file.type);
     })(file);
 
-    reader.readAsText(file, 'utf8');
+    if (file.type.match('text/html'))
+      reader.readAsText(file, 'utf8');
+    else
+      reader.readAsDataURL(file);
   } else {
     alert('File reading not supported');
   }
 }
 
 /*
- * Should parse the file and extract the slide content
+ * Receives the uploaded file
+ * Handle text/html and images/* differently
  * */
-function parseFile(e) {
+function parseFile(fileType, e) {
   var content = e.target.result;
-  var dummy = document.createElement('div');
-  dummy.innerHTML = content;
-  appendContent(dummy.querySelector('.slides').innerHTML);
+  if (fileType.match('text/html')) {
+    var dummy = document.createElement('div');
+    dummy.innerHTML = content;
+    appendContent(dummy.querySelector('.slides').innerHTML);
+  } else {
+    var img = new Image();
+    img.src = e.target.result;
+    document.querySelector('.present').appendChild(img); // FIXME
+  }
 }
 
 /* Appends the parsed content to the page
