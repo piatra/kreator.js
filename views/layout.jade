@@ -25,6 +25,12 @@ html(lang="en")
             option(value="60px") 60px
         li.menu-item
           input(type="color", class="js-handler--color")
+        li.menu-item
+           select(name="text-alignment", class="js-handler--alignment")
+             option(value="none") Alignment
+             option(value="left") Left
+             option(value="center") Center
+             option(value="right") Right
 
     block content
     block scripts

@@ -31,7 +31,8 @@ module.exports = function kreator () {
     upload: document.querySelector('.js-handler--upload'),
     heading: document.querySelector('.js-handler--headings'),
     color: document.querySelector('.js-handler--color'),
-    styleButtons: document.querySelectorAll('.js-handler--style-button')
+    styleButtons: document.querySelectorAll('.js-handler--style-button'),
+    alignment: document.querySelector('.js-handler--alignment')
   });
 
 };

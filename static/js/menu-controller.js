@@ -2,6 +2,7 @@ module.exports = {
   addListeners: function(handler) {
     handler.upload.addEventListener('submit', uploadSlides, false);
     handler.heading.addEventListener('change', setHeading, false);
+    handler.alignment.addEventListener('change', textAlignment, false);
     handler.color.addEventListener('change', setColor, false);
     _.each(handler.styleButtons, function (el) {
       el.addEventListener('click', setFontStyle, false);
@@ -45,6 +46,11 @@ function appendContent(content) {
   slides.innerHTML = content;
   Reveal.toggleOverview();
   Reveal.toggleOverview();
+}
+
+function textAlignment() {
+  var property = 'display:block;text-align:' + this.value;
+  replaceSelectionWithHtml('<span style="'+property+'">' + getSelectionHtml() + '</span>');
 }
 
 function setFontStyle() {

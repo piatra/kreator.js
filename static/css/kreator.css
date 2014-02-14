@@ -1,3 +1,10 @@
+.slides section {
+  border: 1px solid #333;
+  box-shadow: 0 0 5px #333;
+}
+.slides section:focus {
+  outline: none;
+}
 .add-slide {
   position: absolute;
   background: #fff;
@@ -21,6 +28,7 @@
 .container {
   width: 80%;
   margin: 0 auto;
+  text-align: center;
 }
 .menu-item,
 .menu-item--group {
