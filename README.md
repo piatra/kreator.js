@@ -1,3 +1,8 @@
+## About this branch
+
+Everything here is work in progress
+I'm basically rebuilding kreator :)
+
 ## About
 
 GUI Editor for reveal.js
