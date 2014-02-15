@@ -1,5 +1,6 @@
 slide = require('./slide-controller');
 menu = require('./menu-controller');
+download = require('./kreator-download');
 
 module.exports = function kreator () {
 
@@ -34,5 +35,7 @@ module.exports = function kreator () {
     styleButtons: document.querySelectorAll('.js-handler--style-button'),
     alignment: document.querySelector('.js-handler--alignment')
   });
+
+  download.addListener(document.querySelector('.js-handler--download'));
 
 };

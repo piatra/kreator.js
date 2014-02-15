@@ -1,6 +1,71 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+module.exports = {
+  addListener: function(el) {
+    el.addEventListener('click', downloadSlides, false);
+  }
+};
+
+
+function downloadSlides() {
+  var parts = ['head.html', 'tail.html'];
+  var content = [];
+  var url = location.origin + '/download/';
+  var l = parts.length;
+  parts.map(function(p) {
+    return url + p;
+  }).forEach(function(url) {
+    requestPart(url)
+      .then(function (resp) {
+        content.push(resp);
+        if (--l === 0) {
+          createZip(content);
+        }
+      });
+  });
+}
+
+function createZip(content) {
+  var slides = document.querySelector('.slides').innerHTML;
+  content.splice(1,0,slides);
+  content = content.join('');
+  var zip = new JSZip();
+  zip.file('index.html', content);
+
+  content = zip.generate({type: 'blob'});
+  var link = document.querySelector('.js-handler--download-ready');
+  link.href = window.URL.createObjectURL(content);
+  link.download = 'You presentation';
+}
+
+function requestPart(url) {
+
+  var request = new XMLHttpRequest();
+  var deferred = Q.defer();
+
+  request.open("GET", url, true);
+  request.onload = onload;
+  request.onerror = onerror;
+  request.send();
+
+  function onload() {
+    if (request.status === 200) {
+      deferred.resolve(request.responseText);
+    } else {
+      deferred.reject(new Error("Status code: " + request.status));
+    }
+  }
+
+  function onerror() {
+    deferred.reject(new Error("Request to " + url + " failed"));
+  }
+
+  return deferred.promise;
+}
+
+},{}],2:[function(require,module,exports){
 slide = require('./slide-controller');
 menu = require('./menu-controller');
+download = require('./kreator-download');
 
 module.exports = function kreator () {
 
@@ -36,14 +101,16 @@ module.exports = function kreator () {
     alignment: document.querySelector('.js-handler--alignment')
   });
 
+  download.addListener(document.querySelector('.js-handler--download'));
+
 };
 
-},{"./menu-controller":3,"./slide-controller":4}],2:[function(require,module,exports){
+},{"./kreator-download":1,"./menu-controller":4,"./slide-controller":5}],3:[function(require,module,exports){
 var kreator = require('./kreator.js');
 
 kreator();
 
-},{"./kreator.js":1}],3:[function(require,module,exports){
+},{"./kreator.js":2}],4:[function(require,module,exports){
 module.exports = {
   addListeners: function(handler) {
     handler.upload.addEventListener('submit', uploadSlides, false);
@@ -171,7 +238,7 @@ function replaceSelectionWithHtml(html) {
     }
 }
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 var addListeners = function (addDown, addRight) {
 	// js-handler--add-slide-down
 	// js-handler--add-slide-right
@@ -227,4 +294,4 @@ var slidesController = {
   }
 };
 
-},{}]},{},[2])
+},{}]},{},[3])
