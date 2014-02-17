@@ -337,7 +337,8 @@ var slidesController = {
   },
   newSlide: function() {
     var slide = document.createElement('section');
-    slide.innerHTML = '<h2>Add your content here</h2>';
+    slide.innerHTML = '<h3>Add your content here</h3>';
+    slide.setAttribute('contentEditable', true);
     return slide;
   }
 };
