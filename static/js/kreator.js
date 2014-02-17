@@ -33,7 +33,8 @@ module.exports = function kreator () {
     heading: document.querySelector('.js-handler--headings'),
     color: document.querySelector('.js-handler--color'),
     styleButtons: document.querySelectorAll('.js-handler--style-button'),
-    alignment: document.querySelector('.js-handler--alignment')
+    alignment: document.querySelector('.js-handler--alignment'),
+    codeBlock: document.querySelector('.js-handler--code-block')
   });
 
   download.addListener(document.querySelector('.js-handler--download'));

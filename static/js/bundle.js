@@ -146,7 +146,8 @@ module.exports = function kreator () {
     heading: document.querySelector('.js-handler--headings'),
     color: document.querySelector('.js-handler--color'),
     styleButtons: document.querySelectorAll('.js-handler--style-button'),
-    alignment: document.querySelector('.js-handler--alignment')
+    alignment: document.querySelector('.js-handler--alignment'),
+    codeBlock: document.querySelector('.js-handler--code-block')
   });
 
   download.addListener(document.querySelector('.js-handler--download'));
@@ -165,6 +166,7 @@ module.exports = {
     handler.heading.addEventListener('change', setHeading, false);
     handler.alignment.addEventListener('change', textAlignment, false);
     handler.color.addEventListener('change', setColor, false);
+    handler.codeBlock.addEventListener('click', createCodeBlock, false);
     _.each(handler.styleButtons, function (el) {
       el.addEventListener('click', setFontStyle, false);
     });
@@ -237,6 +239,18 @@ function setFontStyle() {
 }
 
 /*
+ * Wraps selected text
+ * in a <pre><code> block
+ * */
+function createCodeBlock() {
+  var selectedHtml = getSelectionHtml();
+  var language = 'javascript';
+  var code = hljs.highlight(language, selectedHtml).value;
+  code = '<pre><code>' + code + '</code></pre>';
+  replaceSelectionWithHtml(code);
+}
+
+/*
  * Set the heading on the current selection
  * */
 function setHeading() {
@@ -244,7 +258,6 @@ function setHeading() {
 }
 
 function setColor() {
-  console.log(this.value);
   replaceSelectionWithHtml('<span style="color:'+this.value+'">' + getSelectionHtml() + '</span>');
 }
 
