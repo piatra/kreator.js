@@ -35,12 +35,34 @@
   list-style: none;
   display: inline-block;
   background: rgba(255,255,255,0.1);
-  padding: 0.3rem;
+  padding: 5px;
   border: 1px solid rgba(0,0,0,0.4);
-  height: 1.8rem;
+  height: 1.5rem;
   border-radius: 3px;
 }
 .menu-item a,
 .menu-item--group a {
   color: #f4f4f4;
+}
+button,
+input,
+select {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1rem;
+  height: 1.5rem;
+  border: none;
+  border-bottom: 1px solid #222;
+  border-right: 1px solid #444;
+  background: #858585;
+  padding: 3px 9px;
+  color: #f4f4f4;
+  text-shadow: 0 1px 0 #333;
+  border-radius: 3px;
+}
+input[type=color],
+input[type=file] {
+  padding: 0;
 }

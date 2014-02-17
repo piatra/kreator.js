@@ -81,6 +81,7 @@ function createZip(content, folders) {
   content = zip.generate({type: 'blob'});
   var link = document.querySelector('.js-handler--download-ready');
   link.href = window.URL.createObjectURL(content);
+  link.innerHTML = 'Presentation ready. Click here to download'
   link.download = 'YourPresentation.zip';
 }
 
