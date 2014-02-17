@@ -6,35 +6,82 @@ module.exports = {
 };
 
 
+var parts = [{
+  name: 'head.html',
+  path: ''
+}, {
+  name: 'tail.html',
+  path: ''
+}, {
+  name: 'default.css',
+  path: 'css'
+}, {
+  name: 'zenburn.css',
+  path: 'lib/css'
+}, {
+  name: 'head.min.js',
+  path: 'lib/js'
+}, {
+  name: 'reveal.js',
+  path: 'js'
+}, {
+  name: 'main.css',
+  path: 'css'
+}, {
+  name: 'zenburn.css',
+  path: 'css'
+}, {
+  name: 'print.css',
+  path: 'css'
+}, {
+  name: 'classList.js',
+  path: 'lib/js'
+}, {
+  name: 'highlight.js',
+  path: 'lib/js'
+}];
+
 function downloadSlides() {
-  var parts = ['head.html', 'tail.html'];
+
   var content = [];
   var url = location.origin + '/download/';
   var l = parts.length;
+  var folders = parts.map(function(p) {
+    return p.path;
+  });
   parts.map(function(p) {
-    return url + p;
-  }).forEach(function(url) {
+    return url + p.name;
+  }).forEach(function(url, idx) {
     requestPart(url)
       .then(function (resp) {
-        content.push(resp);
+        content[idx] = resp;
         if (--l === 0) {
-          createZip(content);
+          createZip(content, folders);
         }
       });
   });
 }
 
-function createZip(content) {
-  var slides = document.querySelector('.slides').innerHTML;
-  content.splice(1,0,slides);
-  content = content.join('');
+function createZip(content, folders) {
+  var slides = '<div class="reveal"><div class="slides">' +
+                document.querySelector('.slides').innerHTML +
+                '</div></div>';
+  var index = content.splice(0,2);
   var zip = new JSZip();
-  zip.file('index.html', content);
+
+  index.splice(1, 0, slides);
+  index = index.join('');
+  zip.file('index.html', index);
+
+  for (var i = 2; i < folders.length; i++) {
+    var folder = zip.folder(folders[i]);
+    folder.file(parts[i].name, content[i - 2]);
+  }
 
   content = zip.generate({type: 'blob'});
   var link = document.querySelector('.js-handler--download-ready');
   link.href = window.URL.createObjectURL(content);
-  link.download = 'You presentation';
+  link.download = 'YourPresentation.zip';
 }
 
 function requestPart(url) {
