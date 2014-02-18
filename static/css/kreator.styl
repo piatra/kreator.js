@@ -1,3 +1,6 @@
+var-add-slide-size = 3rem;
+var-add-slide-size--large = 3.5rem;
+
 .slides section
   border: 1px solid #333;
   box-shadow: 0 0 5px #333;
@@ -8,21 +11,28 @@
   position: absolute;
   background: white;
   border-radius: 50%;
-  width: 2rem;
-  height: 2rem;
+  width: var-add-slide-size;
+  height: var-add-slide-size;
+  font-size: var-add-slide-size !important;
+  line-height: var-add-slide-size;
   text-align: center;
-  line-height: 2rem;
   color: #333;
   z-index: 100;
   cursor: pointer;
+  -webkit-transition-duration: .2s;
+  -moz-transition-duration: .2s;
+  transition-duration: .2s;
+  &:hover
+    margin: -.5rem;
+    padding: .5rem;
 
 .add-slide--right
-  right: 0;
-  top: 50%;
+  right: 3%;
+  top: 46%;
 
 .add-slide--bottom
-  bottom: 80px;
-  left: 50%;
+  bottom: 10%;
+  left: 48%;
 
 .container
   width: 80%;
@@ -40,6 +50,8 @@
   border-radius: 3px;
   a
     color: #f4f4f4;
+  button, input, select
+    cursor: pointer;
 
 button,
 input,

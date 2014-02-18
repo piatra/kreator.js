@@ -9,21 +9,29 @@
   position: absolute;
   background: #fff;
   border-radius: 50%;
-  width: 2rem;
-  height: 2rem;
+  width: 3rem;
+  height: 3rem;
+  font-size: 3rem !important;
+  line-height: 3rem;
   text-align: center;
-  line-height: 2rem;
   color: #333;
   z-index: 100;
   cursor: pointer;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+.add-slide:hover {
+  margin: -0.5rem;
+  padding: 0.5rem;
 }
 .add-slide--right {
-  right: 0;
-  top: 50%;
+  right: 3%;
+  top: 46%;
 }
 .add-slide--bottom {
-  bottom: 80px;
-  left: 50%;
+  bottom: 10%;
+  left: 48%;
 }
 .container {
   width: 80%;
@@ -43,6 +51,14 @@
 .menu-item a,
 .menu-item--group a {
   color: #f4f4f4;
+}
+.menu-item button,
+.menu-item--group button,
+.menu-item input,
+.menu-item--group input,
+.menu-item select,
+.menu-item--group select {
+  cursor: pointer;
 }
 button,
 input,
