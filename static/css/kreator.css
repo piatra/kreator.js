@@ -108,26 +108,46 @@ body {
 .sidemenu input[type=file] {
   width: 10rem;
 }
+.sidemenu a {
+  color: #fff;
+}
 .sidemenu-item,
-.sidemenu-item--small {
-  width: 13rem;
+.sidemenu-item--small,
+.sidemenu-item--action {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 16rem;
   background: #e7e7e7;
   color: #4d4d4d;
-  padding: 1rem;
+  padding: 1rem 0;
   border: 1px solid #222;
   border-radius: 3px;
+  font-weight: bold;
+  text-align: center;
 }
 .sidemenu-item:focus,
-.sidemenu-item--small:focus {
+.sidemenu-item--small:focus,
+.sidemenu-item--action:focus {
   outline: none;
+}
+input.sidemenu-item {
+  box-shadow: inset 0 5px 5px #888;
+  border: 3px solid #555;
+}
+.sidemenu-item--action {
+  background: #2ecc71;
+  color: #fff;
+  cursor: pointer;
 }
 .info-box {
   background: rgba(255,255,255,0.1);
   font-size: 0.9rem;
-  padding: 0.1rem;
+  padding: 0.2rem;
+  line-height: 1.2rem;
   border-radius: 3px;
   width: 15rem;
-  margin: 1rem auto 0 auto;
+  margin: 1rem auto 0.2rem auto;
 }
 hr {
   margin: 1rem 0;

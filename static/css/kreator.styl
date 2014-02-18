@@ -98,26 +98,41 @@ body
     margin: 0;
   input[type=file]
     width: var-sidemenu-width - 6rem;
+  a
+    color: white;
 
 .sidemenu-item,
-.sidemenu-item--small
-  width: var-sidemenu-width - 3rem;
+.sidemenu-item--small,
+.sidemenu-item--action
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+  width: var-sidemenu-width;
   background: #e7e7e7;
   color: #4d4d4d;
-  padding: 1rem;
+  padding: 1rem 0;
   border: 1px solid #222;
   border-radius: 3px;
+  font-weight: bold;
+  text-align: center;
   &:focus
     outline: none;
 
+input.sidemenu-item
+  box-shadow:inset 0 5px 5px #888;
+  border: 3px solid #555;
+
+.sidemenu-item--action
+  background: #2ecc71;
+  color: white;
+  cursor: pointer;
 
 .info-box
   background: rgba(255,255,255,.1);
   font-size: .9rem;
-  padding: .1rem;
+  padding: .2rem;
+  line-height: 1.2rem;
   border-radius: 3px;
   width: var-sidemenu-width - 1rem;
-  margin: 1rem auto 0 auto;
+  margin: 1rem auto .2rem auto;
 
 hr
   margin: 1rem 0
