@@ -97,16 +97,48 @@ body {
   padding: 0.5rem;
   text-align: center;
 }
-.sidemenu-input {
+.sidemenu p {
+  text-align: justify;
+}
+.sidemenu input,
+.sidemenu button {
+  display: inline-block;
+  margin: 0;
+}
+.sidemenu input[type=file] {
+  width: 10rem;
+}
+.sidemenu-item,
+.sidemenu-item--small {
+  width: 13rem;
   background: #e7e7e7;
   color: #4d4d4d;
-  width: 14rem;
   padding: 1rem;
   border: 1px solid #222;
   border-radius: 3px;
 }
-.sidemenu-input:focus {
+.sidemenu-item:focus,
+.sidemenu-item--small:focus {
   outline: none;
+}
+.info-box {
+  background: rgba(255,255,255,0.1);
+  font-size: 0.9rem;
+  padding: 0.1rem;
+  border-radius: 3px;
+  width: 15rem;
+  margin: 1rem auto 0 auto;
+}
+hr {
+  margin: 1rem 0;
+  padding: 0;
+  background: #444;
+  height: 1px;
+  border: 0;
+}
+.sidemenu-item--small {
+  width: 5rem;
+  padding: 0.5rem 1rem;
 }
 .hidden {
   display: none;

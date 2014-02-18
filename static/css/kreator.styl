@@ -90,16 +90,45 @@ body
   color: white;
   padding: .5rem;
   text-align: center;
+  p
+    text-align: justify;
+  input,
+  button
+    display: inline-block;
+    margin: 0;
+  input[type=file]
+    width: var-sidemenu-width - 6rem;
 
-.sidemenu-input
+.sidemenu-item,
+.sidemenu-item--small
+  width: var-sidemenu-width - 3rem;
   background: #e7e7e7;
   color: #4d4d4d;
-  width: var-sidemenu-width - 2rem;
   padding: 1rem;
   border: 1px solid #222;
   border-radius: 3px;
   &:focus
     outline: none;
+
+
+.info-box
+  background: rgba(255,255,255,.1);
+  font-size: .9rem;
+  padding: .1rem;
+  border-radius: 3px;
+  width: var-sidemenu-width - 1rem;
+  margin: 1rem auto 0 auto;
+
+hr
+  margin: 1rem 0
+  padding: 0
+  background: #444
+  height: 1px
+  border: 0
+
+.sidemenu-item--small
+  width: 5rem;
+  padding: .5rem 1rem;
 
 .hidden
   display: none;

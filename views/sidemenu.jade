@@ -1,2 +1,7 @@
 .sidemenu
-  input.sidemenu-input.js-handler--presentation-name(type='text', placeholder='Presentation name')
+  input.sidemenu-item.js-handler--presentation-name(type='text', placeholder='Presentation name')
+  hr
+  p.info-box Upload a reveal.js presentation in the editor. Select the index.html of your presentation
+  form.js-handler--upload(action="")
+    input(type='file', required)
+    button.sidemenu-item--small Upload
