@@ -67,9 +67,9 @@ function createZip(content, folders) {
                 '</div></div>';
   var index = content.splice(0,2);
   var zip = new JSZip();
-
   index.splice(1, 0, slides);
   index = index.join('');
+  index.replace(/<title>.*<\/title>/g, '<title>' + App.title + '</title>');
   zip.file('index.html', index);
 
   for (var i = 2; i < folders.length; i++) {

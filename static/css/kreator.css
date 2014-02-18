@@ -1,3 +1,7 @@
+body {
+  font-size: 16px;
+  color: #333;
+}
 .slides section {
   border: 1px solid #333;
   box-shadow: 0 0 5px #333;
@@ -60,9 +64,9 @@
 .menu-item--group select {
   cursor: pointer;
 }
-button,
-input,
-select {
+#topmenu button,
+#topmenu input,
+#topmenu select {
   display: inline-block;
   margin: 0;
   padding: 0;
@@ -78,9 +82,31 @@ select {
   text-shadow: 0 1px 0 #333;
   border-radius: 3px;
 }
-input[type=color],
-input[type=file] {
+#topmenu input[type=color],
+#topmenu input[type=file] {
   padding: 0;
+}
+.sidemenu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16rem;
+  height: 100%;
+  background: #333;
+  color: #fff;
+  padding: 0.5rem;
+  text-align: center;
+}
+.sidemenu-input {
+  background: #e7e7e7;
+  color: #4d4d4d;
+  width: 14rem;
+  padding: 1rem;
+  border: 1px solid #222;
+  border-radius: 3px;
+}
+.sidemenu-input:focus {
+  outline: none;
 }
 .hidden {
   display: none;

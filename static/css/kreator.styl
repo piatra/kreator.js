@@ -1,5 +1,10 @@
 var-add-slide-size = 3rem;
 var-add-slide-size--large = 3.5rem;
+var-sidemenu-width = 16rem;
+
+body
+  font-size: 16px;
+  color: #333;
 
 .slides section
   border: 1px solid #333;
@@ -53,27 +58,48 @@ var-add-slide-size--large = 3.5rem;
   button, input, select
     cursor: pointer;
 
-button,
-input,
-select
-  display: inline-block;
-  margin: 0;
-  padding: 0;
-  font-size: 1rem;
-  line-height: 1rem;
-  height: 1.5rem;
-  border: none;
-  border-bottom: 1px solid #222;
-  border-right: 1px solid #444;
-  background: #858585;
-  padding:3px 9px;
-  color: #f4f4f4;
-  text-shadow:0 1px 0 #333;
-  border-radius: 3px;
+#topmenu
+  button,
+  input,
+  select
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    line-height: 1rem;
+    height: 1.5rem;
+    border: none;
+    border-bottom: 1px solid #222;
+    border-right: 1px solid #444;
+    background: #858585;
+    padding:3px 9px;
+    color: #f4f4f4;
+    text-shadow:0 1px 0 #333;
+    border-radius: 3px;
+  input[type=color],
+  input[type=file]
+    padding: 0;
 
-input[type=color],
-input[type=file]
-  padding: 0;
+.sidemenu
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var-sidemenu-width;
+  height: 100%;
+  background: #333;
+  color: white;
+  padding: .5rem;
+  text-align: center;
+
+.sidemenu-input
+  background: #e7e7e7;
+  color: #4d4d4d;
+  width: var-sidemenu-width - 2rem;
+  padding: 1rem;
+  border: 1px solid #222;
+  border-radius: 3px;
+  &:focus
+    outline: none;
 
 .hidden
   display: none;

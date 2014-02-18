@@ -11,7 +11,7 @@ html(lang="en")
       #message.message.hidden
         p This is a top level view of your presentation
         p: .menu-item: button.js-handler--overview Overview
-      ul#topmenu
+      ul#topmenu.topmenu
         li.menu-item--group
           button.js-handler--style-button B
           button.js-handler--style-button I
@@ -43,4 +43,5 @@ html(lang="en")
           a.js-handler--download-ready 
 
     block content
+    block sidemenu
     block scripts
