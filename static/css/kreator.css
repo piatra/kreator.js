@@ -64,12 +64,27 @@ body {
 .menu-item--group select {
   cursor: pointer;
 }
+.menu-item--group button {
+  border-radius: 0;
+}
+.menu-item--group button:first-child {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.menu-item--group button:last-child {
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.menu-item--group button:not(:first-child) {
+  margin-left: -0.2rem;
+}
+.menu-item--group button:not(:last-child) {
+  margin-right: -0.2rem;
+}
 #topmenu button,
 #topmenu input,
 #topmenu select {
   display: inline-block;
-  margin: 0;
-  padding: 0;
   font-size: 1rem;
   line-height: 1rem;
   height: 1.5rem;
@@ -80,7 +95,6 @@ body {
   padding: 3px 9px;
   color: #f4f4f4;
   text-shadow: 0 1px 0 #333;
-  border-radius: 3px;
 }
 #topmenu input[type=color],
 #topmenu input[type=file] {

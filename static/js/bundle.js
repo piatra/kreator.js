@@ -153,7 +153,7 @@ module.exports = function kreator () {
     heading: document.querySelector('.js-handler--headings'),
     color: document.querySelector('.js-handler--color'),
     styleButtons: document.querySelectorAll('.js-handler--style-button'),
-    alignment: document.querySelector('.js-handler--alignment'),
+    alignment: document.querySelectorAll('.js-handler--align'),
     codeBlock: document.querySelector('.js-handler--code-block'),
     overview: document.querySelectorAll('.js-handler--overview')
   });
@@ -174,11 +174,14 @@ kreator();
 },{"./kreator.js":2}],4:[function(require,module,exports){
 module.exports = {
   addListeners: function(handler) {
+    console.log(handler)
     handler.upload.addEventListener('submit', uploadSlides, false);
     handler.heading.addEventListener('change', setHeading, false);
-    handler.alignment.addEventListener('change', textAlignment, false);
     handler.color.addEventListener('change', setColor, false);
     handler.codeBlock.addEventListener('click', createCodeBlock, false);
+    _.each(handler.alignment, function(el) {
+      el.addEventListener('click', textAlignment, false);
+    });
     _.each(handler.overview, function(el) {
       el.addEventListener('click', function() {
         toggleMessage();
@@ -260,7 +263,8 @@ function appendContent(content) {
 }
 
 function textAlignment() {
-  var property = 'display:block;text-align:' + this.value;
+  console.log('here')
+  var property = 'display:block;text-align:' + this.getAttribute('data-align');
   replaceSelectionWithHtml('<span style="'+property+'">' + getSelectionHtml() + '</span>');
 }
 

@@ -58,13 +58,25 @@ body
   button, input, select
     cursor: pointer;
 
+.menu-item--group
+  button
+    border-radius: 0;
+  button:first-child
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  button:last-child
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+  button:not(:first-child)
+    margin-left:-.2rem;
+  button:not(:last-child)
+    margin-right:-.2rem;
+
 #topmenu
   button,
   input,
   select
     display: inline-block;
-    margin: 0;
-    padding: 0;
     font-size: 1rem;
     line-height: 1rem;
     height: 1.5rem;
@@ -75,7 +87,6 @@ body
     padding:3px 9px;
     color: #f4f4f4;
     text-shadow:0 1px 0 #333;
-    border-radius: 3px;
   input[type=color],
   input[type=file]
     padding: 0;

@@ -5,6 +5,7 @@ html(lang="en")
     link(rel="stylesheet", type="text/css", href="css/main.css")
     link(rel="stylesheet", type="text/css", href="css/default.css")
     link(rel="stylesheet", type="text/css", href="css/zenburn.css")
+    link(rel="stylesheet", type="text/css", href="css/glyphicons.css")
     link(rel="stylesheet", type="text/css", href="css/kreator.css")
   body
     .navbar.container
@@ -17,9 +18,19 @@ html(lang="en")
           button.js-handler--style-button I
           button.js-handler--style-button U
         li.menu-item
-          button.js-handler--code-block CodeBlock
+          button.js-handler--code-block
+            span.glyphicon.glyphicon-chevron-left
+            span.glyphicon.glyphicon-chevron-right
         li.menu-item
-          button.js-handler--overview Overview
+          button.js-handler--overview
+            span.glyphicon.glyphicon-zoom-out
+        li.menu-item--group
+          button.js-handler--align(data-align="left")
+            span.glyphicon.glyphicon-align-left
+          button.js-handler--align(data-align="center")
+            span.glyphicon.glyphicon-align-center
+          button.js-handler--align(data-align="right")
+            span.glyphicon.glyphicon-align-right
         li.menu-item
           select(name="heading-size", class="js-handler--headings")
             option(value="none") Text size
@@ -28,12 +39,12 @@ html(lang="en")
             option(value="60px") 60px
         li.menu-item
           input(type="color", class="js-handler--color")
-        li.menu-item
-           select(name="text-alignment", class="js-handler--alignment")
-             option(value="none") Alignment
-             option(value="left") Left
-             option(value="center") Center
-             option(value="right") Right
+        //-li.menu-item
+           //-select(name="text-alignment", class="js-handler--alignment")
+             //-option(value="none") Alignment
+             //-option(value="left") Left
+             //-option(value="center") Center
+             //-option(value="right") Right
 
     block content
     block sidemenu
