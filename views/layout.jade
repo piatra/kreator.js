@@ -8,13 +8,18 @@ html(lang="en")
     link(rel="stylesheet", type="text/css", href="css/kreator.css")
   body
     .navbar.container
-      ul
+      #message.message.hidden
+        p This is a top level view of your presentation
+        p: .menu-item: button.js-handler--overview Overview
+      ul#topmenu
         li.menu-item--group
           button.js-handler--style-button B
           button.js-handler--style-button I
           button.js-handler--style-button U
         li.menu-item
           button.js-handler--code-block CodeBlock
+        li.menu-item
+          button.js-handler--overview Overview
         li.menu-item
           form.js-handler--upload(action="")
             input(type='file', required)
