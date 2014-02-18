@@ -174,7 +174,6 @@ kreator();
 },{"./kreator.js":2}],4:[function(require,module,exports){
 module.exports = {
   addListeners: function(handler) {
-    console.log(handler)
     handler.upload.addEventListener('submit', uploadSlides, false);
     handler.heading.addEventListener('change', setHeading, false);
     handler.color.addEventListener('change', setColor, false);
