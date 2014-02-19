@@ -61,7 +61,19 @@ function downloadSlides() {
   });
 }
 
+/*
+ * Toggle on and off the contentEditable
+ * attribute on the slides
+ * */
+function toggleEditMode(mode) {
+  var slides = document.querySelectorAll('section');
+  _.each(slides, function(s) {
+    s.setAttribute('contentEditable', mode);
+  });
+}
+
 function createZip(content, folders) {
+  toggleEditMode(false);
   var slides = '<div class="reveal"><div class="slides">' +
                 document.querySelector('.slides').innerHTML +
                 '</div></div>';
@@ -82,6 +94,7 @@ function createZip(content, folders) {
   link.href = window.URL.createObjectURL(content);
   link.innerHTML = 'Presentation ready. Click here to download'
   link.download = 'YourPresentation.zip';
+  toggleEditMode(true);
 }
 
 function requestPart(url) {
