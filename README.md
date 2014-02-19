@@ -6,6 +6,10 @@ https://github.com/hakimel/reveal.js/issues/31
 There is now an online version of this 
 http://piatra.jit.su (may include work in progress)
 
+*If you are interested with the progress of this project check out the
+[browserify](https://github.com/piatra/kreator.js/tree/browserify) branch, it includes the latest version that will soon be part
+of master*
+
 There is an about page https://github.com/piatra/kreator.js/wiki/About
 
 ## To start
