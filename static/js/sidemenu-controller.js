@@ -6,6 +6,7 @@ module.exports = {
 };
 
 function changeTheme() {
+  App.theme = this.value;
   var themes = [
     'default.css', 'night.css', 'beige.css'
   ];

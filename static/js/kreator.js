@@ -8,7 +8,7 @@ module.exports = function kreator () {
   window.App = {
     title: 'Kreator.js',
     author: 'Andrei Oprea',
-    theme: 'default'
+    theme: 'default.css'
   };
 
 	// Full list of configuration options available here:

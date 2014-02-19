@@ -39,6 +39,15 @@ var parts = [{
 }, {
   name: 'highlight.js',
   path: 'lib/js'
+}, {
+  name: 'sky.css',
+  path: 'css'
+}, {
+  name: 'night.css',
+  path: 'css'
+}, {
+  name: 'beige.css',
+  path: 'css'
 }];
 
 function downloadSlides() {
@@ -75,6 +84,7 @@ function toggleEditMode(mode) {
 
 function createZip(content, folders) {
   toggleEditMode(false);
+  content[0] = content[0].replace(/default.css/g, App.theme);
   var slides = '<div class="reveal"><div class="slides">' +
                 document.querySelector('.slides').innerHTML +
                 '</div></div>';
@@ -93,7 +103,7 @@ function createZip(content, folders) {
   content = zip.generate({type: 'blob'});
   var link = document.querySelector('.js-handler--download-ready');
   link.href = window.URL.createObjectURL(content);
-  link.innerHTML = 'Presentation ready. Click here to download'
+  link.innerHTML = 'Presentation ready. Click here to download';
   link.download = 'YourPresentation.zip';
   toggleEditMode(true);
 }
@@ -134,7 +144,7 @@ module.exports = function kreator () {
   window.App = {
     title: 'Kreator.js',
     author: 'Andrei Oprea',
-    theme: 'default'
+    theme: 'default.css'
   };
 
 	// Full list of configuration options available here:
@@ -361,6 +371,7 @@ module.exports = {
 };
 
 function changeTheme() {
+  App.theme = this.value;
   var themes = [
     'default.css', 'night.css', 'beige.css'
   ];
