@@ -135,7 +135,7 @@ module.exports = function kreator () {
     title: 'Kreator.js',
     author: 'Andrei Oprea',
     theme: 'default'
-  }
+  };
 
 	// Full list of configuration options available here:
 	// https://github.com/hakimel/reveal.js#configuration
@@ -172,7 +172,8 @@ module.exports = function kreator () {
   });
 
   sidemenu.addListeners({
-    presentationTitle: document.querySelector('.js-handler--presentation-name')
+    presentationTitle: document.querySelector('.js-handler--presentation-name'),
+    themeSelector: document.querySelector('.js-handler--theme-selector')
   });
 
   download.addListener(document.querySelector('.js-handler--download'));
@@ -355,6 +356,29 @@ function replaceSelectionWithHtml(html) {
 module.exports = {
   addListeners: function(handler) {
     handler.presentationTitle.addEventListener('keyup', setPresentationTitle, false);
+    handler.themeSelector.addEventListener('change', changeTheme, false);
+  }
+};
+
+function changeTheme() {
+  var themes = [
+    'default.css', 'night.css', 'beige.css'
+  ];
+  _.each(themes, removeCSS);
+  appendCSS(this.value);
+}
+
+function appendCSS(theme) {
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'css/' + theme;
+  document.querySelector('head').appendChild(link);
+}
+
+function removeCSS(val) {
+  var sel = document.querySelector('link[rel=stylesheet][href$="'+val+'"');
+  if (sel) {
+    sel.parentNode.removeChild(sel);
   }
 }
 
