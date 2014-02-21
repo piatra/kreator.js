@@ -12,12 +12,7 @@
   },
   "dependencies": {
     "express": "*",
-    "request": "*",
-    "async": "*",
-    "node-native-zip": "*",
     "jade": "*",
-    "less": "*",
-    "cheerio": "*",
     "stylus": "~0.42.2",
     "reveal.js": "~2.6.0"
   }
