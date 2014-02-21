@@ -2,7 +2,9 @@
   "name": "piatra",
   "subdomain": "piatra",
   "scripts": {
-    "start": "index.js"
+    "start": "node index.js",
+    "watch": "watchify static/js/main.js -o static/js/bundle.js",
+    "build": "browserify static/js/main.js -o static/js/bundle.js"
   },
   "version": "0.0.0-36",
   "engines": {

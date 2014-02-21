@@ -3,6 +3,22 @@
 Everything here is work in progress
 I'm basically rebuilding kreator :)
 
+### To run
+
+````
+npm run start
+
+````
+
+### To build
+
+````
+npm run build
+npm run watch // continous build on edit
+
+````
+
+
 ## About
 
 GUI Editor for reveal.js
