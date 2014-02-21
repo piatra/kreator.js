@@ -3,17 +3,17 @@
   "subdomain": "piatra",
   "scripts": {
     "start": "node index.js",
-    "watch": "watchify static/js/main.js -o static/js/bundle.js",
-    "build": "browserify static/js/main.js -o static/js/bundle.js"
-  },
-  "version": "0.0.0-36",
-  "engines": {
-    "node": "0.6.x"
+    "watch": "./node_modules/watchify/bin/cmd.js static/js/main.js -o static/js/bundle.js",
+    "build": "./node_modules/browserify/bin/cmd.js static/js/main.js -o static/js/bundle.js"
   },
   "dependencies": {
     "express": "*",
     "jade": "*",
     "stylus": "~0.42.2",
     "reveal.js": "~2.6.0"
+  },
+  "devDependencies": {
+    "watchify": "^0.6.1",
+    "browserify": "^3.30.1"
   }
 }
