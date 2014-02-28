@@ -1,3 +1,6 @@
+/* globals module, _, App */
+'use strict';
+
 module.exports = {
   addListeners: function(handler) {
     handler.presentationTitle.addEventListener('keyup', setPresentationTitle, false);

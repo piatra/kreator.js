@@ -196,6 +196,9 @@ var kreator = require('./kreator.js');
 kreator();
 
 },{"./kreator.js":2}],4:[function(require,module,exports){
+/* globals module, _, App, Reveal */
+'use strict';
+
 module.exports = {
   addListeners: function(handler) {
     handler.upload.addEventListener('submit', uploadSlides, false);
@@ -286,7 +289,6 @@ function appendContent(content) {
 }
 
 function textAlignment() {
-  console.log('here')
   var property = 'display:block;text-align:' + this.getAttribute('data-align');
   replaceSelectionWithHtml('<span style="'+property+'">' + getSelectionHtml() + '</span>');
 }
@@ -318,24 +320,26 @@ function createCodeBlock() {
  * */
 function setHeading() {
   replaceSelectionWithHtml('<span style="font-size:'+this.value+'">' + getSelectionHtml() + '</span>');
+  this.value = 'none';
 }
 
 function setColor() {
   replaceSelectionWithHtml('<span style="color:'+this.value+'">' + getSelectionHtml() + '</span>');
+  this.value = '#000';
 }
 
 function getSelectionHtml() {
-    var html = "";
-    if (typeof window.getSelection != "undefined") {
+    var html = '';
+    if (typeof window.getSelection != 'undefined') {
         var sel = window.getSelection();
         if (sel.rangeCount) {
-            var container = document.createElement("div");
+            var container = document.createElement('div');
             for (var i = 0, len = sel.rangeCount; i < len; ++i) {
                 container.appendChild(sel.getRangeAt(i).cloneContents());
             }
             html = container.innerHTML;
         }
-    } else if (typeof document.selection != "undefined") {
+    } else if (typeof document.selection != 'undefined') {
         if (document.selection.type == "Text") {
             html = document.selection.createRange().htmlText;
         }
@@ -363,6 +367,9 @@ function replaceSelectionWithHtml(html) {
 }
 
 },{}],5:[function(require,module,exports){
+/* globals module, _, App */
+'use strict';
+
 module.exports = {
   addListeners: function(handler) {
     handler.presentationTitle.addEventListener('keyup', setPresentationTitle, false);
