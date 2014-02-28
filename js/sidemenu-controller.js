@@ -22,7 +22,7 @@ function appendCSS(theme) {
 }
 
 function removeCSS(val) {
-  var sel = document.querySelector('link[rel=stylesheet][href$="'+val+'"');
+  var sel = document.querySelector('link[rel=stylesheet][href$="'+val+'"]');
   if (sel) {
     sel.parentNode.removeChild(sel);
   }
