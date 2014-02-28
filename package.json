@@ -2,8 +2,8 @@
   "name": "kreator.js",
   "scripts": {
     "start": "./node_modules/http-server/bin/http-server",
-    "watch-js": "./node_modules/watchify/bin/cmd.js static/js/main.js -o static/js/bundle.js",
-    "build-js": "./node_modules/browserify/bin/cmd.js static/js/main.js -o static/js/bundle.js",
+    "watch-js": "./node_modules/watchify/bin/cmd.js js/main.js -o static/js/bundle.js",
+    "build-js": "./node_modules/browserify/bin/cmd.js js/main.js -o static/js/bundle.js",
     "watch-jade": "node_modules/jade/bin/jade.js --watch views/*.jade --out output/",
     "watch-stylus": "node_modules/stylus/bin/stylus --watch css/*.styl -o css/"
   },
