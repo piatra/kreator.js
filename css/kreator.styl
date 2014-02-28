@@ -1,0 +1,160 @@
+var-add-slide-size = 3rem;
+var-add-slide-size--large = 3.5rem;
+var-sidemenu-width = 16rem;
+
+body
+  font-size: 16px;
+  color: #333;
+
+.slides section
+  border: 1px solid #333;
+  box-shadow: 0 0 5px #333;
+  &:focus
+    outline: none;
+
+.add-slide
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  width: var-add-slide-size;
+  height: var-add-slide-size;
+  font-size: var-add-slide-size !important;
+  line-height: var-add-slide-size;
+  text-align: center;
+  color: #333;
+  z-index: 100;
+  cursor: pointer;
+  -webkit-transition-duration: .2s;
+  -moz-transition-duration: .2s;
+  transition-duration: .2s;
+  &:hover
+    margin: -.5rem;
+    padding: .5rem;
+
+.add-slide--right
+  right: 3%;
+  top: 46%;
+
+.add-slide--bottom
+  bottom: 10%;
+  left: 48%;
+
+.container
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+
+.menu-item,
+.menu-item--group
+  list-style: none;
+  display: inline-block;
+  background: hsla(100, 100, 100, .1);
+  padding: 5px;
+  border: 1px solid hsla(0, 0, 0, .4);
+  height: 1.5rem;
+  border-radius: 3px;
+  a
+    color: #f4f4f4;
+  button, input, select
+    cursor: pointer;
+
+.menu-item--group
+  button
+    border-radius: 0;
+  button:first-child
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  button:last-child
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+  button:not(:first-child)
+    margin-left:-.2rem;
+  button:not(:last-child)
+    margin-right:-.2rem;
+
+#topmenu
+  button,
+  input,
+  select
+    display: inline-block;
+    font-size: 1rem;
+    line-height: 1rem;
+    height: 1.5rem;
+    border: none;
+    border-bottom: 1px solid #222;
+    border-right: 1px solid #444;
+    background: #858585;
+    padding:3px 9px;
+    color: #f4f4f4;
+    text-shadow:0 1px 0 #333;
+  input[type=color],
+  input[type=file]
+    padding: 0;
+
+.sidemenu
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var-sidemenu-width;
+  height: 100%;
+  background: #333;
+  color: white;
+  padding: .5rem;
+  text-align: center;
+  p
+    text-align: justify;
+  input,
+  button
+    display: inline-block;
+    margin: 0;
+  input[type=file]
+    width: var-sidemenu-width - 6rem;
+  a
+    color: white;
+
+.sidemenu-item,
+.sidemenu-item--small,
+.sidemenu-item--action
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+  width: var-sidemenu-width;
+  background: #e7e7e7;
+  color: #4d4d4d;
+  padding: 1rem 0;
+  border: 1px solid #222;
+  border-radius: 3px;
+  font-weight: bold;
+  text-align: center;
+  &:focus
+    outline: none;
+
+input.sidemenu-item
+  box-shadow:inset 0 5px 5px #888;
+  border: 3px solid #555;
+
+.sidemenu-item--action
+  background: #2ecc71;
+  color: white;
+  cursor: pointer;
+
+.info-box
+  background: rgba(255,255,255,.1);
+  font-size: .9rem;
+  padding: .2rem;
+  line-height: 1.2rem;
+  border-radius: 3px;
+  width: var-sidemenu-width - 1rem;
+  margin: 1rem auto .2rem auto;
+
+hr
+  margin: 1rem 0
+  padding: 0
+  background: #444
+  height: 1px
+  border: 0
+
+.sidemenu-item--small
+  width: 5rem;
+  padding: .5rem 1rem;
+
+.hidden
+  display: none;

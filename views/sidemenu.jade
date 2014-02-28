@@ -1,0 +1,16 @@
+.sidemenu
+  input.sidemenu-item.js-handler--presentation-name(type='text', placeholder='Presentation name')
+  hr
+  button.sidemenu-item--action.js-handler--download Download presentation
+  a.js-handler--download-ready
+  hr
+  select.sidemenu-item.js-handler--theme-selector(name="theme-selector")
+    option(value="default.css") Theme: Default
+    option(value="night.css") Theme: Night
+    option(value="beige.css") Theme: Beige
+    option(value="sky.css") Theme: Sky
+  hr
+  p.info-box Upload a reveal.js presentation in the editor. Select the index.html of your presentation
+  form.js-handler--upload(action="")
+    input(type='file', required)
+    button.sidemenu-item--small Upload
