@@ -1,16 +1,17 @@
 {
-  "name": "piatra",
-  "subdomain": "piatra",
+  "name": "kreator.js",
   "scripts": {
-    "start": "node index.js",
-    "watch": "./node_modules/watchify/bin/cmd.js static/js/main.js -o static/js/bundle.js",
-    "build": "./node_modules/browserify/bin/cmd.js static/js/main.js -o static/js/bundle.js"
+    "start": "./node_modules/http-server/bin/http-server",
+    "watch-js": "./node_modules/watchify/bin/cmd.js static/js/main.js -o static/js/bundle.js",
+    "build-js": "./node_modules/browserify/bin/cmd.js static/js/main.js -o static/js/bundle.js",
+    "watch-jade": "node_modules/jade/bin/jade.js --watch views/*.jade --out output/",
+    "watch-stylus": "node_modules/stylus/bin/stylus --watch css/*.styl -o css/"
   },
   "dependencies": {
-    "express": "*",
     "jade": "*",
     "stylus": "~0.42.2",
-    "reveal.js": "~2.6.0"
+    "reveal.js": "~2.6.0",
+    "http-server": "^0.6.1"
   },
   "devDependencies": {
     "watchify": "^0.6.1",
