@@ -50,7 +50,9 @@ body {
   padding: 5px;
   border: 1px solid rgba(0,0,0,0.4);
   height: 1.5rem;
+  line-height: 1.5rem;
   border-radius: 3px;
+  margin: 0 0.2rem;
 }
 .menu-item a,
 .menu-item--group a {
@@ -84,21 +86,27 @@ body {
 #topmenu button,
 #topmenu input,
 #topmenu select {
+  vertical-align: top;
   display: inline-block;
   font-size: 1rem;
-  line-height: 1rem;
+  line-height: 1.5rem;
   height: 1.5rem;
   border: none;
   border-bottom: 1px solid #222;
   border-right: 1px solid #444;
   background: #858585;
-  padding: 3px 9px;
   color: #f4f4f4;
   text-shadow: 0 1px 0 #333;
 }
 #topmenu input[type=color],
 #topmenu input[type=file] {
   padding: 0;
+}
+.topmenu {
+  height: 1.5rem;
+  line-height: 1.5rem;
+  text-align: center;
+  white-space: nowrap;
 }
 .sidemenu {
   position: absolute;
