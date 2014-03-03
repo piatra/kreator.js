@@ -184,7 +184,7 @@ module.exports = function kreator () {
   sidemenu.addListeners({
     presentationTitle: document.querySelector('.js-handler--presentation-name'),
     themeSelector: document.querySelector('.js-handler--theme-selector'),
-    toggleSidemenu: document.querySelector('.js-handler--hide-sidemenu')
+    hideSidemenu: document.querySelector('.js-handler--hide-sidemenu')
   });
 
   download.addListener(document.querySelector('.js-handler--download'));
@@ -375,10 +375,12 @@ module.exports = {
   addListeners: function(handler) {
     handler.presentationTitle.addEventListener('keyup', setPresentationTitle, false);
     handler.themeSelector.addEventListener('change', changeTheme, false);
-    handler.toggleSidemenu.addEventListener('click', toggleSidemenu, false);
+    handler.hideSidemenu.addEventListener('click', hideSidemenu, false);
     document.querySelector('.sidemenu').addEventListener('mouseover', showSidemenu, false);
   }
 };
+
+var isSliding = false;
 
 function changeTheme() {
   App.theme = this.value;
@@ -403,15 +405,21 @@ function removeCSS(val) {
   }
 }
 
-function toggleSidemenu() {
+function hideSidemenu() {
   var el = this.parentNode;
   el.style.mozTransform = 'translateX(-90%)';
   el.style.webkitTransform = 'translateX(-90%)';
   el.style.transform = 'translateX(-90%)';
+  isSliding = true;
+  window.setTimeout(function () {
+    isSliding = false;
+  }, 300);
 }
 
 function showSidemenu() {
-  console.log('hover');
+  if (isSliding) {
+    return;
+  }
   var el = this;
   el.style.mozTransform = 'translateX(0)';
   el.style.webkitTransform = 'translateX(0)';
