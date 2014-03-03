@@ -380,6 +380,8 @@ module.exports = {
   }
 };
 
+var isSliding = false;
+
 function changeTheme() {
   App.theme = this.value;
   var themes = [
@@ -408,10 +410,16 @@ function toggleSidemenu() {
   el.style.mozTransform = 'translateX(-90%)';
   el.style.webkitTransform = 'translateX(-90%)';
   el.style.transform = 'translateX(-90%)';
+  isSliding = true;
+  window.setTimeout(function () {
+    isSliding = false;
+  }, 300);
 }
 
 function showSidemenu() {
-  console.log('hover');
+  if (isSliding) {
+    return;
+  }
   var el = this;
   el.style.mozTransform = 'translateX(0)';
   el.style.webkitTransform = 'translateX(0)';
