@@ -118,6 +118,14 @@ body {
   color: #fff;
   padding: 0.5rem;
   text-align: center;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+.sidemenu:hover {
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  transform: translateX(0);
 }
 .sidemenu p {
   text-align: justify;
@@ -133,9 +141,16 @@ body {
 .sidemenu a {
   color: #fff;
 }
+.sidemenu--hidden {
+  -webkit-transform: translateX(-90%);
+  -moz-transform: translateX(-90%);
+  transform: translateX(-90%);
+}
 .sidemenu-item,
 .sidemenu-item--small,
-.sidemenu-item--action {
+.sidemenu-item--action,
+.sidemenu-item--secondary,
+.sidemenu-item--secondary--half {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -147,11 +162,23 @@ body {
   border-radius: 3px;
   font-weight: bold;
   text-align: center;
+  cursor: pointer;
 }
 .sidemenu-item:focus,
 .sidemenu-item--small:focus,
-.sidemenu-item--action:focus {
+.sidemenu-item--action:focus,
+.sidemenu-item--secondary:focus,
+.sidemenu-item--secondary--half:focus {
   outline: none;
+}
+.sidemenu-item--secondary,
+.sidemenu-item--secondary--half {
+  background: #ddd;
+  color: #333;
+}
+.sidemenu-item--secondary--half {
+  width: 8rem;
+  float: left;
 }
 input.sidemenu-item {
   box-shadow: inset 0 5px 5px #888;
