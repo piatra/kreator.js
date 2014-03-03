@@ -6,24 +6,22 @@ Create web presentations in the browsers
 
 [Available on github pages](http://piatra.github.com/kreator.js)
 
-## Development
-
-### To run
+## Running locally
 
 ````
+npm install
 npm run start
-
 ````
+
+## Development
 
 ### To build
 
 ````
-npm run watch-js
-npm run watch-jade
-npm run watch-stylus
+npm install -g gulp
+gulp watch
 
 ````
-
 
 ## About
 
