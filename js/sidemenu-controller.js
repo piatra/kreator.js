@@ -5,7 +5,7 @@ module.exports = {
   addListeners: function(handler) {
     handler.presentationTitle.addEventListener('keyup', setPresentationTitle, false);
     handler.themeSelector.addEventListener('change', changeTheme, false);
-    handler.toggleSidemenu.addEventListener('click', toggleSidemenu, false);
+    handler.hideSidemenu.addEventListener('click', hideSidemenu, false);
     document.querySelector('.sidemenu').addEventListener('mouseover', showSidemenu, false);
   }
 };
@@ -35,7 +35,7 @@ function removeCSS(val) {
   }
 }
 
-function toggleSidemenu() {
+function hideSidemenu() {
   var el = this.parentNode;
   el.style.mozTransform = 'translateX(-90%)';
   el.style.webkitTransform = 'translateX(-90%)';

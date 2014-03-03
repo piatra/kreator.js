@@ -48,7 +48,7 @@ module.exports = function kreator () {
   sidemenu.addListeners({
     presentationTitle: document.querySelector('.js-handler--presentation-name'),
     themeSelector: document.querySelector('.js-handler--theme-selector'),
-    toggleSidemenu: document.querySelector('.js-handler--hide-sidemenu')
+    hideSidemenu: document.querySelector('.js-handler--hide-sidemenu')
   });
 
   download.addListener(document.querySelector('.js-handler--download'));
