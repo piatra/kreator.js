@@ -1,20 +1,15 @@
 {
   "name": "kreator.js",
   "scripts": {
-    "start": "./node_modules/http-server/bin/http-server",
-    "watch-js": "./node_modules/watchify/bin/cmd.js js/main.js -o js/bundle.js",
-    "build-js": "./node_modules/browserify/bin/cmd.js js/main.js -o js/bundle.js",
-    "watch-jade": "node_modules/jade/bin/jade.js --watch views/*.jade --out output/",
-    "watch-stylus": "node_modules/stylus/bin/stylus --watch css/*.styl -o css/"
+    "start": "./node_modules/http-server/bin/http-server"
   },
   "dependencies": {
-    "jade": "*",
-    "stylus": "~0.42.2",
-    "reveal.js": "~2.6.0",
     "http-server": "^0.6.1"
   },
   "devDependencies": {
-    "watchify": "^0.6.1",
-    "browserify": "^3.30.1"
+    "gulp": "^3.5.5",
+    "gulp-jade": "^0.4.2",
+    "gulp-browserify": "^0.4.6",
+    "gulp-stylus": "0.0.13"
   }
 }
