@@ -1,0 +1,20 @@
+extends remote-layout
+
+block content
+
+  h1.time
+    span.time--minutes 00
+    span.time--separator :
+    span.time--seconds 00
+
+  button.js-handler--back.remote-control.pull-left Back
+  button.js-handler--forward.remote-control.pull-right Forward
+
+  h1#title.text-centered title
+  h2#slide.text-centered slide 0
+
+
+block scripts
+  script(src="http://cdn.peerjs.com/0.3/peer.js")
+  script(src="../../js/remote.js")
+  script(src="../../js/time.js")

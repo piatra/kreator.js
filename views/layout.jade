@@ -7,40 +7,9 @@ html(lang="en")
     link(rel="stylesheet", type="text/css", href="css/zenburn.css")
     link(rel="stylesheet", type="text/css", href="css/glyphicons.css")
     link(rel="stylesheet", type="text/css", href="css/kreator.css")
+
   body
-    .navbar.container
-      #message.message.hidden
-        p This is a top level view of your presentation
-        p: .menu-item: button.js-handler--overview Overview
-      ul#topmenu.topmenu
-        li.menu-item--group
-          button.js-handler--style-button B
-          button.js-handler--style-button I
-          button.js-handler--style-button U
-        li.menu-item
-          button.js-handler--code-block
-            span.glyphicon.glyphicon-chevron-left
-            span.glyphicon.glyphicon-chevron-right
-        li.menu-item
-          button.js-handler--overview
-            span.glyphicon.glyphicon-zoom-out
-        li.menu-item--group
-          button.js-handler--align(data-align="left")
-            span.glyphicon.glyphicon-align-left
-          button.js-handler--align(data-align="center")
-            span.glyphicon.glyphicon-align-center
-          button.js-handler--align(data-align="right")
-            span.glyphicon.glyphicon-align-right
-        li.menu-item
-          select(name="heading-size", class="js-handler--headings")
-            option(value="none") Text size
-            option(value="100px") 100px
-            option(value="80px") 80px
-            option(value="60px") 60px
-            option(value="40px") 40px
-            option(value="20px") 20px
-        li.menu-item
-          input(type="color", class="js-handler--color")
+    block header
 
     block content
     block sidemenu

@@ -193,3 +193,50 @@ hr
 
 .hidden
   display: none;
+
+.dark-background
+  background: #333;
+
+.remote-control
+  background: #222;
+  background: -moz-linear-gradient(#444,#242629);
+  width: 25rem;
+  height: 25rem;
+  font-size: 5rem;
+  border: 3px solid #222;
+  border-bottom: 3px solid #222;
+  border-right: 3px solid #222;
+  box-shadow: 0 0 0 10px rgba(255,255,255,.05), 0 4px 0 #000, 0 6px 0 rgba(255,255,255,.2), inset 0 5px 15px rgba(255,255,255,.2);
+  border-radius: 50%;
+  display: inline-block;
+  margin: .5rem;
+  color: #ddd
+  text-shadow: 0 5px 0 #000;
+  &:active
+    background: -moz-linear-gradient(#242629,#444);
+
+.text-centered
+  text-align center;
+
+.pull-left
+  float left
+
+.pull-right
+  float right
+
+.time
+  color white
+  font-weight bold
+  font-size 9.5rem
+  margin 1rem 0
+  font-family: 'Droid Sans', sans-serif;
+  text-align center
+  text-shadow 0 5px 0 #000
+
+@media only screen and (max-width: 850px)
+  .remote-control
+    width 6rem
+    height 6rem
+    font-size 1.2rem
+  .time
+    font-size 7rem
