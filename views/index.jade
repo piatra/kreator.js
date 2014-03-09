@@ -7,25 +7,25 @@ block header
         p: .menu-item: button.js-handler--overview Overview
       ul#topmenu.topmenu
         li.menu-item--group
-          button.js-handler--style-button B
-          button.js-handler--style-button I
-          button.js-handler--style-button U
+          button.js-handler--style-button(title='Make text bold') B
+          button.js-handler--style-button(title='Make text italic') I
+          button.js-handler--style-button(title='Underline text') U
         li.menu-item
-          button.js-handler--code-block
+          button.js-handler--code-block(title='Format text block')
             span.glyphicon.glyphicon-chevron-left
             span.glyphicon.glyphicon-chevron-right
         li.menu-item
-          button.js-handler--overview
+          button.js-handler--overview(title='Presentation overview')
             span.glyphicon.glyphicon-zoom-out
         li.menu-item--group
-          button.js-handler--align(data-align="left")
+          button.js-handler--align(data-align="left", title='Align text left')
             span.glyphicon.glyphicon-align-left
-          button.js-handler--align(data-align="center")
+          button.js-handler--align(data-align="center", title='Align text center')
             span.glyphicon.glyphicon-align-center
-          button.js-handler--align(data-align="right")
+          button.js-handler--align(data-align="right", title='Align text right')
             span.glyphicon.glyphicon-align-right
         li.menu-item
-          select(name="heading-size", class="js-handler--headings")
+          select(name="heading-size", class="js-handler--headings", title='Set font size')
             option(value="none") Text size
             option(value="100px") 100px
             option(value="80px") 80px
@@ -33,7 +33,7 @@ block header
             option(value="40px") 40px
             option(value="20px") 20px
         li.menu-item
-          input(type="color", class="js-handler--color")
+          input(type="color", class="js-handler--color", title='Set font color')
 
 block sidemenu
   include sidemenu

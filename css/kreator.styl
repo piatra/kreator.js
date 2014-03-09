@@ -47,6 +47,7 @@ body
 
 .menu-item,
 .menu-item--group
+  positon relative
   list-style: none;
   display: inline-block;
   background: hsla(100, 100, 100, .1);
@@ -60,6 +61,21 @@ body
     color: #f4f4f4;
   button, input, select
     cursor: pointer;
+  button:after,
+  input:after,
+  select:after
+    content: attr(title)
+    position absolute
+    top 55px
+    opacity 0
+    background: #666;
+    padding: .1rem .3rem;
+    font-size .8rem
+    border-radius 3px
+  button:hover:after,
+  input:hover:after,
+  select:hover:after
+    opacity 1
 
 .menu-item--group
   button
