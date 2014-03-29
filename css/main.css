@@ -531,7 +531,7 @@ body {
 	top: 50%;
 
 	overflow: visible;
-	z-index: 1;
+	z-index: -1;
 	text-align: center;
 
 	-webkit-transition: -webkit-perspective .4s ease;
