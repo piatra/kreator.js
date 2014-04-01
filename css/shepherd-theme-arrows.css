@@ -5,6 +5,7 @@
 
 .shepherd-element {
   position: absolute;
+  z-index:10;
   display: none; }
   .shepherd-element.shepherd-open {
     display: block; }
@@ -20,6 +21,7 @@
     -o-border-radius: 5px;
     border-radius: 5px;
     position: relative;
+    z-index:10;
     font-family: inherit;
     background: white;
     color: #444444;
@@ -38,6 +40,7 @@
       content: "";
       display: block;
       position: absolute;
+      z-index: 10;
       width: 0;
       height: 0;
       border-color: transparent;
