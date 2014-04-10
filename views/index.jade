@@ -36,6 +36,12 @@ block header
             option(value="40px") 40px
             option(value="20px") 20px
         li.menu-item
+          select(name="heading-type", class="js-handler--heading-type", title='Set heading')
+            option(value="none") Heading
+            option(value="h1") H1
+            option(value="h2") H2
+            option(value="h3") H3
+        li.menu-item
           input(type="color", class="js-handler--color", title='Set font color')
 
 block sidemenu
