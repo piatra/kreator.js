@@ -6,10 +6,16 @@
   "dependencies": {
     "http-server": "^0.6.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/piatra/kreator.js"
+  },
   "devDependencies": {
     "gulp": "^3.5.5",
     "gulp-jade": "^0.4.2",
     "gulp-browserify": "^0.4.6",
-    "gulp-stylus": "0.0.13"
+    "gulp-stylus": "0.0.13",
+    "browserify": "*",
+    "mold-source-map": "*"
   }
 }
