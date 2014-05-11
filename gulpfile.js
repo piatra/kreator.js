@@ -1,13 +1,15 @@
 var gulp = require('gulp');
 
-var browserify = require('gulp-browserify');
+var browserify = require('browserify');
 var jade = require('gulp-jade');
 var stylus = require('gulp-stylus');
+var fs = require('fs');
+var mold = require('mold-source-map');
 
 var paths = {
 	js  : {
 		in: './lib/main.js',
-		out: './lib/build'
+		out: './lib/build/main.js'
 	},
 	css : {
 		in: ['./css/*.styl'],
@@ -19,13 +21,11 @@ var paths = {
 	}
 };
 
-gulp.task('build-js', function(){
-	return gulp.src(paths.js.in)
-	.pipe(browserify({
-		insertGlobals: true,
-		debug: true
-	}))
-	.pipe(gulp.dest(paths.js.out));
+gulp.task('browserify', function(){
+    browserify(paths.js.in)
+    .bundle({debug: true})
+    .pipe(mold.transformSourcesRelativeTo(__dirname))
+    .pipe(fs.createWriteStream(paths.js.out));
 });
 
 gulp.task('build-css', function(){
@@ -43,7 +43,7 @@ gulp.task('build-html', function(){
 });
 
 gulp.task('watch', function() {
-	gulp.watch(paths.js.in, ['build-js']);
+	gulp.watch('./lib/*.js', ['browserify']);
 	gulp.watch(paths.css.in, ['build-css']);
 	gulp.watch(paths.html.in, ['build-html']);
 });
