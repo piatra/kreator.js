@@ -27,6 +27,8 @@ While having your presentation open [go to this url](http://piatra.github.io/kre
 
 ## Development
 
+For upcoming features check out [future-release](https://github.com/piatra/kreator.js/issues?labels=future-release&page=1&state=open) tags in the issues
+
 ### To build
 
 ````
