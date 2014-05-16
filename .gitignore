@@ -3,3 +3,4 @@ node_modules
 navbar.html
 layout.html
 sidemenu.html
+lib/build/main.js
