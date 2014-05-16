@@ -10,8 +10,22 @@ body
 .slides section
   border: 1px solid #333;
   box-shadow: 0 0 5px #333;
+  min-height 500px
   &:focus
     outline: none;
+
+.section--editing
+  background #fff;
+
+.section--editing .kreator-slide-content
+  display none
+
+.section--editing .quill-slide-content
+  display block
+  height 500px
+
+.quill-slide-content
+  display none
 
 .add-slide
   position: absolute;
@@ -45,84 +59,12 @@ body
   margin: 0 auto;
   text-align: center;
 
-.menu-item,
-.menu-item--group
-  positon relative
-  list-style: none;
-  display: inline-block;
-  background: hsla(100, 100, 100, .1);
-  padding: 5px;
-  border: 1px solid hsla(0, 0, 0, .4);
-  height: 1.5rem;
-  line-height 1.5rem;
-  border-radius: 3px;
-  margin 0 .2rem
-  &:active
-    box-shadow: inset 0 0 4px #222
-  a
-    color: #f4f4f4;
-  button, input, select
-    cursor: pointer;
-  button:after,
-  input:after,
-  select:after
-    content: attr(title)
-    position absolute
-    top 55px
-    opacity 0
-    background: #666;
-    padding: .1rem .3rem;
-    font-size .8rem
-    border-radius 3px
-  button:hover:after,
-  input:hover:after,
-  select:hover:after
-    opacity 1
-
-.menu-item--group
-  button
-    border-radius: 0;
-  button:first-child
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-  button:last-child
-    border-bottom-right-radius: 3px;
-    border-top-right-radius: 3px;
-  button:not(:first-child)
-    margin-left:-.2rem;
-  button:not(:last-child)
-    margin-right:-.2rem;
-
-.menu-item,
-.menu-item--group
-  button,
-  input,
-  select
-    vertical-align: top;
-    display: inline-block;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    height: 1.5rem;
-    border: none;
-    border-bottom: 1px solid #222;
-    border-right: 1px solid #444;
-    background: #858585;
-    color: #f4f4f4;
-    text-shadow:0 1px 0 #333;
-  input[type=color],
-  input[type=file]
-    padding: 0;
-
-.menu-item button.active,
-.menu-item--group button.active
-  background #666
-  box-shadow inset 0 0 2px #444
-
-.topmenu
-    height: 1.5rem;
-    line-height: 1.5rem;
-    text-align: center;
-    white-space: nowrap;
+.toolbar
+  background white
+  width 500px
+  text-align center
+  margin 0 auto
+  z-index 1000
 
 .sidemenu
   position: absolute;
@@ -256,6 +198,23 @@ hr
   font-family: 'Droid Sans', sans-serif;
   text-align center
   text-shadow 0 5px 0 #000
+
+.slide-edit-lock
+  background #555A5F
+  width 5rem
+  font-size .8rem !important
+  position absolute
+  top -2.7rem
+  right 0
+  cursor pointer
+  border-top-right-radius 5px
+  border-top-left-radius 5px
+  opacity 0
+  color white
+  transition-duration .2s
+
+section:hover .slide-edit-lock
+  opacity 1
 
 @media only screen and (max-width: 850px)
   .remote-control
