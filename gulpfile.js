@@ -38,7 +38,7 @@ gulp.task('build-css', function(){
 
 gulp.task('build-html', function(){
 	return gulp.src(paths.html.in)
-	.pipe(jade({}))
+	.pipe(jade({pretty: true}))
 	.pipe(gulp.dest(paths.html.out));
 });
 

@@ -10,7 +10,7 @@
 
 			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
 			<div class="progress"><span></span></div>
-			
+
 		</div>
 
 		<!-- Optional libraries for code syntax highlighting and classList support in IE9 -->
@@ -55,14 +55,11 @@
 					// Apply a 3D roll to links on hover
 					rollingLinks: true,
 
-					// UI style
-					theme: query.theme || 'default', // default/neon/beige
-
 					// Transition style
 					transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
 				});
 			} );
-			
+
 			// Load third party scripts
 			head.js( 'lib/js/classList.js' );
 			head.js( 'lib/js/highlight.js', function() {
@@ -76,6 +73,6 @@
 				head.js( 'socket.io/socket.io.js', 'plugin/speakernotes/client.js' );
 			}
 		</script>
-		
+
 	</body>
 </html>
