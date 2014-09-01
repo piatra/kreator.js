@@ -22,8 +22,8 @@ var paths = {
 };
 
 gulp.task('browserify', function(){
-    browserify(paths.js.in)
-    .bundle({debug: true})
+    browserify(paths.js.in, {debug: true})
+    .bundle()
     .pipe(mold.transformSourcesRelativeTo(__dirname))
     .pipe(fs.createWriteStream(paths.js.out));
 });
@@ -48,4 +48,4 @@ gulp.task('watch', function() {
 	gulp.watch(paths.html.in, ['build-html']);
 });
 
-gulp.task('default', ['build-js', 'build-html', 'build-css']);
+gulp.task('default', ['browserify', 'build-html', 'build-css']);

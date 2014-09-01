@@ -15,6 +15,7 @@
     "gulp-jade": "^0.4.2",
     "gulp-browserify": "^0.4.6",
     "gulp-stylus": "0.0.13",
+    "quilljs": "*",
     "browserify": "*",
     "mold-source-map": "*"
   }
