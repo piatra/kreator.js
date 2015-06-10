@@ -13,7 +13,7 @@ Create web presentations in the browsers
   - `gulp` (build)
   - `http-server` (or python -m SimpleHTTPServer if you skipped #2)
 
-The application should now be running on localhost:8080. If you are running Ubuntu some people have reported issues. [Here are instructions](https://github.com/piatra/kreator.js/issues/38) that have been reported to work.
+If you are running Ubuntu some people have reported issues. [Here are instructions](https://github.com/piatra/kreator.js/issues/38) that have been reported to work.
 
 Now go in your browser at `localhost:8080` where kreator.js will be running locally :)
 
