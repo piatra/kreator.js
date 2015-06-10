@@ -9,8 +9,10 @@ Create web presentations in the browsers
 ## Running locally
 
 ````
-npm install
-npm run start
+npm install (fetch dependencies)
+npm install -g http-server (or if you have python installed skip this step)
+gulp (build)
+http-server (or python -m SimpleHTTPServer if you skipped #2)
 ````
 
 If you are running Ubuntu some people have reported issues. [Here are instructions](https://github.com/piatra/kreator.js/issues/38) that have been reported to work.
