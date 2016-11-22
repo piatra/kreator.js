@@ -1,5 +1,6 @@
 {
   "name": "kreator.js",
+  "version": "0.1.0",
   "scripts": {
     "start": "gulp && ./node_modules/http-server/bin/http-server"
   },
